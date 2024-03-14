@@ -1,0 +1,82 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-image: url('bg_for_ar.jpeg');
+    background-size: cover;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+}
+.navbar {
+    background-color: #26222D;
+    color: #fff;
+    font-size: 24px;
+    max-width: 1440px;
+    height: 83px;
+}
+.logo_name {
+    font-size: 32px;
+    font-family: "Arvo", serif;
+}
+.search_input {
+    width: 300px;
+}
+.profile_image {
+    border-radius: 50%;
+}
+.main {
+    max-width: 1440px;
+    background-color: #161422;
+}
+.main-image {
+    border-radius: 15px;
+    height: 295px;
+}
+.main_border {
+    border-bottom: 1px solid #fff;
+    margin: 2em 0 1em;
+}
+.genre_item {
+    height: 45px;
+    background-color: #3E305F;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.filter {
+    border-radius: 20px;
+    background-color: #8164C5;
+    color: #fff;
+    font-weight: 500;
+}
+.header_filter {
+    background-color: #402F65;
+    border-radius: 20px 20px 0 0;
+    height: 60px;
+}
+.filter_select {
+    font-size: inherit;
+    font-family: inherit;
+}
+.searchButton {
+    font: inherit;
+}
+
+.footer {
+    max-width: 1440px;
+    background-color: #161422;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+}
+.footer_border {
+    border-bottom: 1px solid white;
+}
+.footer_icons {
+    width: 195px;
+}
+.helpButton {
+    font-size: 21px;
+    background-color: #3E305F;
+    border-radius: 15px;
+}

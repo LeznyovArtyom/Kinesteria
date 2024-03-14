@@ -1,0 +1,119 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-image: url('bg_for_ar.jpeg');
+    background-size: cover;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+}
+.navbar {
+    background-color: #26222D;
+    color: #fff;
+    font-size: 24px;
+    max-width: 1440px;
+    height: 83px;
+}
+.logo_name {
+    font-size: 32px;
+    font-family: "Arvo", serif;
+}
+.search_input {
+    width: 300px;
+}
+.profile_image {
+    border-radius: 50%;
+}
+
+.main {
+    max-width: 1440px;
+    background-color: #161422;
+}
+.main_title {
+    font-size: 48px;
+}
+.main-image {
+    border-radius: 15px;
+    height: 295px;
+}
+.filter_item {
+    height: 68px;
+    border-radius: 10px;
+    font-size: 24px;
+    font-family: inherit;
+    background-color: #3E305F;
+}
+.filter_link {
+    height: 68px;
+}
+.filterButton {
+    height: 68px;
+    border-radius: 10px;
+    font-size: 24px;
+    font-family: inherit;
+    background-color: #3E305F;
+}
+.addButton {
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.modal-design {
+    background-color: #161422;
+    color: #fff;
+    font-family: inherit;
+    border-radius: 30px;
+}
+.modal_title {
+    font-size: 36px;
+}
+.border_line {
+    border-bottom: 3px solid #2F2546;
+    width: 511px;
+}
+.edit_item {
+    font-size: 20px;
+    font-weight: 400;
+    font-family: inherit;
+}
+.edit_select {
+    width: 276px;
+}
+.prewiev_image {
+    width: 196px;
+    height: 295px;
+    border-radius: 15px;
+    background-color: #fff;
+}
+.files_container {
+    width: 363px;
+    height: 149px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.addMovieButton, .cancelButton {
+    width: 270px;
+    height: 51px;
+    background-color: #3E305F;
+    border-radius: 10px;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.footer {
+    max-width: 1440px;
+    background-color: #161422;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+}
+.footer_border {
+    border-bottom: 1px solid white;
+}
+.footer_icons {
+    width: 195px;
+}
+.helpButton {
+    font-size: 21px;
+    background-color: #3E305F;
+    border-radius: 15px;
+}

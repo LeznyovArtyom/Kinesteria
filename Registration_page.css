@@ -1,0 +1,38 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-image: url('bg_for_ar.jpeg');
+    background-size: cover;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+}
+.logo {
+    margin-top: 5em;
+    margin-bottom: 4em;
+}
+.logo_name {
+    font-size: 48px;
+    font-family: "Arvo", serif;
+}
+.registration_form {
+    width: 663px;
+    border-radius: 60px;
+}
+.form_title {
+    font-size: 48px;
+}
+.registration_input, .registrationButton {
+    height: 55px;
+    font-size: inherit;
+    background-color: #5389DA;
+    color: #fff;
+}
+.registration_input {
+    border-radius: 80px;
+}
+.registrationButton {
+    border-radius: 20px;
+}
+.registration_input::placeholder {
+    color: #fff;
+}

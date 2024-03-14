@@ -1,0 +1,55 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-image: url('bg_for_ar.jpeg');
+    background-size: cover;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+}
+.navbar {
+    background-color: #26222D;
+    color: #fff;
+    font-size: 24px;
+    max-width: 1440px;
+    height: 83px;
+}
+.logo_name {
+    font-size: 32px;
+    font-family: "Arvo", serif;
+}
+.main {
+    max-width: 1440px;
+    background-color: #161422;
+}
+.landing-image {
+    border-radius: 15px;
+    width: 320px;
+    height: 180px;
+}
+.description {
+    margin: 4em 0 2em; 
+}
+.registerButton {
+    margin-bottom: 2em;
+    font-size: inherit;
+    border-radius: 25px;
+    background-color: #3E305F;
+}
+.footer {
+    max-width: 1440px;
+    background-color: #161422;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+}
+.footer_border {
+    border-bottom: 1px solid white;
+}
+.footer_icons {
+    width: 195px;
+}
+.helpButton {
+    font-size: 21px;
+    background-color: #3E305F;
+    border-radius: 15px;
+}

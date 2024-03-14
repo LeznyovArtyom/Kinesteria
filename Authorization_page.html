@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Kinesteria</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <link rel="icon" href="icons/icon.png" />
+        <link rel="stylesheet" href="Authorization_page.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="header">
+            <div
+                class="logo container d-flex justify-content-center align-items-center"
+            >
+                <img
+                    src="icons/icon.png"
+                    alt="Иконка"
+                    class="logo_image me-3"
+                    width="97px"
+                    height="97px"
+                />
+                <div class="logo_name">
+                    <a href="index.html" class="text-decoration-none text-white"
+                        >Kinesteria</a
+                    >
+                </div>
+            </div>
+        </div>
+        <form>
+            <div class="container authorization_form bg-white text-dark px-5">
+                <div class="form_title d-flex justify-content-center py-5">
+                    Авторизация
+                </div>
+                <div class="mb-4">
+                    <input
+                        type="text"
+                        class="form-control authorization_input px-4 mb-4"
+                        id="login"
+                        placeholder="Логин"
+                    />
+                </div>
+                <div class="mb-3">
+                    <input
+                        type="text"
+                        class="form-control authorization_input px-4 mb-4"
+                        id="password1"
+                        placeholder="Пароль"
+                    />
+                </div>
+                <div class="py-4 form-check ms-3">
+                    <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="agreeCheckbox"
+                    />
+                    <label class="form-check-label" for="agreeCheckbox"
+                        >Запомни меня</label
+                    >
+                </div>
+                <button
+                    type="button"
+                    class="btn authorizationButton w-100"
+                    onclick="window.location.href='Main_page.html'"
+                >
+                    Войти
+                </button>
+                <div class="social_media d-flex justify-content-center pt-4">
+                    Войти через социальные сети
+                </div>
+                <div
+                    class="social_media_icons d-flex justify-content-center my-3"
+                >
+                    <a href=""
+                        ><img
+                            src="icons/icon6.png"
+                            alt="Соц-сеть"
+                            width="53px"
+                            height="53px"
+                            class="mx-2"
+                    /></a>
+                    <a href=""
+                        ><img
+                            src="icons/icon7.png"
+                            alt="Соц-сеть"
+                            width="53px"
+                            height="53px"
+                            class="mx-2"
+                    /></a>
+                    <a href=""
+                        ><img
+                            src="icons/icon8.png"
+                            alt="Соц-сеть"
+                            width="53px"
+                            height="53px"
+                            class="mx-2"
+                    /></a>
+                    <a href=""
+                        ><img
+                            src="icons/icon9.png"
+                            alt="Соц-сеть"
+                            width="53px"
+                            height="53px"
+                            class="mx-2"
+                    /></a>
+                    <a href=""
+                        ><img
+                            src="icons/icon10.png"
+                            alt="Соц-сеть"
+                            width="53px"
+                            height="53px"
+                            class="mx-2"
+                    /></a>
+                </div>
+                <div class="line"></div>
+                <div class="go-to_registration d-flex justify-content-center pt-2 pb-4">
+                    <button
+                        type="button"
+                        class="btn registerButton"
+                        onclick="window.location.href='Registration_page.html'"
+                    >
+                        У вас нет учетной записи? Зарегистрироваться
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
