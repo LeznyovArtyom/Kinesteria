@@ -14,7 +14,7 @@ body {
     font-size: 48px;
     font-family: "Arvo", serif;
 }
-.authorization_form {
+#authorization_form {
     width: 663px;
     border-radius: 60px;
 }
@@ -40,4 +40,15 @@ body {
 .registerButton {
     font-size: 13px;
     background-color: #A9C7F8;
+}
+
+
+.error .registration_input {
+    border: 2px solid red;
+}
+.error .error {
+    display: block;
+    color: red;
+    font-size: 20px;
+    margin-left: 25px;
 }

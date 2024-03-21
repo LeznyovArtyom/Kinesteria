@@ -50,6 +50,6 @@ body {
 }
 .helpButton {
     font-size: 21px;
-    background-color: #3E305F;
+    background: linear-gradient(90deg, #3E305F 28%, #8263C5 100%);
     border-radius: 15px;
 }

@@ -14,7 +14,7 @@ body {
     font-size: 48px;
     font-family: "Arvo", serif;
 }
-.registration_form {
+#registration_form {
     width: 663px;
     border-radius: 60px;
 }
@@ -35,4 +35,15 @@ body {
 }
 .registration_input::placeholder {
     color: #fff;
+}
+
+
+.error .registration_input {
+    border: 2px solid red;
+}
+.error .error {
+    display: block;
+    color: red;
+    font-size: 20px;
+    margin-left: 25px;
 }

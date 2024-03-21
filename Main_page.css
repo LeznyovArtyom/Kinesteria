@@ -37,7 +37,7 @@ body {
 }
 .genre_item {
     height: 45px;
-    background-color: #3E305F;
+    background: linear-gradient(90deg, #3E305F 29%, #8164C5);
     border-radius: 10px;
     color: #fff;
     font-size: 20px;
@@ -45,7 +45,7 @@ body {
 
 .filter {
     border-radius: 20px;
-    background-color: #8164C5;
+    background: linear-gradient(#8164C5, #3E305F 71%);
     color: #fff;
     font-weight: 500;
 }
@@ -77,6 +77,6 @@ body {
 }
 .helpButton {
     font-size: 21px;
-    background-color: #3E305F;
+    background: linear-gradient(90deg, #3E305F 28%, #8263C5 100%);
     border-radius: 15px;
 }

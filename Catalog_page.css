@@ -42,6 +42,12 @@ body {
     font-family: inherit;
     background-color: #3E305F;
 }
+.filter_item, .filterButton {
+    background: linear-gradient(90deg, #3E305F 29%, #8164C5);
+}
+.filter_item .d {
+    color: #000;
+}
 .filter_link {
     height: 68px;
 }
@@ -67,7 +73,8 @@ body {
     font-size: 36px;
 }
 .border_line {
-    border-bottom: 3px solid #2F2546;
+    height: 3px;
+    background: linear-gradient(90deg, #2F2546, #8C69DF 51%, #322B44);
     width: 511px;
 }
 .edit_item {
@@ -93,7 +100,8 @@ body {
 .addMovieButton, .cancelButton {
     width: 270px;
     height: 51px;
-    background-color: #3E305F;
+    background: linear-gradient(90deg, #3E305F, #8164C5);
+    border: none;
     border-radius: 10px;
     font-size: inherit;
     font-family: inherit;
@@ -114,6 +122,9 @@ body {
 }
 .helpButton {
     font-size: 21px;
-    background-color: #3E305F;
+    background: linear-gradient(90deg, #3E305F 28%, #8263C5 100%);
     border-radius: 15px;
+}
+.underline {
+    border-bottom: 1px solid white;
 }
