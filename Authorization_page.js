@@ -7,7 +7,9 @@ const rememberCheckbox = document.getElementById('rememberCheckbox');
 form.addEventListener("submit", e => {
    e.preventDefault();
 
-   checkUser();
+   if (checkUser()) {
+      window.location.href = "Main_page.html";
+   }
 });
 
 const setError = (element, message) => {
@@ -46,9 +48,10 @@ const checkUser = () => {
    }
 
    if (existingUser) {
-      alert("Вы вошли в аккаунт");
-      window.location.href = "Main_page.html"
+      alert("Вы вошли в аккаунт!");
    } else {
       alert("Введен неправильный логин или пароль!");
    }
+
+   return existingUser;
 }

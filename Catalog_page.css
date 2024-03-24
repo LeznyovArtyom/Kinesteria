@@ -77,13 +77,26 @@ body {
     background: linear-gradient(90deg, #2F2546, #8C69DF 51%, #322B44);
     width: 511px;
 }
+.original_font {
+    font: inherit;
+}
 .edit_item {
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 500;
     font-family: inherit;
 }
 .edit_select {
     width: 276px;
+}
+.multiSelectGenres {
+    height: 300px;
+}
+.multiSelectGenresButton {
+
+}
+#description_edit {
+    border-radius: 10px;
+    font: inherit;
 }
 .prewiev_image {
     width: 196px;
@@ -91,12 +104,14 @@ body {
     border-radius: 15px;
     background-color: #fff;
 }
+/*
 .files_container {
     width: 363px;
     height: 149px;
     background-color: #fff;
     border-radius: 10px;
 }
+*/
 .addMovieButton, .cancelButton {
     width: 270px;
     height: 51px;

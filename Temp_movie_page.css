@@ -17,28 +17,30 @@ body {
     font-size: 32px;
     font-family: "Arvo", serif;
 }
+.search_input {
+    width: 300px;
+}
+.profile_image {
+    border-radius: 50%;
+}
 .main {
     max-width: 1440px;
     background-color: #161422;
 }
-.landing-image {
+
+#image_movie {
     border-radius: 15px;
-    width: 320px;
-    height: 180px;
 }
-.main-image {
-    border-radius: 15px;
-    height: 295px;
+#header_movie {
+    font-size: 32px;
 }
-.description {
-    margin: 4em 0 2em; 
+#name_movie {
+    font-size: 28px;
 }
-.registerButton {
-    margin-bottom: 2em;
-    font-size: inherit;
-    border-radius: 25px;
-    background-color: #3E305F;
+.general-font {
+    font-size: 20px;
 }
+
 .footer {
     max-width: 1440px;
     background-color: #161422;

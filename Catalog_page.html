@@ -4,24 +4,13 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Kinesteria</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-            crossorigin="anonymous"
-        />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
         <link rel="icon" href="icons/icon.png" />
         <link rel="stylesheet" href="Catalog_page.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-            rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     </head>
     <body>
         <div class="header d-flex justify-content-center">
@@ -31,66 +20,31 @@
                         <img src="icons/icon.png" alt="Иконка" />
                     </a>
                     <div class="logo_name me-5">
-                        <a
-                            class="text-decoration-none text-white"
-                            href="index.html"
-                            >Kinesteria</a
-                        >
+                        <a class="text-decoration-none text-white" href="index.html">Kinesteria</a>
                     </div>
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div
-                        class="collapse navbar-collapse"
-                        id="navbarSupportedContent"
-                    >
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a
-                                    class="nav-link text-white"
-                                    href="Main_page.html"
-                                    >Главная</a
-                                >
+                                <a class="nav-link text-white" href="Main_page.html">Главная</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="#"
-                                    >Каталог</a
-                                >
+                                <a class="nav-link text-white" href="#">Каталог</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="#"
-                                    >Новинки</a
-                                >
+                                <a class="nav-link text-white" href="#">Новинки</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto d-flex">
                             <li class="nav-item d-flex align-items-center mx-4">
                                 <div>
-                                    <input
-                                        type="text"
-                                        class="form-control search_input"
-                                        id="search"
-                                        placeholder="Поиск"
-                                    />
+                                    <input type="text" class="form-control search_input" id="search" placeholder="Поиск" />
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link"
-                                    ><img
-                                        src="профиль.jpg"
-                                        alt="Профиль"
-                                        width="74px"
-                                        height="74px"
-                                        class="profile_image"
-                                /></a>
+                                <a href="#" class="nav-link"><img src="профиль.jpg" alt="Профиль" width="74px" height="74px" class="profile_image" /></a>
                             </li>
                         </ul>
                     </div>
@@ -122,28 +76,19 @@
                                 <option value="6" class="d">Триллер</option>
                                 <option value="5" class="d">Роман</option>
                                 <option value="6" class="d">Биография</option>
+                                <option value="6" class="d">Приключения</option>
+                                <option value="6" class="d">Драма</option>
+                                <option value="6" class="d">Фэнтези</option>
                             </select>
                         </div>
                         <div class="col-3">
                             <div class="filter_link d-flex align-items-center">
-                                <button
-                                    type="button"
-                                    class="btn text-white addButton text-decoration-underline"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#addMovieModal"
-                                >
-                                    Добавить фильм
-                                </button>
+                                <button type="button" class="btn text-white addButton text-decoration-underline" data-bs-toggle="modal" data-bs-target="#addMovieModal">Добавить фильм</button>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="d-flex justify-content-end">
-                                <button
-                                    type="button"
-                                    class="btn text-white filterButton px-4 border-0"
-                                >
-                                    Расширенный фильтр
-                                </button>
+                                <button type="button" class="btn text-white filterButton px-4 border-0">Расширенный фильтр</button>
                             </div>
                         </div>
                     </div>
@@ -152,401 +97,214 @@
 
             <section>
                 <div class="container">
-                    <div class="row gy-3 py-5">
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_17.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_18.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_19.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_20.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_21.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_22.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_23.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_24.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_25.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_26.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_27.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_28.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_29.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/фильм_30.jpg"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/сериал_1.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/сериал_2.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/сериал_3.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/сериал_4.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/сериал_5.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/сериал_6.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/сериал_7.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/сериал_8.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/мультфильм_1.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/мультфильм_2.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/мультфильм_3.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/мультфильм_4.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/мультфильм_5.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
-                        <div class="col-xxl-2">
-                            <img
-                                src="items/мультфильм_6.webp"
-                                alt="фильм"
-                                class="w-100 main-image"
-                            />
-                        </div>
+                    <div class="row gy-3 py-5" id="moviesContainer">
+                        
                     </div>
                 </div>
             </section>
         </div>
 
-        <div
-            class="modal fade"
-            id="addMovieModal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-        >
+        <div class="modal fade" id="addMovieModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content modal-design">
                     <div class="modal-body">
-                        <div class="container">
-                            <div
-                                class="modal_title d-flex justify-content-center"
-                            >
-                                Добавить
-                            </div>
-                            <div
-                                class="title_bottom d-flex justify-content-center mt-3 mb-5"
-                            >
-                                <div class="border_line"></div>
-                            </div>
-                            <div class="row mb-4">
-                                <div class="col-7">
-                                    <div class="row">
-                                        <div class="col-4 mb-4">Заголовок</div>
-                                        <div class="col-8">
-                                            <input
-                                                type="text"
-                                                class="form-control edit_item"
-                                                id="header_edit"
-                                            />
+                        <form id="addMovie_form">
+                            <div class="container">
+                                <div class="modal_title d-flex justify-content-center">Добавить</div>
+                                <div class="title_bottom d-flex justify-content-center mt-3 mb-5">
+                                    <div class="border_line"></div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-7">
+                                        <div class="row">
+                                            <div class="col-4 mb-4">Заголовок</div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control edit_item" id="header_edit" required title="Введите заголовок" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 mb-4">Название</div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control edit_item" id="name_edit" required title="Введите название" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 mb-4">Год выхода</div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control edit_item" id="year_edit" required title="Введите год выхода" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 mb-4">Страна</div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control edit_item" id="country_edit" required title="Введите Страну" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 mb-4">Оригинальное название</div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control edit_item" id="original_name_edit" required title="Введите оригинальное название" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 mb-4">Режиссер</div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control edit_item" id="director_edit" required title="Введите режиссера" />
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-4 mb-4">Название</div>
-                                        <div class="col-8">
-                                            <input
-                                                type="text"
-                                                class="form-control edit_item"
-                                                id="name_edit"
-                                            />
+                                    <div class="col-5">
+                                        <div class="d-flex justify-content-center">Жанр</div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="dropdown">
+                                                <button class="btn btn-light dropdown-toggle original_font px-3" type="button" id="multiSelectGenresButton" data-bs-toggle="dropdown" aria-expanded="false">Выберите жанр</button>
+                                                <ul class="dropdown-menu w-100 original_font px-2 multiSelectGenres overflow-auto" aria-labelledby="multiSelectGenres">
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Комедия" class="form-check-input" />
+                                                            Комедия
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Ужасы" class="form-check-input" />
+                                                            Ужасы
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Фантастика" class="form-check-input" />
+                                                            Фантастика
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Детектив" class="form-check-input" />
+                                                            Детектив
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Боевик" class="form-check-input" />
+                                                            Боевик
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Триллер" class="form-check-input" />
+                                                            Триллер
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Роман" class="form-check-input" />
+                                                            Роман
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Биография" class="form-check-input" />
+                                                            Биография
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Приключения" class="form-check-input" />
+                                                            Приключения
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Драма" class="form-check-input" />
+                                                            Драма
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Фэнтези" class="form-check-input" />
+                                                            Фэнтези
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-4 mb-4">Год выхода</div>
-                                        <div class="col-8">
-                                            <input
-                                                type="text"
-                                                class="form-control edit_item"
-                                                id="year_edit"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-4 mb-4">Страна</div>
-                                        <div class="col-8">
-                                            <input
-                                                type="text"
-                                                class="form-control edit_item"
-                                                id="country_edit"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-4 mb-4">
-                                            Оригинальное название
-                                        </div>
-                                        <div class="col-8">
-                                            <input
-                                                type="text"
-                                                class="form-control edit_item"
-                                                id="original_name_edit"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-4 mb-4">Режиссер</div>
-                                        <div class="col-8">
-                                            <input
-                                                type="text"
-                                                class="form-control edit_item"
-                                                id="director_edit"
-                                            />
+
+                                        <div class="d-flex justify-content-center mt-5">Тип</div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="dropdown">
+                                                <button class="btn btn-light dropdown-toggle original_font" type="button" id="multiSelectTypeButton" data-bs-toggle="dropdown" aria-expanded="false">Выберите тип</button>
+                                                <ul class="dropdown-menu w-100 original_font px-2 multiSelectType" aria-labelledby="multiSelectType">
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" name="radio" value="Фильм" class="form-check-input" />
+                                                            Фильм
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" value="Сериал" name="radio" class="form-check-input" />
+                                                            Сериал
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" value="Мультфильм" name="radio" class="form-check-input" />
+                                                            Мультфильм
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-5">
-                                    <div class="d-flex justify-content-center">
-                                        Категории
-                                    </div>
-                                    <div class="d-flex justify-content-center">
-                                        <select class="form-select edit_select">
-                                            <option selected></option>
-                                            <option value="1">Комедия</option>
-                                            <option value="2">Ужасы</option>
-                                            <option value="3">
-                                                Фантастика
-                                            </option>
-                                            <option value="4">Детектив</option>
-                                            <option value="5">Боевик</option>
-                                            <option value="6">Триллер</option>
-                                            <option value="7">Роман</option>
-                                            <option value="8">Биография</option>
-                                        </select>
+                                <div class="row mb-4">
+                                    <div class="col-2">Описание</div>
+                                    <div class="col-10">
+                                        <textarea class="w-100 px-2 form-control" id="description_edit" rows="5" required title="Выберите Категории"></textarea>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-4">
-                                <div class="col-2">Описание</div>
-                                <div class="col-6">
-                                    <input
-                                        type="text"
-                                        class="form-control edit_item"
-                                        id="description_edit"
-                                    />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-2">Актеры</div>
-                                <div class="col-4">
-                                    <select class="form-select edit_select">
-                                        <option selected></option>
-                                        <option value="1">Саша</option>
-                                        <option value="2">Маша</option>
-                                        <option value="3">Гриша</option>
-                                    </select>
-                                </div>
-                                <div class="col-6">
-                                    <div class="row mb-4">
-                                        <div class="col-6">
-                                            Рейтинг на сайте
+                                <div class="row">
+                                    <div class="col-2">Актеры</div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control edit_item" id="actors_edit" required title="Введите актеров" />
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row mb-4">
+                                            <div class="col-9 text-end">Рейтинг на сайте</div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit_item" id="website_rating_edit" required title="Введите рейтинг" />
+                                            </div>
                                         </div>
-                                        <div class="col-6">
-                                            <input
-                                                type="text"
-                                                class="form-control edit_item"
-                                                id="website_rating_edit"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">IMDB</div>
-                                        <div class="col-6">
-                                            <input
-                                                type="text"
-                                                class="form-control edit_item"
-                                                id="IMDB_rating_edit"
-                                            />
+                                        <div class="row">
+                                            <div class="col-9 text-end">IMDB</div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit_item" id="IMDB_rating_edit" required title="Введите рейтинг" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-4">
-                                <div class="col-2">Загрузить изображение</div>
-                                <div class="col-4">
-                                    <input
-                                        type="text"
-                                        class="form-control edit_item"
-                                        id="add_image_edit"
-                                    />
+                                <div class="row mb-4">
+                                    <div class="col-2">Загрузить изображение</div>
+                                    <div class="col-4">
+                                        <input type="file" class="form-control edit_item" id="add_image_edit" name="addImage" required title="Загрузите изображение" onchange="download(this)" />
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-2">Предпросмотр</div>
+                                    <div class="col-4 d-flex justify-content-center">
+                                        <div class="prewiev_image" id="img_wrapper"><img src="" alt="Предпросмотр" id="preview" class="prewiev_image" /></div>
+                                    </div>
+                                    <div class="col-5 d-flex">
+                                        <div class="me-5">Файлы</div>
+                                        <input type="file" name="files[]" multipleclass="bg-white text-dark" id="add_files_edit" title="Необходимо выбрать минимум один файл" />
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end mt-5 mb-4 me-5">
+                                    <button type="button" class="btn text-white cancelButton me-4" onclick="window.location.href='Catalog_page.html'">Отменить</button>
+                                    <button type="submit" class="btn text-white addMovieButton">Добавить</button>
                                 </div>
                             </div>
-                            <div class="row mb_4">
-                                <div class="col-2">Предпросмотр</div>
-                                <div
-                                    class="col-4 d-flex justify-content-center"
-                                >
-                                    <div class="prewiev_image"></div>
-                                </div>
-                                <div class="col-1 me-5">Файлы</div>
-                                <div class="col-4">
-                                    <div class="files_container"></div>
-                                </div>
-                            </div>
-                            <div
-                                class="d-flex justify-content-end mt-5 mb-4 me-5"
-                            >
-                                <button
-                                    type="button"
-                                    class="btn text-white cancelButton me-4"
-                                    onclick="window.location.href='Catalog_page.html'"
-                                >
-                                    Отменить
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn text-white addMovieButton"
-                                    onclick="window.location.href='Catalog_page.html'"
-                                >
-                                    Добавить
-                                </button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -557,109 +315,46 @@
                 <div class="footer_border"></div>
                 <div class="row footer_content">
                     <div class="col-7">
-                        <div
-                            class="footer_icons my-3 d-flex justify-content-between"
-                        >
-                            <img
-                                src="icons/icon1.png"
-                                alt="Соц-сеть"
-                                width="44px"
-                                height="44px"
-                            />
-                            <img
-                                src="icons/icon2.png"
-                                alt="Соц-сеть"
-                                width="39px"
-                                height="39px"
-                            />
-                            <img
-                                src="icons/icon3.png"
-                                alt="Соц-сеть"
-                                width="42px"
-                                height="42px"
-                            />
-                            <img
-                                src="icons/icon4.png"
-                                alt="Соц-сеть"
-                                width="37px"
-                                height="37px"
-                            />
+                        <div class="footer_icons my-3 d-flex justify-content-between">
+                            <img src="icons/icon1.png" alt="Соц-сеть" width="44px" height="44px" />
+                            <img src="icons/icon2.png" alt="Соц-сеть" width="39px" height="39px" />
+                            <img src="icons/icon3.png" alt="Соц-сеть" width="42px" height="42px" />
+                            <img src="icons/icon4.png" alt="Соц-сеть" width="37px" height="37px" />
                         </div>
 
-                        <button
-                            type="button"
-                            class="btn helpButton text-white d-flex border-0"
-                        >
-                            <img
-                                src="icons/icon5.png"
-                                alt="Помощь"
-                                width="33px"
-                                height="33px"
-                                class="mx-2"
-                            />
+                        <button type="button" class="btn helpButton text-white d-flex border-0">
+                            <img src="icons/icon5.png" alt="Помощь" width="33px" height="33px" class="mx-2" />
                             <div class="helpText pe-2">Нужна помощь?</div>
                         </button>
 
                         <div class="indexing d-flex align-items-center my-3">
-                            <img
-                                src="icons/icon.png"
-                                alt="Иконка"
-                                class="me-3"
-                            />
-                            <div class="indexing_item">
-                                © 2024, Kinesteria, 18+
-                            </div>
+                            <img src="icons/icon.png" alt="Иконка" class="me-3" />
+                            <div class="indexing_item">© 2024, Kinesteria, 18+</div>
                         </div>
                     </div>
                     <div class="col-2 mt-4">
                         <ul class="list-unstyled">
                             <li>
-                                <a
-                                    href="#"
-                                    class="text-decoration-none text-white"
-                                    >О нас</a
-                                >
+                                <a href="#" class="text-decoration-none text-white">О нас</a>
                             </li>
                             <li>
-                                <a
-                                    href="#"
-                                    class="text-decoration-none text-white"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#contacts"
-                                    >Контакты</a
-                                >
+                                <a href="#" class="text-decoration-none text-white" data-bs-toggle="modal" data-bs-target="#contacts">Контакты</a>
                             </li>
                             <li>
-                                <a
-                                    href="#"
-                                    class="text-decoration-none text-white"
-                                    >Пользовательское соглашение</a
-                                >
+                                <a href="#" class="text-decoration-none text-white">Пользовательское соглашение</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-3">
                         <ul class="list-unstyled mt-4">
                             <li>
-                                <a
-                                    href="#"
-                                    class="text-decoration-none text-white"
-                                    >Служба поддержки</a
-                                >
+                                <a href="#" class="text-decoration-none text-white">Служба поддержки</a>
                             </li>
                             <li>
-                                <a
-                                    href="#"
-                                    class="text-decoration-none text-white"
-                                    >Вопросы и ответы</a
-                                >
+                                <a href="#" class="text-decoration-none text-white">Вопросы и ответы</a>
                             </li>
                             <li>
-                                <a
-                                    href="#"
-                                    class="text-decoration-none text-white"
-                                    >Сообщить об ощибке</a
-                                >
+                                <a href="#" class="text-decoration-none text-white">Сообщить об ощибке</a>
                             </li>
                         </ul>
                     </div>
@@ -667,32 +362,16 @@
             </div>
         </div>
 
-        <div
-            class="modal fade"
-            id="contacts"
-            tabindex="-1"
-            aria-labelledby="contactsModalLabel"
-            aria-hidden="true"
-        >
+        <div class="modal fade" id="contacts" tabindex="-1" aria-labelledby="contactsModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-design">
                     <div class="modal-body">
                         <div class="container">
-                            <div
-                                class="modal_title d-flex justify-content-center"
-                            >
-                                Контакты
-                            </div>
-                            <div
-                                class="title_bottom d-flex justify-content-center mt-3 mb-5"
-                            >
+                            <div class="modal_title d-flex justify-content-center">Контакты</div>
+                            <div class="title_bottom d-flex justify-content-center mt-3 mb-5">
                                 <div class="border_line"></div>
                             </div>
-                            <div>
-                                Если у вас есть вопросы, идеи, предложения о
-                                сотрудничестве и пожелания, напишите нам на
-                                почту: <br />a-leznev@mail.ru
-                            </div>
+                            <div>Если у вас есть вопросы, идеи, предложения о сотрудничестве и пожелания, напишите мне на почту: <br />a-leznev@mail.ru</div>
                             <div class="mt-5">
                                 Связь со мной в телеграмм:
                                 <a href="https://t.me/arty_y_y" class="text-white text-decoration-none underline"> @arty_y_y </a>
@@ -703,10 +382,7 @@
             </div>
         </div>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"
-        ></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="Catalog_page.js"></script>
     </body>
 </html>
