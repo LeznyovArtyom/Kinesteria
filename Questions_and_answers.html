@@ -1,27 +1,16 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Kinesteria</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-            crossorigin="anonymous"
-        />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
         <link rel="icon" href="icons/icon.png" />
-        <link rel="stylesheet" href="index.css" />
+        <link rel="stylesheet" href="Questions_and_answers.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-            rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     </head>
     <body>
         <div class="header d-flex justify-content-center">
@@ -31,56 +20,31 @@
                         <img src="icons/icon.png" alt="Иконка" />
                     </a>
                     <div class="logo_name me-5">
-                        <a class="text-decoration-none text-white" href=""
-                            >Kinesteria</a
-                        >
+                        <a class="text-decoration-none text-white" href="index.html">Kinesteria</a>
                     </div>
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div
-                        class="collapse navbar-collapse"
-                        id="navbarSupportedContent"
-                    >
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a
-                                    class="nav-link text-white"
-                                    href="Main_page.html"
-                                    >Главная</a
-                                >
+                                <a class="nav-link text-white" href="Main_page.html">Главная</a>
                             </li>
                             <li class="nav-item">
-                                <a
-                                    class="nav-link text-white"
-                                    href="Catalog_page.html"
-                                    >Каталог</a
-                                >
+                                <a class="nav-link text-white" href="Catalog_page.html">Каталог</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="#"
-                                    >Новинки</a
-                                >
+                                <a class="nav-link text-white" href="#">Новинки</a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                        <ul class="navbar-nav ml-auto d-flex">
                             <li class="nav-item d-flex align-items-center mx-4">
-                                <div><input type="text" class="form-control search_input" id="search" placeholder="Поиск" /></div>
+                                <div>
+                                    <input type="text" class="form-control search_input" id="search" placeholder="Поиск" />
+                                </div>
                             </li>
                             <li class="nav-item">
-                                <a
-                                    class="nav-link text-white ms-3"
-                                    href="Authorization_page.html"
-                                    >Войти</a
-                                >
+                                <a href="#" class="nav-link"><img src="профиль.jpg" alt="Профиль" width="74px" height="74px" class="profile_image" /></a>
                             </li>
                         </ul>
                     </div>
@@ -89,52 +53,38 @@
         </div>
 
         <div class="main container">
-            <section>
-                <div class="container">
-                    <div class="pt-5 pb-4">Рекомендации</div>
-                    <div class="row gy-3" id="Recommendations">
-                        
-                    </div>
-                </div>
-            </section>
-            <section>
-                <div class="container">
-                    <div class="pt-5 pb-4">Новинки сезона</div>
-                    <div class="row gy-3" id="newItemsSeasonContainer">
-                        
-                    </div>
-                </div>
-            </section>
-            <section>
-                <div class="container">
-                    <div class="pt-5 pb-4">Фильмы по жанрам</div>
-                    <div class="row gy-3" id="moviesByGenreContainer">
-                        
-                    </div>
-                </div>
-            </section>
-            <section>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-7 description">
-                            Исследуй мир кино с нами! Зарегистрируйся для
-                            доступа к огромной библиотеке фильмов. Вдохновляйся,
-                            открывай новые шедевры и делай кино важной частью
-                            своей жизни. Регистрация - твой билет в
-                            увлекательное кинематографическое путешествие!
-                            🍿🎥✨
+            <div class="container">
+                <div class="title text-center py-5">Вопросы и ответы</div>
+                <ol>
+                    <li class="mb-5">
+                        <div class="mb-3">Как я могу найти фильм/сериал/мультфильм в вашем каталоге?</div>
+                        <div>
+                            Для поиска конкретного контента в нашем каталоге вы можете воспользоваться функцией поиска, расположенной вверху страницы. Просто введите название фильма/сериала/мультфильма и нажмите кнопку "Enter" на клавиатуре. Вы также можете использовать фильтры по жанру, году
+                            выпуска и другим параметрам для уточнения результатов.
                         </div>
-                    </div>
+                    </li>
 
-                    <button
-                        type="button"
-                        class="btn registerButton text-white px-4"
-                        onclick="window.location.href='Registration_page.html'"
-                    >
-                        Зарегистрироваться
-                    </button>
-                </div>
-            </section>
+                    <li class="mb-5">
+                        <div class="mb-3">Как я могу получить дополнительную информацию о фильме/сериале/мультфильме?</div>
+                        <div>Дополнительная информация о контенте доступна на странице каждого фильма/сериала/мультфильма. Вы найдете там описание сюжета, информацию о режиссере, актерском составе, рейтинге и многое другое.</div>
+                    </li>
+
+                    <li class="mb-5">
+                        <div class="mb-3">Что делать, если я не могу найти определенный фильм/сериал/мультфильм в вашем каталоге?</div>
+                        <div>
+                            Если вы не можете найти нужный контент в нашем каталоге, есть вероятность, что он еще не добавлен. Попробуйте проверить каталог еще раз через некоторое время, так как мы регулярно обновляем его с новыми выпусками. Если вы уверены, что фильм/сериал/мультфильм должен быть в
+                            нашем каталоге, пожалуйста, свяжитесь с нами, и мы постараемся добавить его как можно скорее.
+                        </div>
+                    </li>
+
+                    <li class="mb-5">
+                        <div class="mb-3">Как я могу обратиться с вопросом или предложением о работе вашего сайта?</div>
+                        <div>Если у вас есть вопросы, предложения или замечания относительно работы нашего сайта, пожалуйста, свяжитесь с нашей службой поддержки, информация о которой есть в футере сайта в разделе "Контакты" или "Служба поддержки". Мы будем рады помочь вам и услышать ваше мнение.</div>
+                    </li>
+                </ol>
+
+                <div class="pb-5">Спасибо, что выбрали наш сервис для поиска и выбора фильмов! Надеемся, что вы найдете здесь много интересного и увлекательного контента. Если у вас возникли вопросы или замечания, пожалуйста, свяжитесь с нами.</div>
+            </div>
         </div>
 
         <div class="footer container">
@@ -219,11 +169,6 @@
             </div>
         </div>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"
-        ></script>
-        <script src="index.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

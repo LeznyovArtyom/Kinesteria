@@ -28,7 +28,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="#">Главная</a>
+                                <a class="nav-link text-white" href="Main_page.html">Главная</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="Catalog_page.html">Каталог</a>
@@ -88,12 +88,8 @@
                             <div class="title me-2">Жанр:</div>
                             <div class="value"></div>
                         </div>
-                        <div class="general-font d-flex mb-3" id="website_rating_movie">
-                            <div class="title me-2">Рейтинг на сайте:</div>
-                            <div class="value"></div>
-                        </div>
-                        <div class="general-font d-flex mb-3" id="IMDB_rating_movie">
-                            <div class="title me-2">IMDB:</div>
+                        <div class="general-font d-flex mb-3" id="rating_movie">
+                            <div class="title me-2">Рейтинг:</div>
                             <div class="value"></div>
                         </div>
                     </div>
@@ -107,50 +103,80 @@
         <div class="footer container">
             <div class="container">
                 <div class="footer_border"></div>
-                <div class="row footer_content">
+                <div class="row footer_content mt-4">
                     <div class="col-7">
-                        <div class="footer_icons my-3 d-flex justify-content-between">
-                            <img src="icons/icon1.png" alt="Соц-сеть" width="44px" height="44px" />
-                            <img src="icons/icon2.png" alt="Соц-сеть" width="39px" height="39px" />
-                            <img src="icons/icon3.png" alt="Соц-сеть" width="42px" height="42px" />
-                            <img src="icons/icon4.png" alt="Соц-сеть" width="37px" height="37px" />
+                        <div class="footer_title">По вопросам сотрудничества</div>
+                        <div class="footer_icons d-flex justify-content-between mt-2">
+                            <a href="https://vk.com/arrrtyy"><img src="icons/icon1.svg" alt="Соц-сеть" width="33px"></a>
+                            <a href="https://t.me/arty_y_y"><img src="icons/icon2.svg" alt="Соц-сеть" width="33px"></a>
+                            <a href="https://wa.me/79231807045"><img src="icons/icon3.svg" alt="Соц-сеть" width="33px"/></a>
+                            <a href="https://www.instagram.com/arty_y_y/"><img src="icons/icon4.svg" alt="Соц-сеть" width="33px"/></a>
                         </div>
 
-                        <button type="button" class="btn helpButton text-white d-flex border-0">
-                            <img src="icons/icon5.png" alt="Помощь" width="33px" height="33px" class="mx-2" />
-                            <div class="helpText pe-2">Нужна помощь?</div>
-                        </button>
-
-                        <div class="indexing d-flex align-items-center my-3">
+                        <div class="indexing d-flex align-items-center mb-3 mt-4">
                             <img src="icons/icon.png" alt="Иконка" class="me-3" />
                             <div class="indexing_item">© 2024, Kinesteria, 18+</div>
                         </div>
                     </div>
-                    <div class="col-2 mt-4">
+                    <div class="col-2">
+                        <div class="footer_title mb-2">Информация</div>
                         <ul class="list-unstyled">
                             <li>
-                                <a href="#" class="text-decoration-none text-white">О нас</a>
+                                <a href="#" class="text-decoration-none text-white" data-bs-toggle="modal" data-bs-target="#aboutUs">О нас</a>
                             </li>
                             <li>
-                                <a href="#" class="text-decoration-none text-white">Контакты</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-decoration-none text-white">Пользовательское соглашение</a>
+                                <a href="Terms_of_use.html" class="text-decoration-none text-white">Пользовательское соглашение</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-3">
-                        <ul class="list-unstyled mt-4">
+                        <div class="footer_title mb-2">Помощь</div>
+                        <ul class="list-unstyled">
                             <li>
-                                <a href="#" class="text-decoration-none text-white">Служба поддержки</a>
+                                <a href="#" class="text-decoration-none text-white" data-bs-toggle="modal" data-bs-target="#contacts">Контакты</a>
                             </li>
                             <li>
-                                <a href="#" class="text-decoration-none text-white">Вопросы и ответы</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-decoration-none text-white">Сообщить об ощибке</a>
+                                <a href="Questions_and_answers.html" class="text-decoration-none text-white">Вопросы и ответы</a>
                             </li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="aboutUs" tabindex="-1" aria-labelledby="aboutUsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-design">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="modal_title d-flex justify-content-center">О нас</div>
+                            <div class="title_bottom d-flex justify-content-center mt-3 mb-5">
+                                <div class="border_line"></div>
+                            </div>
+                            <div class="mb-4">Добро пожаловать на наш проект - каталог фильмов, сериалов и мультфильмов! Мы собрали для вас самую полную коллекцию кинематографических произведений, чтобы вы могли легко найти и выбрать фильмы на любой вкус и настроение.</div>
+                            <div class="mb-4">Здесь вы найдете информацию о самых популярных фильмах и сериалах, а также откроете для себя новые работы от талантливых режиссеров и актеров. Мы постоянно обновляем наш каталог, чтобы вы всегда были в курсе последних новинок и трендов в мире кино.</div>
+                            <div>Наша цель - помочь вам выбрать идеальный фильм для просмотра в уютной обстановке дома или в кругу друзей. Погрузитесь в мир кино и наслаждайтесь каждым моментом!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="contacts" tabindex="-1" aria-labelledby="contactsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-design">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="modal_title d-flex justify-content-center">Контакты</div>
+                            <div class="title_bottom d-flex justify-content-center mt-3 mb-5">
+                                <div class="border_line"></div>
+                            </div>
+                            <div>Если у вас есть вопросы, идеи, предложения о сотрудничестве и пожелания, напишите мне на почту: <br />a-leznev@mail.ru</div>
+                            <div class="mt-5">
+                                Связь со мной в телеграмм:
+                                <a href="https://t.me/arty_y_y" class="text-white text-decoration-none underline"> @arty_y_y </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

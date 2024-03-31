@@ -27,22 +27,10 @@ body {
     max-width: 1440px;
     background-color: #161422;
 }
-.main-image {
-    border-radius: 15px;
-    height: 295px;
-}
-.main_border {
-    border-bottom: 1px solid #fff;
-    margin: 2em 0 1em;
-}
-.genre_item {
-    height: 45px;
-    background: linear-gradient(90deg, #3E305F 29%, #8164C5);
-    border-radius: 10px;
-    color: #fff;
-    font-size: 20px;
-}
 
+.title {
+    font-size: 36px;
+}
 .modal-design {
     background-color: #161422;
     color: #fff;
@@ -62,25 +50,6 @@ body {
 }
 .underline {
     border-bottom: 1px solid white;
-}
-
-.filter {
-    border-radius: 20px;
-    background: linear-gradient(#8164C5, #3E305F 71%);
-    color: #fff;
-    font-weight: 500;
-}
-.header_filter {
-    background-color: #402F65;
-    border-radius: 20px 20px 0 0;
-    height: 60px;
-}
-.filter_select {
-    font-size: inherit;
-    font-family: inherit;
-}
-.searchButton {
-    font: inherit;
 }
 
 .footer {

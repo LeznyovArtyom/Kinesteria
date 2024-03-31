@@ -8,6 +8,7 @@ window.onload = function() {
 
     let header_movie = document.getElementById("header_movie");
     header_movie.innerHTML = movies[index].header;
+
     let name_movie = document.getElementById("name_movie");
     name_movie.innerHTML = movies[index].name;
 
@@ -17,7 +18,7 @@ window.onload = function() {
 
     let country_movie = document.getElementById("country_movie");
     let country_movie_value = country_movie.querySelector(".value");
-    country_movie_value.innerHTML = movies[index].country;
+    country_movie_value.innerHTML = movies[index].country.join(", ");
 
     let original_name_movie = document.getElementById("original_name_movie");
     let original_name_movie_value = original_name_movie.querySelector(".value");
@@ -35,13 +36,9 @@ window.onload = function() {
     let genre_movie_value = genre_movie.querySelector(".value");
     genre_movie_value.innerHTML = movies[index].genres.join(", ");
 
-    let website_rating_movie = document.getElementById("website_rating_movie");
-    let website_rating_movie_value = website_rating_movie.querySelector(".value");
-    website_rating_movie_value.innerHTML = movies[index].website_rating;
-
-    let IMDB_rating_movie = document.getElementById("IMDB_rating_movie");
-    let IMDB_rating_movie_value = IMDB_rating_movie.querySelector(".value");
-    IMDB_rating_movie_value.innerHTML = movies[index].IMDB_rating;
+    let rating_movie = document.getElementById("rating_movie");
+    let rating_movie_value = rating_movie.querySelector(".value");
+    rating_movie_value.innerHTML = movies[index].rating;
 
     let image_movie = document.getElementById("image_movie");
     image_movie.src = movies[index].image;

@@ -17,6 +17,9 @@ body {
     font-size: 32px;
     font-family: "Arvo", serif;
 }
+.search_input {
+    width: 300px;
+}
 .main {
     max-width: 1440px;
     background-color: #161422;
@@ -39,6 +42,28 @@ body {
     border-radius: 25px;
     background-color: #3E305F;
 }
+
+.modal-design {
+    background-color: #161422;
+    color: #fff;
+    font-family: inherit;
+    border-radius: 30px;
+}
+.modal_title {
+    font-size: 36px;
+}
+.border_line {
+    height: 3px;
+    background: linear-gradient(90deg, #2F2546, #8C69DF 51%, #322B44);
+    width: 511px;
+}
+.original_font {
+    font: inherit;
+}
+.underline {
+    border-bottom: 1px solid white;
+}
+
 .footer {
     max-width: 1440px;
     background-color: #161422;
@@ -56,4 +81,11 @@ body {
     font-size: 21px;
     background: linear-gradient(90deg, #3E305F 28%, #8263C5 100%);
     border-radius: 15px;
+}
+.footer_title {
+    font-size: 24px;
+}
+
+.underline {
+    border-bottom: 1px solid white;
 }

@@ -81,18 +81,18 @@ body {
     font: inherit;
 }
 .edit_item {
+    margin-bottom: 1.8em;
+}
+.edit_input {
     font-size: 20px;
     font-weight: 500;
     font-family: inherit;
 }
-.edit_select {
-    width: 276px;
-}
-.multiSelectGenres {
+.multiSelectGenres, .multiSelectCountry {
     height: 300px;
 }
-.multiSelectGenresButton {
-
+.select_item {
+    width: 300px;
 }
 #description_edit {
     border-radius: 10px;
@@ -103,6 +103,7 @@ body {
     height: 295px;
     border-radius: 15px;
     background-color: #fff;
+    
 }
 /*
 .files_container {
@@ -120,6 +121,14 @@ body {
     border-radius: 10px;
     font-size: inherit;
     font-family: inherit;
+}
+
+.extendedFilter_container {
+    padding: 0 4em;
+}
+.filter_select {
+    overflow-y: auto;
+    max-height: 100px;
 }
 
 .footer {
@@ -140,6 +149,10 @@ body {
     background: linear-gradient(90deg, #3E305F 28%, #8263C5 100%);
     border-radius: 15px;
 }
+.footer_title {
+    font-size: 24px;
+}
+
 .underline {
     border-bottom: 1px solid white;
 }
