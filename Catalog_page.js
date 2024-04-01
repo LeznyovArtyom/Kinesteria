@@ -1,49 +1,59 @@
-function handleCB(chBoxes, selectedListItems) {
+function handleCB(chBoxes, selectedListItems, dropdownButtonId, element) {
+    const dropdownButton = document.getElementById(dropdownButtonId);
     selectedListItems.length = 0;
+    let selectedListItemsText = '';
     chBoxes.forEach((checkbox) => {
         if (checkbox.checked) {
             selectedListItems.push(checkbox.value);
+            selectedListItemsText += checkbox.value + ', ';
         }
     });
+
+    dropdownButton.innerText = selectedListItems.length > 0 ? selectedListItemsText.slice(0, -2) : 'Выберите ' + element;
 }
+
 const genresChBoxes = document.querySelectorAll('.dropdown-menu.multiSelectGenres input[type="checkbox"]');
 let genresSelectedListItems = [];
 genresChBoxes.forEach((checkbox) => {
-    checkbox.addEventListener('change', () => handleCB(genresChBoxes, genresSelectedListItems));
+    checkbox.addEventListener('change', () => handleCB(genresChBoxes, genresSelectedListItems, 'multiSelectGenresButton', 'жанр'));
 });
 const countryChBoxes = document.querySelectorAll('.dropdown-menu.multiSelectCountry input[type="checkbox"]');
 let countrySelectedListItems = [];
 countryChBoxes.forEach((checkbox) => {
-    checkbox.addEventListener('change', () => handleCB(countryChBoxes, countrySelectedListItems));
+    checkbox.addEventListener('change', () => handleCB(countryChBoxes, countrySelectedListItems, 'multiSelectCountryButton', 'страну'));
 });
 const qualityChBoxes = document.querySelectorAll('.dropdown-menu.multiSelectQuality input[type="checkbox"]');
 let qualitySelectedListItems = [];
 qualityChBoxes.forEach((checkbox) => {
-    checkbox.addEventListener('change', () => handleCB(qualityChBoxes, qualitySelectedListItems));
+    checkbox.addEventListener('change', () => handleCB(qualityChBoxes, qualitySelectedListItems, 'multiSelectQualityButton', 'качество'));
 });
 const subtitlesChBoxes = document.querySelectorAll('.dropdown-menu.multiSelectSubtitles input[type="checkbox"]');
 let subtitlesSelectedListItems = [];
 subtitlesChBoxes.forEach((checkbox) => {
-    checkbox.addEventListener('change', () => handleCB(subtitlesChBoxes, subtitlesSelectedListItems));
+    checkbox.addEventListener('change', () => handleCB(subtitlesChBoxes, subtitlesSelectedListItems, 'multiSelectSubtitlesButton', 'субтитры'));
 });
 const voiceActingChBoxes = document.querySelectorAll('.dropdown-menu.multiSelectVoiceActing input[type="checkbox"]');
 let voiceActingSelectedListItems = [];
 voiceActingChBoxes.forEach((checkbox) => {
-    checkbox.addEventListener('change', () => handleCB(voiceActingChBoxes, voiceActingSelectedListItems));
+    checkbox.addEventListener('change', () => handleCB(voiceActingChBoxes, voiceActingSelectedListItems, 'multiSelectVoiceActingButton', 'озвучку'));
 });
 
 
-function handleRadio(radioButtons, selectedRadio) {
+function handleRadio(radioButtons, selectedRadio, dropdownButtonId, element) {
+    const dropdownButton = document.getElementById(dropdownButtonId);
+    let selectedItemsText = '';
     radioButtons.forEach((radio) => {
         if (radio.checked) {
             selectedRadio.value = radio.value;
+            selectedItemsText = radio.value;
         }
     });
+    dropdownButton.innerText = selectedItemsText != 0 ? selectedItemsText : 'Выберите ' + element;
 }
 const typeRadioButtons = document.querySelectorAll('.dropdown-menu.multiSelectType input[type="radio"]');
 let typeSelectedRadio = { value: null }; // Объект для хранения выбранного значения
 typeRadioButtons.forEach((radio) => {
-    radio.addEventListener('change', () => handleRadio(typeRadioButtons, typeSelectedRadio));
+    radio.addEventListener('change', () => handleRadio(typeRadioButtons, typeSelectedRadio, 'multiSelectTypeButton', 'тип'));
 });
 
 

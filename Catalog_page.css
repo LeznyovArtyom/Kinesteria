@@ -93,6 +93,9 @@ body {
 }
 .select_item {
     width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 #description_edit {
     border-radius: 10px;
