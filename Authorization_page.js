@@ -49,6 +49,7 @@ const checkUser = () => {
 
    if (existingUser) {
       alert("Вы вошли в аккаунт!");
+      localStorage.setItem('current_user', login_value)
    } else {
       alert("Введен неправильный логин или пароль!");
    }

@@ -20,9 +20,25 @@ body {
 .search_input {
     width: 300px;
 }
-.profile_image {
+#profile_image {
     border-radius: 50%;
 }
+
+.dropdown:hover .dropdown_profile {
+    display: block;
+}
+.dropdown_profile {
+    right: 0;
+    left: auto; /* Отменяет стандартное позиционирование слева */
+}
+.dropdown_profile {
+    background-color: #26222D;
+}
+/* Изменение цвета фона элемента при наведении */
+.dropdown_profile .dropdown-item:hover {
+    background-color: #161422; /* Цвет фона при наведении */
+}
+
 .main {
     max-width: 1440px;
     background-color: #161422;

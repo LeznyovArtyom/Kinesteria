@@ -43,10 +43,21 @@ body {
     max-width: 1440px;
     background-color: #161422;
 }
-
-.title {
+.page_title {
     font-size: 36px;
 }
+.inputChange, #text_about_me {
+    border-radius: 5px;
+}
+.separator {
+    border-bottom: 2px solid #26222D;
+}
+#preview_image {
+    border-radius: 50%;
+    width: 500px;
+    height: 500px;
+}
+
 .modal-design {
     background-color: #161422;
     color: #fff;

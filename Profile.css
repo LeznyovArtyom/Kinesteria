@@ -23,6 +23,11 @@ body {
 #profile_image {
     border-radius: 50%;
 }
+#avatar_image {
+    border-radius: 50%;
+    width: 416px;
+    height: 416px;
+}
 
 .dropdown:hover .dropdown_profile {
     display: block;
@@ -44,9 +49,19 @@ body {
     background-color: #161422;
 }
 
-.title {
-    font-size: 36px;
+#accaunt_image {
+    border-radius: 50%;
 }
+#login {
+    font-size: 32px;
+}
+.border_line2 {
+    height: 3px;
+    background: linear-gradient(90deg, #2F2546, #8C69DF 51%, #322B44);
+}
+
+
+
 .modal-design {
     background-color: #161422;
     color: #fff;

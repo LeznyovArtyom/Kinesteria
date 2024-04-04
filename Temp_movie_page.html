@@ -33,9 +33,6 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="Catalog_page.html">Каталог</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="#">Новинки</a>
-                            </li>
                         </ul>
                         <ul class="navbar-nav ml-auto d-flex">
                             <li class="nav-item d-flex align-items-center mx-4">
@@ -44,7 +41,17 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link"><img src="профиль.jpg" alt="Профиль" width="74px" height="74px" class="profile_image" /></a>
+                                <a class="nav-link text-white ms-3" href="Authorization_page.html" id="loginButton">Войти</a>
+                            </li>
+                            <li class="nav-item" id="profilePicture" style="display: none;">
+                                <div class="dropdown">
+                                    <a href="#" class="nav-link" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="" alt="Профиль" width="74px" height="74px" id="profile_image" /></a>
+                                    <ul class="dropdown-menu dropdown-menu-end original_font dropdown_profile" aria-labelledby="dropdownMenuLink">
+                                      <li class="dropdown_elem"><a class="dropdown-item text-white" href="Profile.html">Профиль</a></li>
+                                      <li class="dropdown_elem"><a class="dropdown-item text-white" href="Settings.html">Настройки</a></li>
+                                      <li><a class="dropdown-item text-white" href="#" id="go_out">Выйти</a></li>
+                                    </ul>
+                                  </div>
                             </li>
                         </ul>
                     </div>
