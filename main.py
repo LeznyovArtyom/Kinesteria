@@ -1,11 +1,22 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import Optional, List
-import psycopg2
-#import mysql.connector
+from datetime import datetime
+import mysql.connector
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+import os
 
 
 app = FastAPI()
+
+connection = mysql.connector.connect(
+    host=os.getenv("MYSQLHOST"),
+    port=os.getenv("MYSQLPORT"),
+    user=os.getenv("MYSQLUSER"),
+    password=os.getenv("MYSQLPASSWORD"),
+    database=os.getenv("MYSQL_DATABASE"),
+)
 
 # connection = mysql.connector.connect(
 #     host="localhost",
@@ -15,12 +26,13 @@ app = FastAPI()
 #     database="Kinesteria",
 # )
 
-connection = psycopg2.connect(
-    host="localhost",
-    port=5432,
-    user="postgres",
-    password="TikTakfoke86!",
-    database="Kinesteria"
+# Настройка CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5500"],  # Список разрешенных источников
+    allow_credentials=True,
+    allow_methods=["*"],  # Разрешенные методы
+    allow_headers=["*"],  # Разрешенные заголовки
 )
 
 
@@ -44,6 +56,7 @@ class UserUpdate(BaseModel):
     password: Optional[str] = None
     about_me: Optional[str] = None
     avatar: Optional[str] = None
+    role_id: Optional[int] = None
     vkontakte: Optional[str] = None
     instagram: Optional[str] = None
     telegram: Optional[str] = None
@@ -83,6 +96,25 @@ class ProductUpdate(BaseModel):
     quality_id: Optional[List[int]] = None
     voice_acting_id: Optional[List[int]] = None
     video_file: Optional[str] = None
+
+class Comment(BaseModel):
+    text: str
+    user_id: int
+
+class CommentUpdate(BaseModel):
+    text: str
+
+class Review(BaseModel):
+    text: str
+    user_id: int
+
+class ReviewUpdate(BaseModel):
+    text: str
+
+
+@app.get("/index.css")
+def get_index_css():
+    return FileResponse("index.css")
 
 
 # Получить список всех пользователей
@@ -152,7 +184,6 @@ def register_new_user(user_data: User):
     return {"message": "Пользователь успешно зарегистрирован"}
 
 
-"""Доделать с ролью"""
 # Обновить информацию о пользователе
 @app.put("/users/{id}/update")
 def update_user(id: int, user_data: UserUpdate):
@@ -166,7 +197,7 @@ def update_user(id: int, user_data: UserUpdate):
         raise HTTPException(status_code=404, detail="Пользователь не найден")
     
     user_dict = user_data.model_dump(exclude_unset=True)
-    user_fields = {key: value for key, value in user_dict.items() if key in {"first_name", "last_name", "login", "email", "password", "about_me", "avatar"}}
+    user_fields = {key: value for key, value in user_dict.items() if key in {"first_name", "last_name", "login", "email", "password", "about_me", "avatar", "role_id"}}
     social_fields = {key: value for key, value in user_dict.items() if key in {"vkontakte", "instagram", "telegram", "whatsapp"}}
 
     if user_fields:
@@ -182,41 +213,75 @@ def update_user(id: int, user_data: UserUpdate):
     return {"message": "Пользователь успешно обновлен"}
 
 
-# Получить список всех произведений / произведений по параметрам
+# # Получить список всех произведений / произведений по параметрам
+# @app.get("/products/")
+# def get_products_by_parameters(type_id: Optional[int] = None, genre_id: Optional[int] = None, country_id: Optional[int] = None, quality_id: Optional[int] = None, 
+#                                subtitles_id: Optional[int] = None, voice_acting_id: Optional[int] = None, rating_id: Optional[int] = None, release_year_id: Optional[int] = None):
+#     cursor = connection.cursor(dictionary=True)
+
+#     params = {"type_id": type_id, "genre_id": genre_id, "country_id": country_id, "quality_id": quality_id, "subtitles_id": subtitles_id, "voice_acting_id": voice_acting_id, "rating_id": rating_id, "release_year_id": release_year_id}
+#     params = {k: v for k, v in params.items() if v is not None}
+
+#     where_clauses = []
+#     values = []
+#     for key, value in params.items():
+#         if key == 'genre_id':
+#             where_clauses.append("product.id IN (SELECT product_id FROM product_genre WHERE genre_id = %s)")
+#         elif key == 'country_id':
+#             where_clauses.append("product.id IN (SELECT product_id FROM product_country WHERE country_id = %s)")
+#         elif key == 'subtitles_id':
+#             where_clauses.append("product.id IN (SELECT product_id FROM product_subtitles WHERE subtitles_id = %s)")
+#         elif key == 'quality_id':
+#             where_clauses.append("product.id IN (SELECT product_id FROM product_quality WHERE quality_id = %s)")
+#         elif key == 'voice_acting_id':
+#             where_clauses.append("product.id IN (SELECT product_id FROM product_voice_acting WHERE voice_acting_id = %s)")
+#         else:
+#             where_clauses.append(f"{key} = %s")
+#         values.append(value)
+
+#     where_statement = " AND ".join(where_clauses)
+#     sql_query = f"""
+# SELECT product.id, product.name, product.description, product.original_name, product.director, 
+#         product.actors, product.release_year, product.rating, product.image,
+#         type.name as type, GROUP_CONCAT(DISTINCT genre.name SEPARATOR ', ') AS genre, 
+#         GROUP_CONCAT(DISTINCT country.name SEPARATOR ', ') as country, 
+#         GROUP_CONCAT(DISTINCT subtitles.name SEPARATOR ', ') as subtitles,
+#         GROUP_CONCAT(DISTINCT quality.name SEPARATOR ', ') as quality, 
+#         GROUP_CONCAT(DISTINCT voice_acting.name SEPARATOR ', ') as voice_acting 
+# FROM product
+# LEFT JOIN type on product.type_id = type.id
+# LEFT JOIN product_genre on product.id = product_genre.product_id
+# LEFT JOIN genre on product_genre.genre_id = genre.id
+# LEFT JOIN product_country on product.id = product_country.product_id
+# LEFT JOIN country on product_country.country_id = country.id
+# LEFT JOIN product_subtitles on product.id = product_subtitles.product_id
+# LEFT JOIN subtitles on product_subtitles.subtitles_id = subtitles.id
+# LEFT JOIN product_quality on product.id = product_quality.product_id
+# LEFT JOIN quality on product_quality.quality_id = quality.id
+# LEFT JOIN product_voice_acting on product.id = product_voice_acting.product_id
+# LEFT JOIN voice_acting on product_voice_acting.voice_acting_id = voice_acting.id
+# {(f'WHERE {where_statement}' if where_statement else '')}
+# GROUP BY product.id
+# ORDER BY product.id
+#     """
+
+#     cursor.execute(sql_query, tuple(values))
+#     result = cursor.fetchall()
+#     cursor.close()
+#     return {"Products": result}
+
+# Получить список всех произведений
 @app.get("/products/")
-def get_products_by_parameters(type_id: Optional[int] = None, genre_id: Optional[int] = None, country_id: Optional[int] = None, quality_id: Optional[int] = None, 
-                               subtitles_id: Optional[int] = None, voice_acting_id: Optional[int] = None, rating_id: Optional[int] = None, release_year_id: Optional[int] = None):
+def get_products_by_parameters():
     cursor = connection.cursor(dictionary=True)
 
-    params = {"type_id": type_id, "genre_id": genre_id, "country_id": country_id, "quality_id": quality_id, "subtitles_id": subtitles_id, "voice_acting_id": voice_acting_id, "rating_id": rating_id, "release_year_id": release_year_id}
-    params = {k: v for k, v in params.items() if v is not None}
-
-    where_clauses = []
-    values = []
-    for key, value in params.items():
-        if key == 'genre_id':
-            where_clauses.append("product.id IN (SELECT product_id FROM product_genre WHERE genre_id = %s)")
-        elif key == 'country_id':
-            where_clauses.append("product.id IN (SELECT product_id FROM product_country WHERE country_id = %s)")
-        elif key == 'subtitles_id':
-            where_clauses.append("product.id IN (SELECT product_id FROM product_subtitles WHERE subtitles_id = %s)")
-        elif key == 'quality_id':
-            where_clauses.append("product.id IN (SELECT product_id FROM product_quality WHERE quality_id = %s)")
-        elif key == 'voice_acting_id':
-            where_clauses.append("product.id IN (SELECT product_id FROM product_voice_acting WHERE voice_acting_id = %s)")
-        else:
-            where_clauses.append(f"{key} = %s")
-        values.append(value)
-
-    where_statement = " AND ".join(where_clauses)
-    sql_query = f"""
-    SELECT product.id, product.name, product.description, product.original_name, product.director, 
-           product.actors, product.release_year, product.rating, product.image,
-           type.name as type, GROUP_CONCAT(DISTINCT genre.name SEPARATOR ', ') AS genre, 
-           GROUP_CONCAT(DISTINCT country.name SEPARATOR ', ') as country, 
-           GROUP_CONCAT(DISTINCT subtitles.name SEPARATOR ', ') as subtitles,
-           GROUP_CONCAT(DISTINCT quality.name SEPARATOR ', ') as quality, 
-           GROUP_CONCAT(DISTINCT voice_acting.name SEPARATOR ', ') as voice_acting 
+    sql_query = """
+    SELECT product.id, product.name, product.release_year, product.rating, product.image,
+            type.name as type, GROUP_CONCAT(DISTINCT genre.name SEPARATOR ', ') AS genre, 
+            GROUP_CONCAT(DISTINCT country.name SEPARATOR ', ') as country, 
+            GROUP_CONCAT(DISTINCT subtitles.name SEPARATOR ', ') as subtitles,
+            GROUP_CONCAT(DISTINCT quality.name SEPARATOR ', ') as quality, 
+            GROUP_CONCAT(DISTINCT voice_acting.name SEPARATOR ', ') as voice_acting 
     FROM product
     LEFT JOIN type on product.type_id = type.id
     LEFT JOIN product_genre on product.id = product_genre.product_id
@@ -229,16 +294,14 @@ def get_products_by_parameters(type_id: Optional[int] = None, genre_id: Optional
     LEFT JOIN quality on product_quality.quality_id = quality.id
     LEFT JOIN product_voice_acting on product.id = product_voice_acting.product_id
     LEFT JOIN voice_acting on product_voice_acting.voice_acting_id = voice_acting.id
-    {(f'WHERE {where_statement}' if where_statement else '')}
     GROUP BY product.id
     ORDER BY product.id
     """
 
-    cursor.execute(sql_query, tuple(values))
+    cursor.execute(sql_query)
     result = cursor.fetchall()
     cursor.close()
     return {"Products": result}
-    
 
 # Получить произведение по ID
 @app.get("/products/{id}")
@@ -358,6 +421,7 @@ def update_product(id: int, product_data: ProductUpdate):
     cursor.close()
     return {"message": "Произведение успешно обновлено"}
 
+
 # Получить список всех ролей
 @app.get("/roles")
 def get_roles():
@@ -432,48 +496,91 @@ def get_voice_acting():
 @app.get("/products/{id}/comments")
 def get_comments_by_product_id(id: int):
     cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM comments WHERE product_id = %s", (id,))
+    sql_query = """SELECT comments.id, comments.text, comments.date, product.name as product, user.login FROM comments
+                    LEFT JOIN user on comments.user_id = user.id
+                    LEFT JOIN product on comments.product_id = product.id
+                    WHERE product.id = %s"""
+    cursor.execute(sql_query, (id,))
     result = cursor.fetchall()
     cursor.close()
     return {"Product": id, "Comments": result}
 
 
 # Удалить комментарий
-
+@app.delete("/comments/{id}/delete")
+def delete_comment(id: int):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("DELETE FROM comments WHERE id = %s", (id,))
+    connection.commit()
+    cursor.close()
+    return {"message": "Комментарий удален"}
 
 
 # Добавить комментарий
-# @app.post("/products/{id}/comments/add")
-# def add_new_comment():
-#     cursor = connection.cursor(dictionary=True)
-#     sql_query = """INSERT INTO"""
-#     cursor.execute(sql_query)
-#     result = cursor.fetchall()
-#     cursor.close()
-#     return {"Users": result}
+@app.post("/products/{id}/comments/add")
+def add_new_comment(id: int, comment_data: Comment):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("INSERT INTO comments (text, date, product_id, user_id) VALUES (%s, %s, %s, %s)", (comment_data.text, datetime.now(), id, comment_data.user_id))
+    connection.commit()
+    cursor.close()
+    return {"message": "Комментарий успешно добавлен"}
 
 
 # Обновить комментарий
-
+@app.put("/comments/{id}/update")
+def update_coment(id: int, comment_data: CommentUpdate):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("UPDATE comments SET text = %s WHERE id = %s", (comment_data.text, id))
+    connection.commit()
+    cursor.close()
+    return {"message": "Комментарий успешно обновлен"}
 
 
 # Получить список всех отзывов произведения
 @app.get("/products/{id}/reviews")
 def get_reviews_by_product_id(id: int):
     cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM reviews WHERE product_id = %s", (id,))
+    sql_query = """SELECT reviews.id, reviews.text, reviews.date, product.name as product, user.login FROM reviews
+                    LEFT JOIN user on reviews.user_id = user.id
+                    LEFT JOIN product on reviews.product_id = product.id
+                    WHERE product.id = %s"""
+    cursor.execute(sql_query, (id,))
     result = cursor.fetchall()
     cursor.close()
     return {"Product": id, "Reviews": result}
 
 
-
 # Удалить отзыв
-
+@app.delete("/reviews/{id}/delete")
+def delete_review(id: int):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("DELETE FROM reviews WHERE id = %s", (id,))
+    connection.commit()
+    cursor.close()
+    return {"message": "Отзыв удален"}
 
 
 # Добавить отзыв
+@app.post("/products/{id}/reviews/add")
+def add_new_review(id: int, review_data: Review):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM reviews WHERE product_id = %s AND user_id = %s", (id, review_data.user_id))
+    existing_review = cursor.fetchone()
+    if existing_review:
+        cursor.close()
+        raise HTTPException(status_code=400, detail="Пользователь уже написал отзыв к этому произведению")
 
+    cursor.execute("INSERT INTO reviews (text, date, product_id, user_id) VALUES (%s, %s, %s, %s)", (review_data.text, datetime.now(), id, review_data.user_id))
+    connection.commit()
+    cursor.close()
+    return {"message": "Отзыв успешно добавлен"}
 
 
 # Обновить отзыв
+@app.put("/reviews/{id}/update")
+def update_review(id: int, review_data: ReviewUpdate):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("UPDATE reviews SET text = %s WHERE id = %s", (review_data.text, id))
+    connection.commit()
+    cursor.close()
+    return {"message": "Отзыв успешно обновлен"}

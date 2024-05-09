@@ -1,8 +1,8 @@
 -- -----------------------------------------------------
 -- Schema Kinesteria
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `Kinesteria` DEFAULT CHARACTER SET utf8mb4;
-USE `Kinesteria`;
+CREATE SCHEMA IF NOT EXISTS `Kinesteria` DEFAULT CHARACTER SET utf8 ;
+USE `Kinesteria` ;
 
 -- -----------------------------------------------------
 -- Table `Kinesteria`.`role`
@@ -33,8 +33,7 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`user` (
   CONSTRAINT `fk_role`
     FOREIGN KEY (`role_id`)
     REFERENCES `Kinesteria`.`role` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  );
 
 
 -- -----------------------------------------------------
@@ -58,14 +57,14 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`product` (
   `actors` TEXT(200) NULL,
   `release_year` INT NULL,
   `rating` DECIMAL(3,1) NULL,
+  `image` BLOB NULL,
   `type_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_type_idx` (`type_id` ASC) VISIBLE,
   CONSTRAINT `fk_type`
     FOREIGN KEY (`type_id`)
     REFERENCES `Kinesteria`.`type` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  );
 
 
 -- -----------------------------------------------------
@@ -83,8 +82,8 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`social_media` (
   CONSTRAINT `fk_social_media_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `Kinesteria`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE
+  );
 
 
 -- -----------------------------------------------------
@@ -138,6 +137,7 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`voice_acting` (
 CREATE TABLE IF NOT EXISTS `Kinesteria`.`comments` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `text` TEXT(1000) NULL,
+  `date` DATETIME NULL,
   `product_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -146,13 +146,12 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`comments` (
   CONSTRAINT `fk_user`
     FOREIGN KEY (`user_id`)
     REFERENCES `Kinesteria`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE,
   CONSTRAINT `fk_product6`
     FOREIGN KEY (`product_id`)
     REFERENCES `Kinesteria`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE
+  );
 
 
 -- -----------------------------------------------------
@@ -161,6 +160,7 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`comments` (
 CREATE TABLE IF NOT EXISTS `Kinesteria`.`reviews` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `text` TEXT(1000) NULL,
+  `date` DATETIME NULL,
   `product_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -169,13 +169,12 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`reviews` (
   CONSTRAINT `fk_product7`
     FOREIGN KEY (`product_id`)
     REFERENCES `Kinesteria`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE,
   CONSTRAINT `fk_reviews_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `Kinesteria`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE
+  );
 
 
 -- -----------------------------------------------------
@@ -189,8 +188,8 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`series` (
   CONSTRAINT `fk_series_product1`
     FOREIGN KEY (`product_id`)
     REFERENCES `Kinesteria`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE
+  );
 
 
 -- -----------------------------------------------------
@@ -207,14 +206,14 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`episode` (
   CONSTRAINT `fk_series`
     FOREIGN KEY (`series_id`)
     REFERENCES `Kinesteria`.`series` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE
+  );
 
 
 -- -----------------------------------------------------
--- Table `Kinesteria`.`movies_and_cartoons`
+-- Table `Kinesteria`.`movies`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinesteria`.`movies_and_cartoons` (
+CREATE TABLE IF NOT EXISTS `Kinesteria`.`movies` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `video_file` BLOB NULL,
   `product_id` INT NOT NULL,
@@ -223,8 +222,8 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`movies_and_cartoons` (
   CONSTRAINT `fk_movies_and_cartoons_product1`
     FOREIGN KEY (`product_id`)
     REFERENCES `Kinesteria`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE
+  );
 
 
 -- -----------------------------------------------------
@@ -238,13 +237,11 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`product_genre` (
   CONSTRAINT `fk_product1`
     FOREIGN KEY (`product_id`)
     REFERENCES `Kinesteria`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE,
   CONSTRAINT `fk_genre`
     FOREIGN KEY (`genre_id`)
     REFERENCES `Kinesteria`.`genre` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  );
 
 
 -- -----------------------------------------------------
@@ -258,13 +255,11 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`product_country` (
   CONSTRAINT `fk_product2`
     FOREIGN KEY (`product_id`)
     REFERENCES `Kinesteria`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE,
   CONSTRAINT `fk_country`
     FOREIGN KEY (`country_id`)
     REFERENCES `Kinesteria`.`country` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  );
 
 
 -- -----------------------------------------------------
@@ -278,13 +273,11 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`product_subtitles` (
   CONSTRAINT `fk_product3`
     FOREIGN KEY (`product_id`)
     REFERENCES `Kinesteria`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE,
   CONSTRAINT `fk_subtitles`
     FOREIGN KEY (`subtitles_id`)
     REFERENCES `Kinesteria`.`subtitles` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  );
 
 
 -- -----------------------------------------------------
@@ -298,13 +291,11 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`product_quality` (
   CONSTRAINT `fk_product4`
     FOREIGN KEY (`product_id`)
     REFERENCES `Kinesteria`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE,
   CONSTRAINT `fk_quality`
     FOREIGN KEY (`quality_id`)
     REFERENCES `Kinesteria`.`quality` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  );
 
 
 -- -----------------------------------------------------
@@ -318,10 +309,35 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`product_voice_acting` (
   CONSTRAINT `fk_product5`
     FOREIGN KEY (`product_id`)
     REFERENCES `Kinesteria`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE,
   CONSTRAINT `fk_voice_acting`
     FOREIGN KEY (`voice_acting_id`)
     REFERENCES `Kinesteria`.`voice_acting` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  );
+
+
+-- -----------------------------------------------------
+-- Table `Kinesteria`.`cartoons`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Kinesteria`.`cartoons` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `video_file` BLOB NULL,
+  `product_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_cartoons_product1_idx` (`product_id` ASC) VISIBLE,
+  CONSTRAINT `fk_cartoons_product1`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `Kinesteria`.`product` (`id`)
+    ON DELETE CASCADE
+  );
+
+
+USE `Kinesteria`;
+
+DELIMITER $$
+CREATE DEFINER = CURRENT_USER TRIGGER `Kinesteria`.`user_AFTER_INSERT` AFTER INSERT ON `user` FOR EACH ROW
+BEGIN
+	INSERT INTO `social_media` (user_id) VALUES (NEW.id);
+END$$
+
+DELIMITER ;
