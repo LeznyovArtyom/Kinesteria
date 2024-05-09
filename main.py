@@ -5,8 +5,8 @@ from datetime import datetime
 import mysql.connector
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
-import os
 from fastapi.staticfiles import StaticFiles
+import os
 
 
 app = FastAPI()
@@ -111,6 +111,7 @@ class Review(BaseModel):
 
 class ReviewUpdate(BaseModel):
     text: str
+
 
 app.mount("/css", StaticFiles(directory="css"), name="css")
 app.mount("/html", StaticFiles(directory="html"), name="html")
@@ -361,7 +362,7 @@ def delete_product(id: int):
 
 
 # Добавить произведение
-@app.post("/products/add")
+@app.post("/products/add/")
 def add_new_product(product_data: Product):
     cursor = connection.cursor(dictionary=True)
 
