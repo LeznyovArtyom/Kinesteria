@@ -113,8 +113,8 @@ class ReviewUpdate(BaseModel):
 
 
 @app.get("/")
-def get_index_css():
-    return FileResponse("index.css")
+def get_index():
+    return FileResponse("index.html")
 
 
 # Получить список всех пользователей
