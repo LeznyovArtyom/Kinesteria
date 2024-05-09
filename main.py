@@ -6,6 +6,7 @@ import mysql.connector
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 import os
+from fastapi.staticfiles import StaticFiles
 
 
 app = FastAPI()
@@ -111,6 +112,9 @@ class Review(BaseModel):
 class ReviewUpdate(BaseModel):
     text: str
 
+app.mount("/css", StaticFiles(directory="css"), name="css")
+app.mount("/html", StaticFiles(directory="html"), name="html")
+app.mount("/js", StaticFiles(directory="js"), name="js")
 
 @app.get("/")
 def get_index():
