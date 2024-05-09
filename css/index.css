@@ -1,0 +1,110 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-image: url('bg_for_ar.jpeg');
+    background-size: cover;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+}
+.navbar {
+    background-color: #26222D;
+    color: #fff;
+    font-size: 24px;
+    max-width: 1440px;
+    height: 83px;
+}
+.logo_name {
+    font-size: 32px;
+    font-family: "Arvo", serif;
+}
+.search_input {
+    width: 300px;
+}
+#profile_image {
+    border-radius: 50%;
+}
+
+.dropdown:hover .dropdown_profile {
+    display: block;
+}
+.dropdown_profile {
+    right: 0;
+    left: auto; /* Отменяет стандартное позиционирование слева */
+}
+.dropdown_profile {
+    background-color: #26222D;
+}
+/* Изменение цвета фона элемента при наведении */
+.dropdown_profile .dropdown-item:hover {
+    background-color: #161422; /* Цвет фона при наведении */
+}
+
+.main {
+    max-width: 1440px;
+    background-color: #161422;
+}
+.landing-image {
+    border-radius: 15px;
+    width: 320px;
+    height: 180px;
+}
+.main-image {
+    border-radius: 15px;
+    height: 295px;
+}
+.description {
+    margin: 4em 0 2em; 
+}
+#registerButton {
+    margin-bottom: 2em;
+    font-size: inherit;
+    border-radius: 25px;
+    background-color: #3E305F;
+}
+
+.modal-design {
+    background-color: #161422;
+    color: #fff;
+    font-family: inherit;
+    border-radius: 30px;
+}
+.modal_title {
+    font-size: 36px;
+}
+.border_line {
+    height: 3px;
+    background: linear-gradient(90deg, #2F2546, #8C69DF 51%, #322B44);
+    width: 511px;
+}
+.original_font {
+    font: inherit;
+}
+.underline {
+    border-bottom: 1px solid white;
+}
+
+.footer {
+    max-width: 1440px;
+    background-color: #161422;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+}
+.footer_border {
+    border-bottom: 1px solid white;
+}
+.footer_icons {
+    width: 195px;
+}
+.helpButton {
+    font-size: 21px;
+    background: linear-gradient(90deg, #3E305F 28%, #8263C5 100%);
+    border-radius: 15px;
+}
+.footer_title {
+    font-size: 24px;
+}
+
+.underline {
+    border-bottom: 1px solid white;
+}

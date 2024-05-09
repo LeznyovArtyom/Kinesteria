@@ -1,0 +1,126 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-image: url('bg_for_ar.jpeg');
+    background-size: cover;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+}
+.navbar {
+    background-color: #26222D;
+    color: #fff;
+    font-size: 24px;
+    max-width: 1440px;
+    height: 83px;
+}
+.logo_name {
+    font-size: 32px;
+    font-family: "Arvo", serif;
+}
+.search_input {
+    width: 300px;
+}
+#profile_image {
+    border-radius: 50%;
+}
+
+.dropdown:hover .dropdown_profile {
+    display: block;
+}
+.dropdown_profile {
+    right: 0;
+    left: auto; /* Отменяет стандартное позиционирование слева */
+}
+.dropdown_profile {
+    background-color: #26222D;
+}
+/* Изменение цвета фона элемента при наведении */
+.dropdown_profile .dropdown-item:hover {
+    background-color: #161422; /* Цвет фона при наведении */
+}
+
+.main {
+    max-width: 1440px;
+    background-color: #161422;
+}
+.main-image {
+    border-radius: 15px;
+    height: 295px;
+}
+.main_border {
+    border-bottom: 1px solid #fff;
+    margin: 2em 0 1em;
+}
+.genre_item {
+    height: 45px;
+    background: linear-gradient(90deg, #3E305F 29%, #8164C5);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.modal-design {
+    background-color: #161422;
+    color: #fff;
+    font-family: inherit;
+    border-radius: 30px;
+}
+.modal_title {
+    font-size: 36px;
+}
+.border_line {
+    height: 3px;
+    background: linear-gradient(90deg, #2F2546, #8C69DF 51%, #322B44);
+    width: 511px;
+}
+.original_font {
+    font: inherit;
+}
+.underline {
+    border-bottom: 1px solid white;
+}
+
+.filter {
+    border-radius: 20px;
+    background: linear-gradient(#8164C5, #3E305F 71%);
+    color: #fff;
+    font-weight: 500;
+}
+.header_filter {
+    background-color: #402F65;
+    border-radius: 20px 20px 0 0;
+    height: 60px;
+}
+.filter_select {
+    font-size: inherit;
+    font-family: inherit;
+}
+.searchButton {
+    font: inherit;
+}
+
+.footer {
+    max-width: 1440px;
+    background-color: #161422;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+}
+.footer_border {
+    border-bottom: 1px solid white;
+}
+.footer_icons {
+    width: 195px;
+}
+.helpButton {
+    font-size: 21px;
+    background: linear-gradient(90deg, #3E305F 28%, #8263C5 100%);
+    border-radius: 15px;
+}
+.footer_title {
+    font-size: 24px;
+}
+
+.underline {
+    border-bottom: 1px solid white;
+}

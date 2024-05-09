@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Kinesteria</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+        <link rel="icon" href="icons/icon.png" />
+        <link rel="stylesheet" href="Catalog_page.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="header d-flex justify-content-center">
+            <nav class="navbar navbar-expand-lg navbar-dark w-100 py-0">
+                <div class="container">
+                    <a class="navbar-brand" href="#">
+                        <img src="icons/icon.png" alt="Иконка" />
+                    </a>
+                    <div class="logo_name me-5">
+                        <a class="text-decoration-none text-white" href="index.html">Kinesteria</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="Main_page.html">Главная</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="Catalog_page.html">Каталог</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto d-flex">
+                            <li class="nav-item d-flex align-items-center mx-4">
+                                <div>
+                                    <input type="text" class="form-control search_input" id="search" placeholder="Поиск" />
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white ms-3" href="Authorization_page.html" id="loginButton">Войти</a>
+                            </li>
+                            <li class="nav-item" id="profilePicture" style="display: none;">
+                                <div class="dropdown">
+                                    <a href="#" class="nav-link" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="" alt="Профиль" width="74px" height="74px" id="profile_image" /></a>
+                                    <ul class="dropdown-menu dropdown-menu-end original_font dropdown_profile" aria-labelledby="dropdownMenuLink">
+                                      <li class="dropdown_elem"><a class="dropdown-item text-white" href="Profile.html">Профиль</a></li>
+                                      <li class="dropdown_elem"><a class="dropdown-item text-white" href="Settings.html">Настройки</a></li>
+                                      <li><a class="dropdown-item text-white" href="#" id="go_out">Выйти</a></li>
+                                    </ul>
+                                  </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="main container">
+            <section>
+                <div class="container">
+                    <div class="pt-5 pb-4 main_title">Каталог</div>
+                    <div class="row">
+                        <div class="col-2">
+                            <select class="form-select filter_item text-white" id="type_filter_2">
+                                <option selected class="d">Тип</option>
+                                <option value="Фильм" class="d">Фильм</option>
+                                <option value="Сериал" class="d">Сериал</option>
+                                <option value="Мультфильм" class="d">Мультфильм</option>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <select class="form-select filter_item text-white" id="genre_filter_2">
+                                <option selected class="d">Жанр</option>
+                                <option value="Комедия" class="d">Комедия</option>
+                                <option value="Ужасы" class="d">Ужасы</option>
+                                <option value="Фантастика" class="d">Фантастика</option>
+                                <option value="Детектив" class="d">Детектив</option>
+                                <option value="Боевик" class="d">Боевик</option>
+                                <option value="Триллер" class="d">Триллер</option>
+                                <option value="Роман" class="d">Роман</option>
+                                <option value="Биография" class="d">Биография</option>
+                                <option value="Приключения" class="d">Приключения</option>
+                                <option value="Драма" class="d">Драма</option>
+                                <option value="Фэнтези" class="d">Фэнтези</option>
+                                <option value="Вестерн" class="d">Вестерн</option>
+                                <option value="Мелодрама" class="d">Мелодрама</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <div class="filter_link d-flex align-items-center">
+                                <button type="button" class="btn text-white addButton text-decoration-underline" data-bs-toggle="modal" data-bs-target="#addMovieModal">Добавить фильм</button>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn text-white filterButton px-4 border-0" data-bs-toggle="modal" data-bs-target="#extendedFilter">Расширенный фильтр</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container">
+                    <div class="row gy-3 py-5" id="moviesContainer"></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="modal fade" id="extendedFilter" tabindex="-1" aria-labelledby="extendedFilter" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-design">
+                    <div class="modal-body">
+                        <form id="extendedFilter_form">
+                            <div class="container extendedFilter_container">
+                                <div class="modal_title d-flex justify-content-center">Фильтр</div>
+                                <div class="title_bottom d-flex justify-content-center mt-3 mb-5">
+                                    <div class="border_line"></div>
+                                </div>
+                                <div class="filter_form_item row mb-3">
+                                    <div class="col-3"><div>Год</div></div>
+                                    <div class="col-9">
+                                        <input type="range" class="form-range" id="customRange1" min="2010" max="2024" id="year_filter" value="2024"/>
+                                        <div class="d-flex justify-content-between">
+                                            <div>2010</div>
+                                            <div>2024</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="filter_form_item row mb-3">
+                                    <div class="col-3"><div>Рейтинг</div></div>
+                                    <div class="col-9">
+                                        <select class="form-select filter_select text-dark original_font" id="rating_filter">
+                                            <option></option>
+                                            <option value="1">От 1⭐</option>
+                                            <option value="2">От 2⭐</option>
+                                            <option value="3">От 3⭐</option>
+                                            <option value="4">От 4⭐</option>
+                                            <option value="5">От 5⭐</option>
+                                            <option value="6">От 6⭐</option>
+                                            <option value="7">От 7⭐</option>
+                                            <option value="8">От 8⭐</option>
+                                            <option value="9">От 9⭐</option>
+                                            <option value="10">10⭐</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="filter_form_item row mb-3">
+                                    <div class="col-3"><div>Страна</div></div>
+                                    <div class="col-9">
+                                        <select class="form-select filter_select text-dark original_font" id="country_filter">
+                                            <option></option>
+                                            <option value="Австралия">Австралия</option>
+                                            <option value="Австрия">Австрия</option>
+                                            <option value="Бельгия">Бельгия</option>
+                                            <option value="Великобритания">Великобритания</option>
+                                            <option value="Германия">Германия</option>
+                                            <option value="Гонконг">Гонконг</option>
+                                            <option value="Греция">Греция</option>
+                                            <option value="Дания">Дания</option>
+                                            <option value="Испания">Испания</option>
+                                            <option value="Италия">Италия</option>
+                                            <option value="Канада">Канада</option>
+                                            <option value="Нидерланды">Нидерланды</option>
+                                            <option value="Норвегия">Новергия</option>
+                                            <option value="Россия">Россия</option>
+                                            <option value="США">США</option>
+                                            <option value="Турция">Турция</option>
+                                            <option value="Франция">Франция</option>
+                                            <option value="Швеция">Швеция</option>
+                                            <option value="Южная Корея">Южная Корея</option>
+                                            <option value="Япония">Япония</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="filter_form_item row mb-3">
+                                    <div class="col-3"><div>Качество</div></div>
+                                    <div class="col-9">
+                                        <select class="form-select filter_select text-dark original_font" id="quality_filter">
+                                            <option></option>
+                                            <option value="480p">480p</option>
+                                            <option value="760p">760p</option>
+                                            <option value="1080p">1080p</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="filter_form_item row mb-3">
+                                    <div class="col-3"><div>Субтитры</div></div>
+                                    <div class="col-9">
+                                        <select class="form-select filter_select text-dark original_font" id="subtitles_filter">
+                                            <option></option>
+                                            <option value="Русский">Русский</option>
+                                            <option value="Английский">Английский</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="filter_form_item row mb-3">
+                                    <div class="col-3"><div>Озвучка</div></div>
+                                    <div class="col-9">
+                                        <select class="form-select filter_select text-dark original_font" id="voice_acting_filter">
+                                            <option></option>
+                                            <option value="Русский">Русский</option>
+                                            <option value="Английский">Английский</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-center mt-5 mb-3">
+                                    <button type="button" class="btn text-white cancelButton me-4" data-bs-dismiss="modal">Закрыть</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addMovieModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content modal-design">
+                    <div class="modal-body">
+                        <form id="addMovie_form">
+                            <div class="container">
+                                <div class="modal_title d-flex justify-content-center">Добавить</div>
+                                <div class="title_bottom d-flex justify-content-center mt-3 mb-5">
+                                    <div class="border_line"></div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-7">
+                                        <div class="row edit_item">
+                                            <div class="col-4">Заголовок</div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control edit_input" id="header_edit" required title="Введите заголовок" />
+                                            </div>
+                                        </div>
+                                        <div class="row edit_item">
+                                            <div class="col-4">Название</div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control edit_input" id="name_edit" required title="Введите название" />
+                                            </div>
+                                        </div>
+                                        <div class="row edit_item">
+                                            <div class="col-4">Год выхода</div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control edit_input" id="year_edit" required title="Введите год выхода" />
+                                            </div>
+                                        </div>
+                                        <div class="row edit_item">
+                                            <div class="col-4">Оригинальное название</div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control edit_input" id="original_name_edit" required title="Введите оригинальное название" />
+                                            </div>
+                                        </div>
+                                        <div class="row edit_item">
+                                            <div class="col-4">Режиссер</div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control edit_input" id="director_edit" required title="Введите режиссера" />
+                                            </div>
+                                        </div>
+                                        <div class="row edit_item">
+                                            <div class="col-4">Актеры</div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control edit_input" id="actors_edit" required title="Введите актеров" />
+                                            </div>
+                                        </div>
+                                        <div class="row edit_item">
+                                            <div class="col-4">Рейтинг</div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control edit_input" id="rating_edit" required title="Введите рейтинг" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="d-flex justify-content-center">Жанр</div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="dropdown">
+                                                <button class="btn btn-light dropdown-toggle original_font px-3 select_item" type="button" id="multiSelectGenresButton" data-bs-toggle="dropdown" aria-expanded="false">Выберите жанр</button>
+                                                <ul class="dropdown-menu w-100 original_font px-2 multiSelectGenres overflow-auto" aria-labelledby="multiSelectGenres">
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Комедия" class="form-check-input" />
+                                                            Комедия
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Ужасы" class="form-check-input" />
+                                                            Ужасы
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Фантастика" class="form-check-input" />
+                                                            Фантастика
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Детектив" class="form-check-input" />
+                                                            Детектив
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Боевик" class="form-check-input" />
+                                                            Боевик
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Триллер" class="form-check-input" />
+                                                            Триллер
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Роман" class="form-check-input" />
+                                                            Роман
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Биография" class="form-check-input" />
+                                                            Биография
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Приключения" class="form-check-input" />
+                                                            Приключения
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Драма" class="form-check-input" />
+                                                            Драма
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Фэнтези" class="form-check-input" />
+                                                            Фэнтези
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Вестерн" class="form-check-input" />
+                                                            Вестерн
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Мелодрама" class="form-check-input" />
+                                                            Мелодрама
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-center mt-3">Тип</div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="dropdown">
+                                                <button class="btn btn-light dropdown-toggle original_font select_item" type="button" id="multiSelectTypeButton" data-bs-toggle="dropdown" aria-expanded="false">Выберите тип</button>
+                                                <ul class="dropdown-menu w-100 original_font px-2 multiSelectType" aria-labelledby="multiSelectType">
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" name="radio" value="Фильм" class="form-check-input" />
+                                                            Фильм
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" value="Сериал" name="radio" class="form-check-input" />
+                                                            Сериал
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" value="Мультфильм" name="radio" class="form-check-input" />
+                                                            Мультфильм
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-center mt-3">Страна</div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="dropdown">
+                                                <button class="btn btn-light dropdown-toggle original_font select_item" type="button" id="multiSelectCountryButton" data-bs-toggle="dropdown" aria-expanded="false">Выберите страну</button>
+                                                <ul class="dropdown-menu w-100 original_font px-2 multiSelectCountry overflow-auto" aria-labelledby="multiSelectCountry">
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Австралия" class="form-check-input" />
+                                                            Австралия
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Австрия" class="form-check-input" />
+                                                            Австрия
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Бельгия" class="form-check-input" />
+                                                            Бельгия
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Великобритания" class="form-check-input" />
+                                                            Великобритания
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Германия" class="form-check-input" />
+                                                            Германия
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Гонконг" class="form-check-input" />
+                                                            Гонконг
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Греция" class="form-check-input" />
+                                                            Греция
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Дания" class="form-check-input" />
+                                                            Дания
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Испания" class="form-check-input" />
+                                                            Испания
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Италия" class="form-check-input" />
+                                                            Италия
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Канада" class="form-check-input" />
+                                                            Канада
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Нидерланды" class="form-check-input" />
+                                                            Нидерланды
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Норвегия" class="form-check-input" />
+                                                            Новергия
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Россия" class="form-check-input" />
+                                                            Россия
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="США" class="form-check-input" />
+                                                            США
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Турция" class="form-check-input" />
+                                                            Турция
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Франция" class="form-check-input" />
+                                                            Франция
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Швеция" class="form-check-input" />
+                                                            Швеция
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Южная Корея" class="form-check-input" />
+                                                            Южная Корея
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="ФЯпония" class="form-check-input" />
+                                                            Япония
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-center mt-3">Качество</div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="dropdown">
+                                                <button class="btn btn-light dropdown-toggle original_font select_item" type="button" id="multiSelectQualityButton" data-bs-toggle="dropdown" aria-expanded="false">Выберите качество</button>
+                                                <ul class="dropdown-menu w-100 original_font px-2 multiSelectQuality overflow-auto" aria-labelledby="multiSelectQuality">
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="480p" class="form-check-input" />
+                                                            480p
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="760p" class="form-check-input" />
+                                                            760p
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="1080p" class="form-check-input" />
+                                                            1080p
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-center mt-3">Субтитры</div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="dropdown">
+                                                <button class="btn btn-light dropdown-toggle original_font select_item" type="button" id="multiSelectSubtitlesButton" data-bs-toggle="dropdown" aria-expanded="false">Выберите субтитры</button>
+                                                <ul class="dropdown-menu w-100 original_font px-2 multiSelectSubtitles overflow-auto" aria-labelledby="multiSelectSubtitles">
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Русский" class="form-check-input" />
+                                                            Русский
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Английский" class="form-check-input" />
+                                                            Английский
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-center mt-3">Озвучка</div>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="dropdown">
+                                                <button class="btn btn-light dropdown-toggle original_font select_item" type="button" id="multiSelectVoiceActingButton" data-bs-toggle="dropdown" aria-expanded="false">Выберите озвучку</button>
+                                                <ul class="dropdown-menu w-100 original_font px-2 multiSelectVoiceActing overflow-auto" aria-labelledby="multiSelectVoiceActing">
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Русский" class="form-check-input" />
+                                                            Русский
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" value="Английский" class="form-check-input" />
+                                                            Английский
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-2">Описание</div>
+                                    <div class="col-10">
+                                        <textarea class="w-100 px-2 form-control" id="description_edit" rows="5" required title="Выберите Категории"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4 mt-5">
+                                    <div class="col-2">Загрузить изображение</div>
+                                    <div class="col-6">
+                                        <input type="file" class="form-control edit_item original_font" id="add_image_edit" name="addImage" required title="Загрузите изображение" onchange="download(this)" />
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-2">Предпросмотр</div>
+                                    <div class="col-4 d-flex justify-content-center">
+                                        <div class="prewiev_image" id="img_wrapper"><img src="" alt="Предпросмотр" id="preview" class="prewiev_image" /></div>
+                                    </div>
+                                    <div class="col-5 d-flex">
+                                        <div class="me-5">Файлы</div>
+                                        <input type="file" name="files[]" multipleclass="bg-white text-dark" id="add_files_edit" title="Необходимо выбрать минимум один файл" />
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end mt-5 mb-4 me-5">
+                                    <button type="button" class="btn text-white cancelButton me-4" onclick="window.location.href='Catalog_page.html'">Отменить</button>
+                                    <button type="submit" class="btn text-white addMovieButton">Добавить</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer container">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row footer_content mt-4">
+                    <div class="col-7">
+                        <div class="footer_title">По вопросам сотрудничества</div>
+                        <div class="footer_icons d-flex justify-content-between mt-2">
+                            <a href="https://vk.com/arrrtyy"><img src="icons/icon1.svg" alt="Соц-сеть" width="33px" /></a>
+                            <a href="https://t.me/arty_y_y"><img src="icons/icon2.svg" alt="Соц-сеть" width="33px" /></a>
+                            <a href="https://wa.me/79231807045"><img src="icons/icon3.svg" alt="Соц-сеть" width="33px" /></a>
+                            <a href="https://www.instagram.com/arty_y_y/"><img src="icons/icon4.svg" alt="Соц-сеть" width="33px" /></a>
+                        </div>
+                        <!--
+                        <button type="button" class="btn helpButton text-white d-flex border-0">
+                            <img src="icons/icon5.png" alt="Помощь" width="33px" height="33px" class="mx-2" />
+                            <div class="helpText pe-2">Нужна помощь?</div>
+                        </button>
+                        -->
+
+                        <div class="indexing d-flex align-items-center mb-3 mt-4">
+                            <img src="icons/icon.png" alt="Иконка" class="me-3" />
+                            <div class="indexing_item">© 2024, Kinesteria, 18+</div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="footer_title mb-2">Информация</div>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#" class="text-decoration-none text-white" data-bs-toggle="modal" data-bs-target="#aboutUs">О нас</a>
+                            </li>
+                            <li>
+                                <a href="Terms_of_use.html" class="text-decoration-none text-white">Пользовательское соглашение</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-3">
+                        <div class="footer_title mb-2">Помощь</div>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#" class="text-decoration-none text-white" data-bs-toggle="modal" data-bs-target="#contacts">Контакты</a>
+                            </li>
+                            <li>
+                                <a href="Questions_and_answers.html" class="text-decoration-none text-white">Вопросы и ответы</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="aboutUs" tabindex="-1" aria-labelledby="aboutUsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-design">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="modal_title d-flex justify-content-center">О нас</div>
+                            <div class="title_bottom d-flex justify-content-center mt-3 mb-5">
+                                <div class="border_line"></div>
+                            </div>
+                            <div class="mb-4">Добро пожаловать на наш проект - каталог фильмов, сериалов и мультфильмов! Мы собрали для вас самую полную коллекцию кинематографических произведений, чтобы вы могли легко найти и выбрать фильмы на любой вкус и настроение.</div>
+                            <div class="mb-4">Здесь вы найдете информацию о самых популярных фильмах и сериалах, а также откроете для себя новые работы от талантливых режиссеров и актеров. Мы постоянно обновляем наш каталог, чтобы вы всегда были в курсе последних новинок и трендов в мире кино.</div>
+                            <div>Наша цель - помочь вам выбрать идеальный фильм для просмотра в уютной обстановке дома или в кругу друзей. Погрузитесь в мир кино и наслаждайтесь каждым моментом!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="contacts" tabindex="-1" aria-labelledby="contactsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-design">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="modal_title d-flex justify-content-center">Контакты</div>
+                            <div class="title_bottom d-flex justify-content-center mt-3 mb-5">
+                                <div class="border_line"></div>
+                            </div>
+                            <div>Если у вас есть вопросы, идеи, предложения о сотрудничестве и пожелания, напишите мне на почту: <br />a-leznev@mail.ru</div>
+                            <div class="mt-5">
+                                Связь со мной в телеграмм:
+                                <a href="https://t.me/arty_y_y" class="text-white text-decoration-none underline"> @arty_y_y </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="Catalog_page.js"></script>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-image: url('bg_for_ar.jpeg');
+    background-size: cover;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+}
+.logo {
+    margin-top: 5em;
+    margin-bottom: 4em;
+}
+.logo_name {
+    font-size: 48px;
+    font-family: "Arvo", serif;
+}
+#authorization_form {
+    width: 663px;
+    border-radius: 60px;
+}
+.form_title {
+    font-size: 48px;
+}
+.authorization_input, .authorizationButton {
+    height: 55px;
+    font-size: inherit;
+    background-color: #5389DA;
+    color: #fff;
+    border-radius: 80px;
+}
+.authorization_input::placeholder {
+    color: #fff;
+}
+.social_media {
+    font-size: 20px;
+}
+.line {
+    border-bottom: 1px solid black;
+}
+.registerButton {
+    font-size: 13px;
+    background-color: #A9C7F8;
+}
+
+
+.error .registration_input {
+    border: 2px solid red;
+}
+.error .error {
+    display: block;
+    color: red;
+    font-size: 20px;
+    margin-left: 25px;
+}
