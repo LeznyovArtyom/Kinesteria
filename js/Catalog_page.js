@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Получаем произведения из базы данных
     function getProducts() {    
         // Отправляем AJAX запрос к API
-        fetch(`http://localhost:8000/products/`)
+        fetch(`https://kinesteria-production.up.railway.app/products/`)
             .then(response => response.json())
             .then(data => {
                 const movies = data.Products;
