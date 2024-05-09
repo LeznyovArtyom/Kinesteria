@@ -115,6 +115,7 @@ class ReviewUpdate(BaseModel):
 app.mount("/css", StaticFiles(directory="css"), name="css")
 app.mount("/html", StaticFiles(directory="html"), name="html")
 app.mount("/js", StaticFiles(directory="js"), name="js")
+app.mount("/images", StaticFiles(directory="images"), name="images")
 
 @app.get("/")
 def get_index():
