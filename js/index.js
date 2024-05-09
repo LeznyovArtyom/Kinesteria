@@ -1,7 +1,7 @@
 // Получаем произведения из базы данных
 function getProducts() {    
     // Отправляем AJAX запрос к API
-    fetch(`https://kinesteria-production.up.railway.app/products/`)
+    fetch(`/products/`)
         .then(response => response.json())
         .then(data => {
             const movies = data.Products;
