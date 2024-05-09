@@ -117,6 +117,10 @@ app.mount("/html", StaticFiles(directory="html"), name="html")
 app.mount("/js", StaticFiles(directory="js"), name="js")
 app.mount("/images", StaticFiles(directory="images"), name="images")
 
+@app.get("/index.html")
+def get_index_page():
+    return FileResponse("index.html")
+
 @app.get("/")
 def get_index():
     return FileResponse("index.html")
