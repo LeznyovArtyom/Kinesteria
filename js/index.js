@@ -20,7 +20,7 @@ function fillContainer(container, movies) {
         div.classList.add("col-xxl-2");
         container.appendChild(div);
         const a = document.createElement('a');
-        a.href = "Temp_movie_page.html?id=" + movie.id;
+        a.href = "html/Temp_movie_page.html?id=" + movie.id;
         div.appendChild(a);
         const img = document.createElement('img');
         img.classList.add("w-100", "main-image");
