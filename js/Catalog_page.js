@@ -4,8 +4,8 @@ function handleCB(chBoxes, selectedListItems, dropdownButtonId, element) {
     let selectedListItemsText = '';
     chBoxes.forEach((checkbox) => {
         if (checkbox.checked) {
-            selectedListItems.push(checkbox.value);
-            selectedListItemsText += checkbox.value + ', ';
+            selectedListItems.push(Number(checkbox.value));
+            selectedListItemsText += checkbox.name + ', ';
         }
     });
 
@@ -44,8 +44,8 @@ function handleRadio(radioButtons, selectedRadio, dropdownButtonId, element) {
     let selectedItemsText = '';
     radioButtons.forEach((radio) => {
         if (radio.checked) {
-            selectedRadio.value = radio.value;
-            selectedItemsText = radio.value;
+            selectedRadio.value = Number(radio.value);
+            selectedItemsText = radio.getAttribute("data-value");
         }
     });
     dropdownButton.innerText = selectedItemsText != 0 ? selectedItemsText : 'Выберите ' + element;
@@ -56,7 +56,7 @@ typeRadioButtons.forEach((radio) => {
     radio.addEventListener('change', () => handleRadio(typeRadioButtons, typeSelectedRadio, 'multiSelectTypeButton', 'тип'));
 });
 
-
+// Загрузить изображение, чтобы отобразить 
 function download(input) {
     let file = input.files[0];
     let reader = new FileReader();
@@ -68,12 +68,12 @@ function download(input) {
     }
 }
 
+// Окно добавления фильма (без видео)
 const form = document.getElementById('addMovie_form');
-
-form.addEventListener("submit", e => {
+form.addEventListener("submit", async e => {
     e.preventDefault();
 
-    const header_edit = document.getElementById('header_edit');
+    // Получаем данные из формы добавления фильма
     const name_edit = document.getElementById('name_edit');
     const year_edit = document.getElementById('year_edit');
     const original_name_edit = document.getElementById('original_name_edit');
@@ -82,57 +82,51 @@ form.addEventListener("submit", e => {
     const rating_edit = document.getElementById('rating_edit');
     const description_edit = document.getElementById('description_edit');
 
-    const movies = JSON.parse(localStorage.getItem('movies')) || [];
-    let newMovie = {
-        header: header_edit.value,
+    // Подготавливаем данные
+    const newProduct = {
         name: name_edit.value,
-        year: year_edit.value,
+        description: description_edit.value,
         original_name: original_name_edit.value,
         director: director_edit.value,
         actors: actors_edit.value,
-        rating: rating_edit.value,
-        description: description_edit.value,
-        genres: genresSelectedListItems.length > 0 ? genresSelectedListItems : [""],
-        type: typeSelectedRadio.value,
-        country: countrySelectedListItems.length > 0 ? countrySelectedListItems : [""],
-        quality: qualitySelectedListItems.length > 0 ? qualitySelectedListItems : [""],
-        subtitles: subtitlesSelectedListItems.length > 0 ? subtitlesSelectedListItems : [""],
-        voice_acting: voiceActingSelectedListItems.length > 0 ? voiceActingSelectedListItems : [""],
+        release_year: Number(year_edit.value),
+        rating: Number(rating_edit.value),
+        type_id: typeSelectedRadio.value,
+        genre_id: genresSelectedListItems,
+        country_id: countrySelectedListItems,
+        subtitles_id: subtitlesSelectedListItems,
+        quality_id: qualitySelectedListItems,
+        voice_acting_id: voiceActingSelectedListItems,
     };
 
     const add_image_edit = document.getElementById('add_image_edit');
     const reader = new FileReader();
     reader.readAsDataURL(add_image_edit.files[0]);
 
+
     reader.onload = function() {
-        const url = reader.result;
-        newMovie["image"] = url;
-
-        const add_video_edit = document.getElementById('add_files_edit');
-        const videos = Array.from(add_video_edit.files);
-        const promises = videos.map(videoFile => {
-            return new Promise((resolve, reject) => {
-                const videoReader = new FileReader();
-                videoReader.readAsDataURL(videoFile);
-                videoReader.onload = function() {
-                    resolve(videoReader.result);
-                };
-            });
+        let url = reader.result;
+        url = url.split(',')[1];
+        newProduct["image"] = url;
+        
+        console.log(newProduct);
+        // Отправляем данные на сервер
+        fetch('https://kinesteria-production.up.railway.app/products/add/', {
+            method: 'POST',
+            body: JSON.stringify(newProduct),
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        })
+        .then(response => {
+            form.reset(); // Очищаем форму
+            window.location.href = "Catalog_page.html"; // Переадресация обратно на страницу каталога
+        })
+        .catch(error => {
+            console.error('Ошибка при добавлении фильма:', error);
         });
-
-        Promise.all(promises).then(videoUrls => {
-            newMovie["videos"] = videoUrls;
-
-            movies.push(newMovie);
-            localStorage.setItem('movies', JSON.stringify(movies));
-            alert("Вы успешно добавили фильм!");
-            form.reset();
-            window.location.href = "../html/Catalog_page.html";
-        });
-    };
+    }
 });
-
-
 
 
 
