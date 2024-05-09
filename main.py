@@ -112,7 +112,7 @@ class ReviewUpdate(BaseModel):
     text: str
 
 
-@app.get("/index.css")
+@app.get("/")
 def get_index_css():
     return FileResponse("index.css")
 
