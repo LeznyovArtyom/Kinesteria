@@ -5,7 +5,7 @@ window.onload = function() {
 
     // Получение фильма из юазы данных
     if (movie_id) {
-        fetch(`https://kinesteria-production.up.railway.app/${movie_id}`)
+        fetch(`https://kinesteria-production.up.railway.app/products/${movie_id}`)
         .then(response => response.json())
         .then(data => { displayMovieDetails(data.Product); })
         .catch(error => console.error('Ошибка при получении данных', error))
