@@ -1,6 +1,6 @@
 body {
     font-family: "Montserrat", sans-serif;
-    background-image: url('bg_for_ar.jpeg');
+    background-image: url('../images/bg_for_ar.jpeg');
     background-size: cover;
     color: #fff;
     font-size: 24px;

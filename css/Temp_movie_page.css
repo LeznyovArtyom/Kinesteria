@@ -1,6 +1,6 @@
 body {
     font-family: "Montserrat", sans-serif;
-    background-image: url('bg_for_ar.jpeg');
+    background-image: url('../images/bg_for_ar.jpeg');
     background-size: cover;
     color: #fff;
     font-size: 24px;
@@ -47,11 +47,8 @@ body {
 #image_movie {
     border-radius: 15px;
 }
-#header_movie {
-    font-size: 32px;
-}
 #name_movie {
-    font-size: 28px;
+    font-size: 32px;
 }
 .general-font {
     font-size: 20px;
