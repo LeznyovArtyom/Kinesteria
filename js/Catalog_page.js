@@ -127,12 +127,22 @@ form.addEventListener("submit", e => {
             localStorage.setItem('movies', JSON.stringify(movies));
             alert("Вы успешно добавили фильм!");
             form.reset();
-            window.location.href = "Catalog_page.html";
+            window.location.href = "../html/Catalog_page.html";
         });
     };
 });
 
 
+
+
+
+
+
+
+
+
+
+// Загрузка страницы
 document.addEventListener('DOMContentLoaded', function () {
     // Функция для получения параметров из URL
     function getUrlParams() {
@@ -140,33 +150,15 @@ document.addEventListener('DOMContentLoaded', function () {
         var params = {};
 
         // Проверяем наличие параметров в URL и добавляем их в объект params
-        if (urlParams.has('type')) {
-            params.type = urlParams.get('type');
-        }
-        if (urlParams.has('genre')) {
-            params.genre = urlParams.get('genre');
-        }
-        if (urlParams.has('year')) {
-            params.year = urlParams.get('year');
-        }
-        if (urlParams.has('rating')) {
-            params.rating = urlParams.get('rating');
-        }
-        if (urlParams.has('country')) {
-            params.country = urlParams.get('country');
-        }
-        if (urlParams.has('quality')) {
-            params.quality = urlParams.get('quality');
-        }
-        if (urlParams.has('subtitles')) {
-            params.subtitles = urlParams.get('subtitles');
-        }
-        if (urlParams.has('voice')) {
-            params.voice = urlParams.get('voice');
-        }
-        if (urlParams.has('search')) {
-            params.search = urlParams.get('search');
-        }
+        if (urlParams.has('type')) { params.type = urlParams.get('type'); }
+        if (urlParams.has('genre')) { params.genre = urlParams.get('genre'); }
+        if (urlParams.has('year')) { params.year = urlParams.get('year'); }
+        if (urlParams.has('rating')) { params.rating = urlParams.get('rating'); }
+        if (urlParams.has('country')) { params.country = urlParams.get('country'); }
+        if (urlParams.has('quality')) { params.quality = urlParams.get('quality'); }
+        if (urlParams.has('subtitles')) { params.subtitles = urlParams.get('subtitles'); }
+        if (urlParams.has('voice')) { params.voice = urlParams.get('voice'); }
+        if (urlParams.has('search')) { params.search = urlParams.get('search'); }
 
         return params;
     }
@@ -176,39 +168,39 @@ document.addEventListener('DOMContentLoaded', function () {
         var params = getUrlParams();
 
         // Устанавливаем значения фильтров, если они присутствуют в параметрах URL
-        if (params.type) {
-            document.getElementById('type_filter_2').value = params.type;
-        }
-        if (params.genre) {
-            document.getElementById('genre_filter_2').value = params.genre;
-        }
-        if (params.year) {
-            document.getElementById('customRange1').value = params.year;
-        }
-        if (params.rating) {
-            document.getElementById('rating_filter').value = params.rating;
-        }
-        if (params.country) {
-            document.getElementById('country_filter').value = params.country;
-        }
-        if (params.quality) {
-            document.getElementById('quality_filter').value = params.quality;
-        }
-        if (params.subtitles) {
-            document.getElementById('subtitles_filter').value = params.subtitles;
-        }
-        if (params.voice) {
-            document.getElementById('voice_acting_filter').value = params.voice;
-        }
+        if (params.type) { document.getElementById('type_filter_2').value = params.type; }
+        if (params.genre) { document.getElementById('genre_filter_2').value = params.genre; }
+        if (params.year) { document.getElementById('customRange1').value = params.year; }
+        if (params.rating) { document.getElementById('rating_filter').value = params.rating; }
+        if (params.country) { document.getElementById('country_filter').value = params.country; }
+        if (params.quality) { document.getElementById('quality_filter').value = params.quality; }
+        if (params.subtitles) { document.getElementById('subtitles_filter').value = params.subtitles; }
+        if (params.voice) { document.getElementById('voice_acting_filter').value = params.voice; }
     }
 
     // Вызываем функцию установки фильтров при загрузке страницы
     setFilters();
 
-    // Функция для отображения фильмов в соответствии с выбранными фильтрами
-    function filterMovies() {
+    // Получаем произведения из базы данных
+    function getProducts() {    
+        // Отправляем AJAX запрос к API
+        fetch(`http://localhost:8000/products/`)
+            .then(response => response.json())
+            .then(data => {
+                const movies = data.Products;
+                displayMovies(movies); // Функция отображения фильмов на странице
+            })
+            .catch(error => console.error('Ошибка при получении данных:', error));
+    }
+    
+    // Отображаем произведения по выбранным фильтрам
+    function displayMovies(movies) {
         const params = getUrlParams(); // Получаем параметры из URL
         const searchQuery = params.search ? params.search.toLowerCase() : null; // Получаем поисковый запрос из параметров URL и приводим к нижнему регистру
+
+        // Очищаем контейнер перед добавлением новых фильмов
+        var moviesContainer = document.getElementById('moviesContainer');
+        moviesContainer.innerHTML = '';
 
         var typeFilter = document.getElementById('type_filter_2').value;
         var genreFilter = document.getElementById('genre_filter_2').value;
@@ -219,63 +211,60 @@ document.addEventListener('DOMContentLoaded', function () {
         var subtitlesFilter = document.getElementById('subtitles_filter').value;
         var voiceActingFilter = document.getElementById('voice_acting_filter').value;
 
-        var movies = JSON.parse(localStorage.getItem('movies')) || [];
-
-        // Очищаем контейнер перед добавлением новых фильмов
-        var moviesContainer = document.getElementById('moviesContainer');
-        moviesContainer.innerHTML = '';
-
-        let i = 0;
-        // Фильтрация и отображение фильмов
         movies.forEach(function (movie) {
-            if ((typeFilter === 'Тип' || movie.type === typeFilter) &&
-                (genreFilter === 'Жанр' || movie.genres.includes(genreFilter)) &&
-                (yearFilter === 0 || parseInt(movie.year) <= parseInt(yearFilter)) &&
-                (ratingFilter === '' || parseFloat(movie.rating) <= parseFloat(ratingFilter)) &&
-                (countryFilter === '' || movie.country.includes(countryFilter)) &&
-                (qualityFilter === '' || movie.quality.includes(qualityFilter)) &&
-                (subtitlesFilter === '' || movie.subtitles.includes(subtitlesFilter)) &&
-                (voiceActingFilter === '' || movie.voice_acting.includes(voiceActingFilter)) &&
+            if ((typeFilter === 'Тип' || movie.type == typeFilter) &&
+                (genreFilter === 'Жанр' || movie.genre.split(', ').includes(genreFilter)) &&
+                (yearFilter === 0 || parseInt(movie.release_year) <= parseInt(yearFilter)) &&
+                (ratingFilter === '' || parseFloat(movie.rating) >= parseFloat(ratingFilter))&&
+                (countryFilter === '' || movie.country.split(', ').includes(countryFilter)) &&
+                (qualityFilter === '' || movie.quality.split(', ').includes(qualityFilter)) &&
+                (subtitlesFilter === '' || movie.subtitles.split(', ').includes(subtitlesFilter)) &&
+                (voiceActingFilter === '' || movie.voice_acting.split(', ').includes(voiceActingFilter)) &&
                 (!searchQuery || movie.name.toLowerCase().includes(searchQuery))) {
-                    let div = document.createElement('div');
-                    div.classList.add("col-xxl-2");
-                    moviesContainer.prepend(div);
-                    let a = document.createElement('a');
-                    a.id = "linkToMovie_" + i;
-                    a.href = "Temp_movie_page.html?id=" + a.id;
-                    div.appendChild(a);
-                    let img = document.createElement('img');
-                    img.classList.add("w-100", "main-image");
-                    img.alt = "фильм";
-                    img.src = movies[i].image;
-                    a.appendChild(img);
+                let div = document.createElement('div');
+                div.classList.add("col-xxl-2");
+                moviesContainer.prepend(div);
+                let a = document.createElement('a');
+                a.href = "Temp_movie_page.html?id=" + movie.id;
+                div.appendChild(a);
+                let img = document.createElement('img');
+                img.classList.add("w-100", "main-image");
+                img.alt = "фильм";
+                img.src = 'data:image/jpeg;base64,' + movie.image;
+                a.appendChild(img);
             }
-            i++;
         });
     }
 
+
     // Слушаем изменения в фильтрах и вызываем функцию фильтрации
-    document.getElementById('genre_filter_2').addEventListener('change', filterMovies);
-    document.getElementById('type_filter_2').addEventListener('change', filterMovies);
-    document.getElementById('customRange1').addEventListener('input', filterMovies);
-    document.getElementById('rating_filter').addEventListener('change', filterMovies);
-    document.getElementById('country_filter').addEventListener('change', filterMovies);
-    document.getElementById('quality_filter').addEventListener('change', filterMovies);
-    document.getElementById('subtitles_filter').addEventListener('change', filterMovies);
-    document.getElementById('voice_acting_filter').addEventListener('change', filterMovies);
+    document.getElementById('genre_filter_2').addEventListener('change', getProducts);
+    document.getElementById('type_filter_2').addEventListener('change', getProducts);
+    document.getElementById('customRange1').addEventListener('input', getProducts);
+    document.getElementById('rating_filter').addEventListener('change', getProducts);
+    document.getElementById('country_filter').addEventListener('change', getProducts);
+    document.getElementById('quality_filter').addEventListener('change', getProducts);
+    document.getElementById('subtitles_filter').addEventListener('change', getProducts);
+    document.getElementById('voice_acting_filter').addEventListener('change', getProducts);
+
 
     // При загрузке страницы применяем фильтры
-    filterMovies();
+    getProducts();
 });
 
 document.getElementById('search').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') { // Проверка нажатия на Enter
         var searchQuery = this.value.trim(); // Получаем значение поля ввода, удаляя лишние пробелы
         if (searchQuery.length > 0) {
-            window.location.href = "Catalog_page.html?search=" + encodeURIComponent(searchQuery); // Перенаправление на страницу каталога с параметром поиска
+            window.location.href = "../html/Catalog_page.html?search=" + encodeURIComponent(searchQuery); // Перенаправление на страницу каталога с параметром поиска
         }
     }
 });
+
+
+
+
+// Переделать !!!!!!
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginButton = document.getElementById('loginButton');

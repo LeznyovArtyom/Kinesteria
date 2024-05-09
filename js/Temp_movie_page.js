@@ -1,56 +1,36 @@
 window.onload = function() {
     // Получение значения идентификатора из URL
     let urlParams = new URLSearchParams(window.location.search);
-    let id = urlParams.get('id');
-    let index = id.split('_')[1];
+    let movie_id = urlParams.get('id');
 
-    const movies = JSON.parse(localStorage.getItem('movies')) || [];
+    // Получение фильма из юазы данных
+    if (movie_id) {
+        fetch(`http://localhost:8000/products/${movie_id}`)
+        .then(response => response.json())
+        .then(data => { displayMovieDetails(data.Product); })
+        .catch(error => console.error('Ошибка при получении данных', error))
+    }
 
-    let header_movie = document.getElementById("header_movie");
-    header_movie.innerHTML = movies[index].header;
-
-    let name_movie = document.getElementById("name_movie");
-    name_movie.innerHTML = movies[index].name;
-
-    let year_movie = document.getElementById("year_movie");
-    let year_movie_value = year_movie.querySelector(".value");
-    year_movie_value.innerHTML = movies[index].year;
-
-    let country_movie = document.getElementById("country_movie");
-    let country_movie_value = country_movie.querySelector(".value");
-    country_movie_value.innerHTML = movies[index].country.join(", ");
-
-    let original_name_movie = document.getElementById("original_name_movie");
-    let original_name_movie_value = original_name_movie.querySelector(".value");
-    original_name_movie_value.innerHTML = movies[index].original_name;
-
-    let director_movie = document.getElementById("director_movie");
-    let director_movie_value = director_movie.querySelector(".value");
-    director_movie_value.innerHTML = movies[index].director;
-
-    let actors_movie = document.getElementById("actors_movie");
-    let actors_movie_movie_value = actors_movie.querySelector(".value");
-    actors_movie_movie_value.innerHTML = movies[index].actors;
-
-    let genre_movie = document.getElementById("genre_movie");
-    let genre_movie_value = genre_movie.querySelector(".value");
-    genre_movie_value.innerHTML = movies[index].genres.join(", ");
-
-    let rating_movie = document.getElementById("rating_movie");
-    let rating_movie_value = rating_movie.querySelector(".value");
-    rating_movie_value.innerHTML = movies[index].rating;
-
-    let image_movie = document.getElementById("image_movie");
-    image_movie.src = movies[index].image;
-    let decription_movie = document.getElementById("decription_movie");
-    decription_movie.innerHTML = movies[index].description;
+    // Отображение информации о фильме на странице
+    function displayMovieDetails(movie) {
+        document.getElementById("name_movie").innerHTML = movie.name;
+        document.getElementById("decription_movie").innerHTML = movie.description;
+        document.getElementById("year_movie").querySelector(".value").innerHTML = movie.release_year;
+        document.getElementById("country_movie").querySelector(".value").innerHTML = movie.country;
+        document.getElementById("original_name_movie").querySelector(".value").innerHTML = movie.original_name;
+        document.getElementById("director_movie").querySelector(".value").innerHTML = movie.director;
+        document.getElementById("actors_movie").querySelector(".value").innerHTML = movie.actors;
+        document.getElementById("genre_movie").querySelector(".value").innerHTML = movie.genre;
+        document.getElementById("rating_movie").querySelector(".value").innerHTML = movie.rating;
+        document.getElementById("image_movie").src = 'data:image/jpeg;base64,' + movie.image;
+    }
 }
 
 document.getElementById('search').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') { // Проверка нажатия на Enter
         var searchQuery = this.value.trim(); // Получаем значение поля ввода, удаляя лишние пробелы
         if (searchQuery.length > 0) {
-            window.location.href = "Catalog_page.html?search=" + encodeURIComponent(searchQuery); // Перенаправление на страницу каталога с параметром поиска
+            window.location.href = "../html/atalog_page.html?search=" + encodeURIComponent(searchQuery); // Перенаправление на страницу каталога с параметром поиска
         }
     }
 });

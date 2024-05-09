@@ -8,7 +8,7 @@ form.addEventListener("submit", e => {
    e.preventDefault();
 
    if (checkUser()) {
-      window.location.href = "Main_page.html";
+      window.location.href = "../html/Main_page.html";
    }
 });
 

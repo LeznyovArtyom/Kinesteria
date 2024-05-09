@@ -1,36 +1,83 @@
-const movies = JSON.parse(localStorage.getItem('movies')) || [];
-let newItemsContainer = document.getElementById("newItemsContainer");
-let moviesContainer = document.getElementById("moviesContainer");
-
-for (let i = 0; i < movies.length; i++) {
-    if (i < 6) {
-        let div = document.createElement('div');
-        div.classList.add("col-xxl-2");
-        newItemsContainer.appendChild(div);
-        let a = document.createElement('a');
-        a.id = "linkToMovie_" + i;
-        a.href = "Temp_movie_page.html?id=" + a.id;
-        div.appendChild(a);
-        let img = document.createElement('img');
-        img.classList.add("w-100", "main-image");
-        img.alt = "фильм";
-        img.src = movies[i].image;
-        a.appendChild(img);
-    } else if (i < 14) {
-        let div = document.createElement('div');
-        div.classList.add("col-xxl-3");
-        moviesContainer.appendChild(div);
-        let a = document.createElement('a');
-        a.id = "linkToMovie_" + i;
-        a.href = "Temp_movie_page.html?id=" + a.id;
-        div.appendChild(a);
-        let img = document.createElement('img');
-        img.classList.add("w-100", "main-image");
-        img.alt = "фильм";
-        img.src = movies[i].image;
-        a.appendChild(img);
-    }
+// Получаем произведения из базы данных
+function getProducts() {    
+    // Отправляем AJAX запрос к API
+    fetch(`http://localhost:8000/products/`)
+        .then(response => response.json())
+        .then(data => {
+            const products = data.Products;
+            displayProducts(products); // Функция отображения фильмов на странице
+        })
+        .catch(error => console.error('Ошибка при получении данных:', error));
 }
+
+getProducts()
+
+function fillContainer(container, products, num) {
+    container.innerHTML = ''; // Очищаем контейнер перед заполнением
+    products.forEach(product => {
+        const div = document.createElement('div');
+        div.classList.add(`col-xxl-${num}`);
+        container.appendChild(div);
+        const a = document.createElement('a');
+        a.href = "Temp_movie_page.html?id=" + product.id;
+        div.appendChild(a);
+        const img = document.createElement('img');
+        img.classList.add("w-100", "main-image");
+        img.alt = "фильм";
+        img.src = 'data:image/jpeg;base64,' + product.image;
+        a.appendChild(img);
+    })
+}
+
+// Функция получения текущего года
+function getCurrentYear() {
+    return new Date().getFullYear();
+}
+
+function displayProducts(products) {
+    const currentYear = getCurrentYear(); // Текущий год
+    const newSeason = []; // Массив для новинок сезона
+    const movies = [];    // Массив для фильмов
+    const series = [];    // Массив для сериалов
+    const cartoons = [];    // Массив для мультфильмов
+
+    // Фильтрация по критериям
+    for (const product of products) {
+        // На сайте пока нет фильмов текущего года
+        if (product.release_year === 2022 && newSeason.length < 6) {
+            newSeason.push(product);
+            continue;
+        }
+        
+        if (product.type === "Фильм" && movies.length < 8) {
+            movies.push(product);
+            continue;
+        }
+
+        if (product.type === "Сериал" && series.length < 8) {
+            series.push(product);
+            continue;
+        }
+
+        if (product.type === "Мультфильм" && cartoons.length < 6) {
+            cartoons.push(product);
+            continue;
+        }
+    }
+
+    let newItemsContainer = document.getElementById("newItemsContainer");
+    let moviesContainer = document.getElementById("moviesContainer")
+    let seriesContainer = document.getElementById("seriesContainer")
+    let cartoonsContainer = document.getElementById("cartoonsContainer")
+
+    // Отображение результатов в соответствующих контейнерах
+    fillContainer(newItemsContainer, newSeason, 2);
+    fillContainer(moviesContainer, movies, 3);
+    fillContainer(seriesContainer, series, 3);
+    fillContainer(cartoonsContainer, cartoons, 2);
+}
+
+
 
 // Функция для сбора выбранных фильтров и перехода на страницу каталога
 function applyFiltersAndRedirect() {
@@ -45,7 +92,7 @@ function applyFiltersAndRedirect() {
     var ratingFilter = document.getElementById('rating_filter').value;
 
     // Формируем URL с параметрами фильтров
-    var url = 'Catalog_page.html?year=' + yearFilter +
+    var url = '../html/Catalog_page.html?year=' + yearFilter +
               '&genre=' + genreFilter +
               '&type=' + typeFilter +
               '&country=' + countryFilter +
@@ -58,16 +105,18 @@ function applyFiltersAndRedirect() {
     window.location.href = url;
 }
 
+// Функция перенаправления по жанру
 function applyGenre(genre) {
-    var url ='Catalog_page.html?&genre=' + genre;
+    var url ='../html/Catalog_page.html?&genre=' + genre;
     window.location.href = url;
 }
 
+// Функция поиска
 document.getElementById('search').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') { // Проверка нажатия на Enter
         var searchQuery = this.value.trim(); // Получаем значение поля ввода, удаляя лишние пробелы
         if (searchQuery.length > 0) {
-            window.location.href = "Catalog_page.html?search=" + encodeURIComponent(searchQuery); // Перенаправление на страницу каталога с параметром поиска
+            window.location.href = "../html/Catalog_page.html?search=" + encodeURIComponent(searchQuery); // Перенаправление на страницу каталога с параметром поиска
         }
     }
 });

@@ -2,7 +2,7 @@ document.getElementById('search').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') { // Проверка нажатия на Enter
         var searchQuery = this.value.trim(); // Получаем значение поля ввода, удаляя лишние пробелы
         if (searchQuery.length > 0) {
-            window.location.href = "Catalog_page.html?search=" + encodeURIComponent(searchQuery); // Перенаправление на страницу каталога с параметром поиска
+            window.location.href = "../html/Catalog_page.html?search=" + encodeURIComponent(searchQuery); // Перенаправление на страницу каталога с параметром поиска
         }
     }
 });
@@ -45,5 +45,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.getElementById('go_out').addEventListener('click', function() {
     localStorage.removeItem('current_user');
-    window.location.href = 'index.html';
+    window.location.href = '../index.html';
 });

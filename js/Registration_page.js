@@ -134,7 +134,7 @@ function addUser(userInputs) {
    localStorage.setItem('current_user', login_value);
 
    form.reset(); // Сбросить форму после успешной регистрации
-   window.location.href = "Main_page.html"
+   window.location.href = "../html/Main_page.html"
 }
 
 function validateLogin(login_value) {
