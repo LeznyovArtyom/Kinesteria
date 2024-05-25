@@ -1,7 +1,9 @@
+const link = 'http://localhost:8000';
+
 // Получаем произведения из базы данных
-function getProducts() {    
+async function getProducts() {    
     // Отправляем AJAX запрос к API
-    fetch(`https://kinesteria-production.up.railway.app/products/`)
+    fetch(`${link}/products/`)
         .then(response => response.json())
         .then(data => {
             const movies = data.Products;
@@ -17,7 +19,7 @@ function fillContainer(container, movies) {
     container.innerHTML = ''; // Очищаем контейнер перед заполнением
     movies.forEach(movie => {
         const div = document.createElement('div');
-        div.classList.add("col-xxl-2");
+        div.classList.add("col-6", "col-md-4", "col-lg-3", "col-xl-2");
         container.appendChild(div);
         const a = document.createElement('a');
         a.href = "html/Temp_movie_page.html?id=" + movie.id;
@@ -70,6 +72,7 @@ function displayMovies(movies) {
 }
 
 
+// Поиск по каталогу
 document.getElementById('search').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') { // Проверка нажатия на Enter
         var searchQuery = this.value.trim(); // Получаем значение поля ввода, удаляя лишние пробелы
@@ -80,40 +83,59 @@ document.getElementById('search').addEventListener('keypress', function(e) {
 });
 
 
-
-
-// Переделать !!!!!!
-
-document.addEventListener('DOMContentLoaded', () => {
+// Отображение аккаунта
+document.addEventListener('DOMContentLoaded', async () => {
     const loginButton = document.getElementById('loginButton');
     const profilePicture = document.getElementById('profilePicture');
     const registerButton = document.getElementById('registerButton');
+    const profile_image = document.getElementById('profile_image');
 
-    // Проверяем, вошел ли пользователь, проверяя localStorage
-    if (localStorage.getItem('current_user')) {
-        // Если пользователь вошел, скрываем кнопку "Войти", "Зарегистрироваться" и показываем аватарку
-        loginButton.style.display = 'none';
-        profilePicture.style.display = 'block';
-        registerButton.style.display = 'none';
+    const userId = getCookie('user_id');
+    if (userId) {
+        try {
+            let response = await fetch(`${link}/users/${userId}`);
+
+            if (response.ok) {
+                let user = await response.json();
+                user = user.User;
+                loginButton.style.display = 'none';
+                profilePicture.style.display = 'block';
+                registerButton.style.display = 'none';
+                profile_image.src = user.avatar;
+            } else {
+                console.error('Ошибка при получении данных пользователя:', await response.json());
+            }
+        } catch (error) {
+            console.error('Ошибка при получении данных пользователя:', error);
+            loginButton.style.display = 'block';
+            profilePicture.style.display = 'none';
+            registerButton.style.display = 'inline-block';
+        }
     } else {
-        // Если пользователь не вошел, оставляем все как есть
         loginButton.style.display = 'block';
         profilePicture.style.display = 'none';
         registerButton.style.display = 'inline-block';
     }
-
-    const profile_image = document.getElementById('profile_image');
-
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const current_user = localStorage.getItem('current_user');
-    const currentUserInfo = users.find(user => user.login === current_user);
-
-    if (currentUserInfo) {
-        profile_image.src = currentUserInfo.avatar;
-    }
 });
 
+
+// Выход из аккаунта
 document.getElementById('go_out').addEventListener('click', function() {
-    localStorage.removeItem('current_user');
-    window.location.reload();
+    deleteCookie('user_id'); // Удаляем куки с id пользователя
+    window.location.reload(); // Перезагружаем страницу
 });
+
+
+// Функция получения куки
+const getCookie = (name) => {
+    let matches = document.cookie.match(new RegExp(
+       "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+
+// Функция удаления куки
+const deleteCookie = (name) => {
+    document.cookie = name + '=; Max-Age=-99999999; path=/';
+}

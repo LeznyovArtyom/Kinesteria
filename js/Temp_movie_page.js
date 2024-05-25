@@ -1,11 +1,14 @@
+const link = 'http://localhost:8000';
+
+// Отображение информации о произведении
 window.onload = function() {
     // Получение значения идентификатора из URL
     let urlParams = new URLSearchParams(window.location.search);
     let movie_id = urlParams.get('id');
 
-    // Получение фильма из юазы данных
+    // Получение фильма из базы данных
     if (movie_id) {
-        fetch(`https://kinesteria-production.up.railway.app/products/${movie_id}`)
+        fetch(`${link}/products/${movie_id}`)
         .then(response => response.json())
         .then(data => { displayMovieDetails(data.Product); })
         .catch(error => console.error('Ошибка при получении данных', error))
@@ -26,42 +29,101 @@ window.onload = function() {
     }
 }
 
+
+// Функция поиска
 document.getElementById('search').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') { // Проверка нажатия на Enter
         var searchQuery = this.value.trim(); // Получаем значение поля ввода, удаляя лишние пробелы
         if (searchQuery.length > 0) {
-            window.location.href = "../html/atalog_page.html?search=" + encodeURIComponent(searchQuery); // Перенаправление на страницу каталога с параметром поиска
+            window.location.href = "../html/Catalog_page.html?search=" + encodeURIComponent(searchQuery); // Перенаправление на страницу каталога с параметром поиска
         }
     }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+
+// Отображение аккаунта
+document.addEventListener('DOMContentLoaded', async () => {
     const loginButton = document.getElementById('loginButton');
     const profilePicture = document.getElementById('profilePicture');
+    const profile_image = document.getElementById('profile_image');
+    const changeMovie = document.getElementById('changeMovie');
+    const deleteMovie = document.getElementById('deleteMovie');
 
-    // Проверяем, вошел ли пользователь, проверяя localStorage
-    if (localStorage.getItem('current_user')) {
-        // Если пользователь вошел, скрываем кнопку "Войти" и показываем аватарку
-        loginButton.style.display = 'none';
-        profilePicture.style.display = 'block';
+    const userId = getCookie('user_id');
+    if (userId) {
+        try {
+            let response = await fetch(`${link}/users/${userId}`);
+
+            if (response.ok) {
+                let user = await response.json();
+                user = user.User;
+                loginButton.style.display = 'none';
+                profilePicture.style.display = 'block';
+                profile_image.src = user.avatar;
+                if (user.role === 'Админиcтратор' || user.role === 'Модератор') {
+                    changeMovie.style.display = 'block';
+                    deleteMovie.style.display = 'block';
+                }
+            } else {
+                console.error('Ошибка при получении данных пользователя:', await response.json());
+            }
+        } catch (error) {
+            console.error('Ошибка при получении данных пользователя:', error);
+            loginButton.style.display = 'block';
+            profilePicture.style.display = 'none';
+        }
     } else {
-        // Если пользователь не вошел, оставляем все как есть
         loginButton.style.display = 'block';
         profilePicture.style.display = 'none';
     }
-
-    const profile_image = document.getElementById('profile_image');
-
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const current_user = localStorage.getItem('current_user');
-    const currentUserInfo = users.find(user => user.login === current_user);
-
-    if (currentUserInfo) {
-        profile_image.src = currentUserInfo.avatar;
-    }
 });
 
+
+// Выход из аккаунта
 document.getElementById('go_out').addEventListener('click', function() {
-    localStorage.removeItem('current_user');
-    window.location.reload();
+    deleteCookie('user_id'); // Удаляем куки с id пользователя
+    window.location.href = '../index.html';
+});
+
+
+// Функция получения куки
+const getCookie = (name) => {
+    let matches = document.cookie.match(new RegExp(
+       "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+
+// Функция удаления куки
+const deleteCookie = (name) => {
+    document.cookie = name + '=; Max-Age=-99999999; path=/';
+}
+
+
+// Переход на страницу изменения произведения
+document.getElementById('changeMovie').addEventListener('click', function() {
+    // Получение значения идентификатора из URL
+    let urlParams = new URLSearchParams(window.location.search);
+    let product_id = urlParams.get('id');
+
+    window.location.href=`../html/Change_product.html?id=${product_id}`;
+});
+
+
+// Удалить произведение
+document.getElementById('deleteMovie').addEventListener('click', function() {
+    // Получение значения идентификатора из URL
+    let urlParams = new URLSearchParams(window.location.search);
+    let product_id = urlParams.get('id');
+
+    fetch(`${link}/products/${product_id}/delete`, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        window.location.href = "Catalog_page.html"; // Переадресация обратно на страницу каталога
+    })
+    .catch(error => {
+        console.error('Ошибка при удалении фильма:', error);
+    });
 });
