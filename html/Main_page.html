@@ -112,15 +112,30 @@
                                 </div>
 
                                 <div class="filter_body mx-4">
-                                    <div class="date_interval mt-4">
-                                        <input type="range" class="form-range" id="date_range" min="1997" max="2024" id="year_filter" value="2024" />
-                                        <div class="d-flex justify-content-between">
-                                            <div>1997</div>
-                                            <div>2024</div>
+                                    <div class="filter-item">
+                                        <div class="filter_name mt-4 mb-3">Год выхода</div>
+                                        <div class="year-input d-flex w-100">
+                                            <div class="field d-flex w-100 h-100 align-items-center">
+                                                <span>От</span>
+                                                <input type="number" class="input-min w-100 text-center" id="year_input_min" value="1994">
+                                            </div>
+                                            <div class="separator d-flex align-items-center justify-content-center">-</div>
+                                            <div class="field d-flex w-100 h-100 align-items-center">
+                                                <span>До</span>
+                                                <input type="number" class="input-max w-100 text-center" id="year_input_max" value="2024">
+                                            </div>
+                                        </div>
+                                        <div class="year-slider mt-4 position-relative">
+                                            <div class="year-progress position-absolute"></div>
+                                        </div>
+                                        <div class="range-input position-relative">
+                                            <input type="range" class="range-min position-absolute bg-transparent w-100" min="1994" max="2024" value="1994">
+                                            <input type="range" class="range-max position-absolute bg-transparent w-100" min="1994" max="2024" value="2024">
                                         </div>
                                     </div>
+
                                     <div class="filter_item">
-                                        <div class="filter_name mt-5 mb-3">Жанр</div>
+                                        <div class="filter_name mt-4 mb-3">Жанр</div>
                                         <select class="form-select text-dark original_font" id="genre_filter">
                                             <option></option>
                                             <option value="Комедия">Комедия</option>

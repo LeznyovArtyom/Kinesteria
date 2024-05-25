@@ -90,12 +90,12 @@
                                 <option value="Мелодрама" class="d">Мелодрама</option>
                             </select>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <div class="filter_link d-flex align-items-center">
-                                <button type="button" class="btn text-white addButton text-decoration-underline" data-bs-toggle="modal" data-bs-target="#addMovieModal">Добавить фильм</button>
+                                <button type="button" class="btn text-white addButton text-decoration-underline" data-bs-toggle="modal" data-bs-target="#addMovieModal" id="addProductButton" style="display: none">Добавить произведение</button>
                             </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-4">
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn text-white filterButton px-4 border-0" data-bs-toggle="modal" data-bs-target="#extendedFilter">Расширенный фильтр</button>
                             </div>
@@ -122,12 +122,27 @@
                                     <div class="border_line"></div>
                                 </div>
                                 <div class="filter_form_item row mb-3">
-                                    <div class="col-3"><div>Год</div></div>
+                                    <div class="col-3"><div>Год выхода</div></div>
                                     <div class="col-9">
-                                        <input type="range" class="form-range" id="customRange1" min="1997" max="2024" id="year_filter" value="2024"/>
-                                        <div class="d-flex justify-content-between">
-                                            <div>1997</div>
-                                            <div>2024</div>
+                                        <div class="filter-item">
+                                            <div class="year-input d-flex w-100">
+                                                <div class="field d-flex w-100 h-100 align-items-center">
+                                                    <span>От</span>
+                                                    <input type="number" class="input-min w-100 text-center" id="year_input_min" value="1994">
+                                                </div>
+                                                <div class="separator d-flex align-items-center justify-content-center">-</div>
+                                                <div class="field d-flex w-100 h-100 align-items-center">
+                                                    <span>До</span>
+                                                    <input type="number" class="input-max w-100 text-center" id="year_input_max" value="2024">
+                                                </div>
+                                            </div>
+                                            <div class="year-slider mt-4 position-relative">
+                                                <div class="year-progress position-absolute"></div>
+                                            </div>
+                                            <div class="range-input position-relative">
+                                                <input type="range" class="range-min position-absolute bg-transparent w-100" id="year_range_min" min="1994" max="2024" value="1994">
+                                                <input type="range" class="range-max position-absolute bg-transparent w-100" id="year_range_max" min="1994" max="2024" value="2024">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
