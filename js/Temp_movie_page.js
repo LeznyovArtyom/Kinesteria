@@ -1,4 +1,5 @@
-const link = 'http://localhost:8000';
+//const link = 'http://localhost:8000';
+const link = 'https://kinesteria-production.up.railway.app';
 
 // Отображение информации о произведении
 window.onload = function() {
