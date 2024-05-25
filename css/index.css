@@ -1,7 +1,20 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Предотвращает горизонтальную прокрутку */
+}
+.main {
+    flex: 1;
+}
+
 body {
     font-family: "Montserrat", sans-serif;
-    background-image: url('../images/bg_for_ar.jpeg');
-    background-size: cover;
+    background-image: url('../images/фон.jpg');
+    background-size: contain;
     color: #fff;
     font-size: 24px;
     font-weight: 500;
@@ -11,14 +24,17 @@ body {
     color: #fff;
     font-size: 24px;
     max-width: 1440px;
+    width: 100%; /* Гарантирует, что navbar будет занимать всю ширину экрана */
     height: 83px;
+    margin: 0 auto; /* Центрирует navbar */
 }
 .logo_name {
     font-size: 32px;
     font-family: "Arvo", serif;
 }
 .search_input {
-    width: 300px;
+    width: 100%; /* Устанавливаем ширину 100% для адаптивности */
+    max-width: 300px;
 }
 #profile_image {
     border-radius: 50%;
@@ -30,8 +46,6 @@ body {
 .dropdown_profile {
     right: 0;
     left: auto; /* Отменяет стандартное позиционирование слева */
-}
-.dropdown_profile {
     background-color: #26222D;
 }
 /* Изменение цвета фона элемента при наведении */
@@ -43,14 +57,11 @@ body {
     max-width: 1440px;
     background-color: #161422;
 }
-.landing-image {
-    border-radius: 15px;
-    width: 320px;
-    height: 180px;
-}
 .main-image {
     border-radius: 15px;
-    height: 295px;
+    /* height: 295px; */
+    width: 100%; /* Устанавливаем ширину 100% для адаптивности */
+    height: auto;
 }
 .description {
     margin: 4em 0 2em; 
@@ -74,7 +85,9 @@ body {
 .border_line {
     height: 3px;
     background: linear-gradient(90deg, #2F2546, #8C69DF 51%, #322B44);
-    width: 511px;
+    width: 100%; /* Устанавливаем ширину 100% для адаптивности */
+    max-width: 511px;
+    margin: 0 auto; /* Центрируем элемент */
 }
 .original_font {
     font: inherit;
@@ -89,12 +102,17 @@ body {
     color: #fff;
     font-size: 20px;
     font-weight: 400;
+    margin: 0 auto; /* Центрирует footer */
 }
 .footer_border {
     border-bottom: 1px solid white;
 }
 .footer_icons {
-    width: 195px;
+    width: 100%;
+    max-width: 195px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Позволяет иконкам переноситься на следующую строку */
 }
 .helpButton {
     font-size: 21px;

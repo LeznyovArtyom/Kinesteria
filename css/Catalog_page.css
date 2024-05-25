@@ -1,7 +1,17 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+.main {
+    flex: 1;
+}
+
 body {
     font-family: "Montserrat", sans-serif;
-    background-image: url('../images/bg_for_ar.jpeg');
-    background-size: cover;
+    background-image: url('../images/фон.jpg');
+    background-size: contain;
     color: #fff;
     font-size: 24px;
     font-weight: 500;
@@ -121,7 +131,7 @@ body {
     height: 295px;
     border-radius: 15px;
     background-color: #fff;
-    
+    background: none;
 }
 /*
 .files_container {
@@ -147,6 +157,55 @@ body {
 .filter_select {
     overflow-y: auto;
     max-height: 100px;
+}
+.field input {
+    outline: none;
+    border: 1px solid #999;
+    margin-left: 25px;
+    border-radius: 5px;
+    appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.year-input .separator {
+    width: 100px;
+}
+.year-slider {
+    height: 5px;
+    border-radius: 5px;
+    background-color: #ddd;
+}
+.year-slider .year-progress {
+    height: 5px;
+    left: 0%;
+    right: 0%;
+    border-radius: 5px;
+    background-color: #3E305F;
+}
+.range-input input {
+    top: -5px;
+    height: 5px;
+    pointer-events: none;
+    appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    pointer-events: auto;
+    appearance: none;
+    background: #3E305F;
+}
+input[type="range"]::-moz-range-thumb {
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    border: none;
+    pointer-events: auto;
+    appearance: none;
+    background: #3E305F;
 }
 
 .footer {

@@ -53,21 +53,40 @@ body {
     max-width: 1440px;
     background-color: #161422;
 }
-.main-image {
-    border-radius: 15px;
+.page_title {
+    font-size: 36px;
+}
+.inputChange {
+    border-radius: 5px;
+    width: 500px;
+    height: 50px;
+    font: inherit;
+}
+#text_description {
+    border-radius: 5px;
+    font: inherit;
+}
+.separator {
+    border-bottom: 2px solid #26222D;
+}
+
+.multiSelectGenres, .multiSelectCountry {
+    height: 300px;
+}
+.select_item {
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.prewiev_image {
+    width: 196px;
     height: 295px;
+    border-radius: 15px;
+    background-color: #fff;
+    background: none;
 }
-.main_border {
-    border-bottom: 1px solid #fff;
-    margin: 2em 0 1em;
-}
-.genre_item {
-    height: 45px;
-    background: linear-gradient(90deg, #3E305F 29%, #8164C5);
-    border-radius: 10px;
-    color: #fff;
-    font-size: 20px;
-}
+
 
 .modal-design {
     background-color: #161422;
@@ -90,75 +109,6 @@ body {
     border-bottom: 1px solid white;
 }
 
-.filter {
-    border-radius: 20px;
-    background: linear-gradient(#8164C5, #3E305F 71%);
-    color: #fff;
-    font-weight: 500;
-}
-.field input {
-    outline: none;
-    border: 1px solid #999;
-    margin-left: 12px;
-    border-radius: 5px;
-    appearance: textfield;
-}
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-.year-input .separator {
-    width: 100px;
-}
-.year-slider {
-    height: 5px;
-    border-radius: 5px;
-    background-color: #ddd;
-}
-.year-slider .year-progress {
-    height: 5px;
-    left: 0%;
-    right: 0%;
-    border-radius: 5px;
-    background-color: #3E305F;
-}
-.range-input input {
-    top: -5px;
-    height: 5px;
-    pointer-events: none;
-    appearance: none;
-}
-input[type="range"]::-webkit-slider-thumb {
-    height: 17px;
-    width: 17px;
-    border-radius: 50%;
-    pointer-events: auto;
-    appearance: none;
-    background: #3E305F;
-}
-input[type="range"]::-moz-range-thumb {
-    height: 17px;
-    width: 17px;
-    border-radius: 50%;
-    border: none;
-    pointer-events: auto;
-    appearance: none;
-    background: #3E305F;
-}
-
-.header_filter {
-    background-color: #402F65;
-    border-radius: 20px 20px 0 0;
-    height: 60px;
-}
-.filter_select {
-    font-size: inherit;
-    font-family: inherit;
-}
-.searchButton {
-    font: inherit;
-}
-
 .footer {
     max-width: 1440px;
     background-color: #161422;
@@ -179,8 +129,4 @@ input[type="range"]::-moz-range-thumb {
 }
 .footer_title {
     font-size: 24px;
-}
-
-.underline {
-    border-bottom: 1px solid white;
 }
