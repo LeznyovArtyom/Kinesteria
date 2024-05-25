@@ -7,25 +7,28 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 import os
+import uvicorn
 
 
 app = FastAPI()
 
-connection = mysql.connector.connect(
-    host=os.getenv("MYSQLHOST"),
-    port=os.getenv("MYSQLPORT"),
-    user=os.getenv("MYSQLUSER"),
-    password=os.getenv("MYSQLPASSWORD"),
-    database=os.getenv("MYSQL_DATABASE"),
-)
+def get_db_connection():
+    return mysql.connector.connect(
+        host=os.getenv("MYSQLHOST"),
+        port=os.getenv("MYSQLPORT"),
+        user=os.getenv("MYSQLUSER"),
+        password=os.getenv("MYSQLPASSWORD"),
+        database=os.getenv("MYSQL_DATABASE"),
+    )
 
-# connection = mysql.connector.connect(
-#     host="localhost",
-#     port=3306,
-#     user="root",
-#     password="TikTakfoke86!",
-#     database="Kinesteria",
-# )
+# def get_db_connection():
+#     return mysql.connector.connect(
+#         host="localhost",
+#         port=3306,
+#         user="root",
+#         password="TikTakfoke86!",
+#         database="Kinesteria",
+#     )
 
 # Настройка CORS
 app.add_middleware(
@@ -35,6 +38,11 @@ app.add_middleware(
     allow_methods=["*"],  # Разрешенные методы
     allow_headers=["*"],  # Разрешенные заголовки
 )
+
+
+class UserLogin(BaseModel):
+    login: str
+    password: str
 
 
 class User(BaseModel):
@@ -118,6 +126,7 @@ app.mount("/html", StaticFiles(directory="html"), name="html")
 app.mount("/js", StaticFiles(directory="js"), name="js")
 app.mount("/images", StaticFiles(directory="images"), name="images")
 
+
 @app.get("/index.html")
 def get_index_page():
     return FileResponse("index.html")
@@ -127,9 +136,23 @@ def get_index():
     return FileResponse("index.html")
 
 
+@app.post("/login")
+def login(user: UserLogin):
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT id FROM user WHERE login = %s AND password = %s", (user.login, user.password))
+    result = cursor.fetchone()
+    cursor.close()
+    if result:
+        return {"user_id": result['id']}
+    else:
+        raise HTTPException(status_code=401, detail="Неверный логин или пароль")
+
+
 # Получить список всех пользователей
 @app.get("/users")
 def get_users():
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     sql_query = """SELECT user.id, user.first_name, user.last_name, user.login, user.email, user.password, user.about_me, user.avatar, role.name as role,
                         social_media.vkontakte, social_media.instagram, social_media.telegram, social_media.whatsapp 
@@ -145,6 +168,7 @@ def get_users():
 # Получить информацию о пользователе по ID
 @app.get("/users/{id}")
 def get_user_by_id(id: int):
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     sql_query = """SELECT user.id, user.first_name, user.last_name, user.login, user.email, user.password, user.about_me, user.avatar, role.name as role,
                         social_media.vkontakte, social_media.instagram, social_media.telegram, social_media.whatsapp 
@@ -161,6 +185,7 @@ def get_user_by_id(id: int):
 # Удалить пользователя
 @app.delete("/users/{id}/delete")
 def delete_user(id: int):
+    connection = get_db_connection()
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM user WHERE id = %s", (id,))
     result = cursor.fetchone()
@@ -177,18 +202,16 @@ def delete_user(id: int):
 # Зарегистрировать нового пользователя
 @app.post("/users/register")
 def register_new_user(user_data: User):
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
-    # проверяем, существует ли пользователь с таким логином и почтой
-    cursor.execute("SELECT * FROM user WHERE login = %s OR email = %s",
-                   (user_data.login, user_data.email))
+    cursor.execute("SELECT * FROM user WHERE login = %s OR email = %s", (user_data.login, user_data.email))
     existing_user = cursor.fetchone()
     if existing_user:
         cursor.close()
         raise HTTPException(status_code=400, detail="Пользователь с таким логином или электронной почтой уже существует")
 
-    # Если такого пользователя нет, то регистрируем
     cursor.execute("INSERT INTO user (first_name, last_name, login, email, password, avatar, role_id) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                   (user_data.first_name, user_data.last_name, user_data.login, user_data.email, user_data.password, "avatar", "3"))
+                   (user_data.first_name, user_data.last_name, user_data.login, user_data.email, user_data.password, user_data.avatar, 3))
     connection.commit()
     cursor.close()
     return {"message": "Пользователь успешно зарегистрирован"}
@@ -197,6 +220,7 @@ def register_new_user(user_data: User):
 # Обновить информацию о пользователе
 @app.put("/users/{id}/update")
 def update_user(id: int, user_data: UserUpdate):
+    connection = get_db_connection()
     cursor = connection.cursor()
     # Проверяем, существует ли пользователь с указанным ID
     cursor.execute("SELECT * FROM user WHERE id = %s", (id,))
@@ -280,9 +304,11 @@ def update_user(id: int, user_data: UserUpdate):
 #     cursor.close()
 #     return {"Products": result}
 
+
 # Получить список всех произведений
 @app.get("/products/")
 def get_products_by_parameters():
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
 
     sql_query = """
@@ -316,6 +342,7 @@ def get_products_by_parameters():
 # Получить произведение по ID
 @app.get("/products/{id}")
 def get_product_by_id(id: int):
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     sql_query = """SELECT product.id, product.name, product.description, product.original_name, product.director, 
                         product.actors, product.release_year, product.rating, product.image,
@@ -323,7 +350,12 @@ def get_product_by_id(id: int):
                         GROUP_CONCAT(DISTINCT country.name SEPARATOR ', ') as country, 
                         GROUP_CONCAT(DISTINCT subtitles.name SEPARATOR ', ') as subtitles,
                         GROUP_CONCAT(DISTINCT quality.name SEPARATOR ', ') as quality, 
-                        GROUP_CONCAT(DISTINCT voice_acting.name SEPARATOR ', ') as voice_acting 
+                        GROUP_CONCAT(DISTINCT voice_acting.name SEPARATOR ', ') as voice_acting,
+                        GROUP_CONCAT(DISTINCT genre.id SEPARATOR ', ') AS genre_ids,
+                        GROUP_CONCAT(DISTINCT country.id SEPARATOR ', ') as country_ids,
+                        GROUP_CONCAT(DISTINCT subtitles.id SEPARATOR ', ') as subtitles_ids,
+                        GROUP_CONCAT(DISTINCT quality.id SEPARATOR ', ') as quality_ids,
+                        GROUP_CONCAT(DISTINCT voice_acting.id SEPARATOR ', ') as voice_acting_ids
                     FROM product
                     LEFT JOIN type on product.type_id = type.id
                     LEFT JOIN product_genre on product.id = product_genre.product_id
@@ -348,6 +380,7 @@ def get_product_by_id(id: int):
 # Удалить произведение
 @app.delete("/products/{id}/delete")
 def delete_product(id: int):
+    connection = get_db_connection()
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM product WHERE id = %s", (id,))
     result = cursor.fetchone()
@@ -364,6 +397,7 @@ def delete_product(id: int):
 # Добавить произведение
 @app.post("/products/add/")
 def add_new_product(product_data: Product):
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
 
     cursor.execute("""INSERT INTO product (name, description, original_name, director, actors, release_year, rating, image, type_id) 
@@ -396,6 +430,7 @@ def add_new_product(product_data: Product):
 # Обновить информацию о произведении
 @app.put("/products/{id}/update")
 def update_product(id: int, product_data: ProductUpdate):
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True) 
 
     updates = []
@@ -435,6 +470,7 @@ def update_product(id: int, product_data: ProductUpdate):
 # Получить список всех ролей
 @app.get("/roles")
 def get_roles():
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("SELECT * FROM role")
     result = cursor.fetchall()
@@ -445,6 +481,7 @@ def get_roles():
 # Получить список всех типов произведений
 @app.get("/types")
 def get_types():
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("SELECT * FROM type")
     result = cursor.fetchall()
@@ -455,6 +492,7 @@ def get_types():
 # Получить список всех жанров
 @app.get("/genres")
 def get_genres():
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("SELECT * FROM genre")
     result = cursor.fetchall()
@@ -465,6 +503,7 @@ def get_genres():
 # Получить список всех стран
 @app.get("/countries")
 def get_countries():
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("SELECT * FROM country")
     result = cursor.fetchall()
@@ -475,6 +514,7 @@ def get_countries():
 # Получить список всех наименований субтитров
 @app.get("/subtitles")
 def get_subtitles():
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("SELECT * FROM subtitles")
     result = cursor.fetchall()
@@ -485,6 +525,7 @@ def get_subtitles():
 # Получить список всех наименований качества
 @app.get("/qualities")
 def get_qualities():
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("SELECT * FROM quality")
     result = cursor.fetchall()
@@ -495,6 +536,7 @@ def get_qualities():
 # Получить список всех наименований озвучек
 @app.get("/voice_acting")
 def get_voice_acting():
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("SELECT * FROM voice_acting")
     result = cursor.fetchall()
@@ -505,6 +547,7 @@ def get_voice_acting():
 # Получить список всех комментариев произведения
 @app.get("/products/{id}/comments")
 def get_comments_by_product_id(id: int):
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     sql_query = """SELECT comments.id, comments.text, comments.date, product.name as product, user.login FROM comments
                     LEFT JOIN user on comments.user_id = user.id
@@ -519,6 +562,7 @@ def get_comments_by_product_id(id: int):
 # Удалить комментарий
 @app.delete("/comments/{id}/delete")
 def delete_comment(id: int):
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("DELETE FROM comments WHERE id = %s", (id,))
     connection.commit()
@@ -529,6 +573,7 @@ def delete_comment(id: int):
 # Добавить комментарий
 @app.post("/products/{id}/comments/add")
 def add_new_comment(id: int, comment_data: Comment):
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("INSERT INTO comments (text, date, product_id, user_id) VALUES (%s, %s, %s, %s)", (comment_data.text, datetime.now(), id, comment_data.user_id))
     connection.commit()
@@ -539,6 +584,7 @@ def add_new_comment(id: int, comment_data: Comment):
 # Обновить комментарий
 @app.put("/comments/{id}/update")
 def update_coment(id: int, comment_data: CommentUpdate):
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("UPDATE comments SET text = %s WHERE id = %s", (comment_data.text, id))
     connection.commit()
@@ -549,6 +595,7 @@ def update_coment(id: int, comment_data: CommentUpdate):
 # Получить список всех отзывов произведения
 @app.get("/products/{id}/reviews")
 def get_reviews_by_product_id(id: int):
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     sql_query = """SELECT reviews.id, reviews.text, reviews.date, product.name as product, user.login FROM reviews
                     LEFT JOIN user on reviews.user_id = user.id
@@ -563,6 +610,7 @@ def get_reviews_by_product_id(id: int):
 # Удалить отзыв
 @app.delete("/reviews/{id}/delete")
 def delete_review(id: int):
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("DELETE FROM reviews WHERE id = %s", (id,))
     connection.commit()
@@ -573,6 +621,7 @@ def delete_review(id: int):
 # Добавить отзыв
 @app.post("/products/{id}/reviews/add")
 def add_new_review(id: int, review_data: Review):
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("SELECT * FROM reviews WHERE product_id = %s AND user_id = %s", (id, review_data.user_id))
     existing_review = cursor.fetchone()
@@ -589,8 +638,13 @@ def add_new_review(id: int, review_data: Review):
 # Обновить отзыв
 @app.put("/reviews/{id}/update")
 def update_review(id: int, review_data: ReviewUpdate):
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("UPDATE reviews SET text = %s WHERE id = %s", (review_data.text, id))
     connection.commit()
     cursor.close()
     return {"message": "Отзыв успешно обновлен"}
+
+if __name__ == "__main__":
+    # uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=os.getenv("MYSQLPORT"))
