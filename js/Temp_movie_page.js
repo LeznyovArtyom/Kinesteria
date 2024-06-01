@@ -133,6 +133,7 @@ document.getElementById('deleteMovie').addEventListener('click', function() {
     });
 });
 
+let parentId = null;
 
 // Отправить комментарий
 document.querySelector('.sendComment').addEventListener('click', sendComment);
