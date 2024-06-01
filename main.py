@@ -33,7 +33,7 @@ def get_db_connection():
 # Настройка CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5500"],  # Список разрешенных источников
+    allow_origins=["http://127.0.0.1:5500", "kinesteria-production.up.railway.app"],  # Список разрешенных источников
     allow_credentials=True,
     allow_methods=["*"],  # Разрешенные методы
     allow_headers=["*"],  # Разрешенные заголовки
@@ -598,4 +598,4 @@ def update_review(id: int, review_data: ReviewUpdate):
 
 if __name__ == "__main__":
     # uvicorn.run(app, host="0.0.0.0", port=8000)
-    uvicorn.run(app, host=os.getenv("MYSQLHOST"), port=os.getenv("MYSQLPORT"))
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT")))
