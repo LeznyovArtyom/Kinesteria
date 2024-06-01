@@ -13,15 +13,15 @@ async function getProducts() {
 }
 
 
-// При загрузке страницы
-document.addEventListener('DOMContentLoaded', function () {
-    // Получаем фильмы из базы данных
-    getProducts();
-    // Вызываем функцию установки фильтров
-    setFilters();
-    // Отображаем фильмы
-    displayProducts(productsData);
-});
+// // При загрузке страницы
+// document.addEventListener('DOMContentLoaded', async () => {
+//     // Получаем фильмы из базы данных
+//     await getProducts();
+//     // Вызываем функцию установки фильтров
+//     setFilters();
+//     // Отображаем фильмы
+//     displayProducts(productsData);
+// });
 
 
 // Слушаем изменения в фильтрах и вызываем функцию фильтрации
@@ -367,6 +367,13 @@ form.addEventListener("submit", async e => {
 
 // Отображение аккаунта
 document.addEventListener('DOMContentLoaded', async () => {
+    // Получаем фильмы из базы данных
+    getProducts();
+    // Вызываем функцию установки фильтров
+    setFilters();
+    // Отображаем фильмы
+    displayProducts(productsData);
+
     const loginButton = document.getElementById('loginButton');
     const profilePicture = document.getElementById('profilePicture');
     const profile_image = document.getElementById('profile_image');    

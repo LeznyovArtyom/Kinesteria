@@ -11,8 +11,6 @@ async function getProducts() {
     }
 }
 
-getProducts()
-
 
 function fillContainer(container, movies) {
     container.innerHTML = ''; // Очищаем контейнер перед заполнением
@@ -85,6 +83,8 @@ document.getElementById('search').addEventListener('keypress', function(e) {
 
 // Отображение аккаунта
 document.addEventListener('DOMContentLoaded', async () => {
+    await getProducts();
+
     const loginButton = document.getElementById('loginButton');
     const profilePicture = document.getElementById('profilePicture');
     const registerButton = document.getElementById('registerButton');

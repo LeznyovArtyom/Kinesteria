@@ -207,8 +207,8 @@ document.getElementById('changeImage').addEventListener('click', async e => {
     const reader = new FileReader();
     reader.readAsDataURL(productImage.files[0]);
     reader.onload = async function() {
-        console.log(reader.result)
-        await updateProduct('image', reader.result);
+        result = reader.result.split(',')[1]
+        await updateProduct('image', result);
     };
 });
 
@@ -262,7 +262,7 @@ async function updateProduct(field, value) {
         console.error('Ошибка при обновлении информации о произведении:', error);
     }
 
-    //window.location.reload(); // Перезагружаем страницу
+    window.location.reload(); // Перезагружаем страницу
 }
 
 

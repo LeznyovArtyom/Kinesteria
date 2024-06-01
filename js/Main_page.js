@@ -11,8 +11,6 @@ async function getProducts() {
     }
 }
 
-getProducts()
-
 
 // Заполнить контейнер произведениями
 function fillContainer(container, products, num1, num2, num3) {
@@ -223,6 +221,8 @@ function updateProgress() {
 
 // Отображение аккаунта
 document.addEventListener('DOMContentLoaded', async () => {
+    await getProducts();
+
     const loginButton = document.getElementById('loginButton');
     const profilePicture = document.getElementById('profilePicture');
     const profile_image = document.getElementById('profile_image'); 
