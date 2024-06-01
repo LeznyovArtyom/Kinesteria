@@ -1,6 +1,3 @@
-//const link = 'http://localhost:8000';
-const link = 'https://kinesteria-production.up.railway.app';
-
 const form = document.getElementById('authorization_form');
 const login = document.getElementById('login');
 const password = document.getElementById('password');
@@ -77,7 +74,7 @@ const authenticateUser = async (login_value, password_value) => {
 
       if (response.ok) {
          let data = await response.json();
-         setCookie('user_id', data.user_id, { 'max-age': 3600 }); // Сохранение id пользователя в куки
+         setCookie('user_id', data.user_id, { 'max-age': 86400 }); // Сохранение id пользователя в куки
          // alert("Вы вошли в аккаунт!");
          window.location.href = "../html/Main_page.html";
       } else {

@@ -1,8 +1,11 @@
 html, body {
     height: 100%;
+    width: 100%;
+    padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; /* Предотвращает горизонтальную прокрутку */
 }
 .main {
     flex: 1;
@@ -21,17 +24,23 @@ body {
     color: #fff;
     font-size: 24px;
     max-width: 1440px;
-    height: 83px;
+    height: 85px;
+    margin: 0;
+    padding: 0;
 }
 .logo_name {
     font-size: 32px;
     font-family: "Arvo", serif;
 }
 .search_input {
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
 }
 #profile_image {
     border-radius: 50%;
+}
+.dropdown-toggle::after {
+    display: none !important; /* Убираем стрелочку */
 }
 
 .dropdown:hover .dropdown_profile {
@@ -40,13 +49,14 @@ body {
 .dropdown_profile {
     right: 0;
     left: auto; /* Отменяет стандартное позиционирование слева */
-}
-.dropdown_profile {
     background-color: #26222D;
 }
 /* Изменение цвета фона элемента при наведении */
 .dropdown_profile .dropdown-item:hover {
     background-color: #161422; /* Цвет фона при наведении */
+}
+.offcanvas {
+    background-color: #26222D;
 }
 
 .main {
@@ -82,6 +92,19 @@ body {
     font-size: 24px;
     font-family: inherit;
     background-color: #3E305F;
+    /* max-width: 327px;
+    width: 100%; */
+}
+.filter-button-container {
+    justify-content: end;
+}
+@media (max-width: 1199px) {
+    .filter-button-container {
+        justify-content: start;
+    }
+    .filterButton {
+        font-size: 20px;
+    }
 }
 .addButton {
     font-size: inherit;
@@ -100,7 +123,8 @@ body {
 .border_line {
     height: 3px;
     background: linear-gradient(90deg, #2F2546, #8C69DF 51%, #322B44);
-    width: 511px;
+    max-width: 511px;
+    width: 100%;
 }
 .original_font {
     font: inherit;
@@ -108,10 +132,14 @@ body {
 .edit_item {
     margin-bottom: 1.8em;
 }
+.edit_title {
+    width: 300px;
+}
 .edit_input {
     font-size: 20px;
     font-weight: 500;
     font-family: inherit;
+    height: 44px;
 }
 .multiSelectGenres, .multiSelectCountry {
     height: 300px;
@@ -130,17 +158,10 @@ body {
     width: 196px;
     height: 295px;
     border-radius: 15px;
-    background-color: #fff;
-    background: none;
 }
-/*
-.files_container {
-    width: 363px;
-    height: 149px;
-    background-color: #fff;
-    border-radius: 10px;
+#preview {
+    display: none;
 }
-*/
 .addMovieButton, .cancelButton {
     width: 270px;
     height: 51px;
@@ -149,6 +170,16 @@ body {
     border-radius: 10px;
     font-size: inherit;
     font-family: inherit;
+}
+.buttons_container {
+    justify-content: end;
+    margin-right: 40px;
+}
+@media (max-width: 1200px) {
+    .buttons_container {
+        justify-content: center;
+        margin-right: 0;
+    }
 }
 
 .extendedFilter_container {
@@ -219,7 +250,7 @@ input[type="range"]::-moz-range-thumb {
     border-bottom: 1px solid white;
 }
 .footer_icons {
-    width: 195px;
+    max-width: 195px;
 }
 .helpButton {
     font-size: 21px;
@@ -230,6 +261,32 @@ input[type="range"]::-moz-range-thumb {
     font-size: 24px;
 }
 
+@media (max-width: 576px) {
+    .logo_name {
+        font-size: 6vw;
+    }
+    #loginButton {
+        font-size: 5vw;
+    }
+}
+
 .underline {
     border-bottom: 1px solid white;
+}
+
+@media (max-width: 992px) {
+    .modal-dialog {
+        max-width: 100%;
+        margin: 0;
+    }
+}
+@media (max-width: 768px) {
+    .edit_item {
+        flex-direction: column;
+    }
+}
+@media (max-width: 576px) {
+    #add_image_edit {
+        font-size: 18px;
+    }
 }

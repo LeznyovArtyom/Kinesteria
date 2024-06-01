@@ -1,6 +1,3 @@
-//const link = 'http://localhost:8000';
-const link = 'https://kinesteria-production.up.railway.app';
-
 // Получаем произведения из базы данных
 function getProducts() {    
     // Отправляем AJAX запрос к API
@@ -81,8 +78,8 @@ function displayProducts(products) {
 
     // Отображение результатов в соответствующих контейнерах
     fillContainer(newItemsContainer, newSeason, 2, 3, 4);
-    fillContainer(moviesContainer, movies, 3, 4, 6);
-    fillContainer(seriesContainer, series, 3, 4, 6);
+    fillContainer(moviesContainer, movies, 3, 4, 4);
+    fillContainer(seriesContainer, series, 3, 4, 4);
     fillContainer(cartoonsContainer, cartoons, 2, 3, 4);
 }
 

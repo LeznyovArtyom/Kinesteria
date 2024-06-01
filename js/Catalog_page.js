@@ -1,6 +1,3 @@
-//const link = 'http://localhost:8000';
-const link = 'https://kinesteria-production.up.railway.app';
-
 let productsData = []
 // Получаем произведения из базы данных
 function getProducts() {    
@@ -22,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Вызываем функцию установки фильтров
     setFilters();
     // Отображаем фильмы
-    displayProducts(productsData)
+    displayProducts(productsData);
 });
 
 
@@ -299,6 +296,9 @@ function download(input) {
     reader.onload = function() {
         let img = document.getElementById("preview");
         img.src = reader.result;
+
+        // Показываем изображение после его полной загрузки
+        img.style.display = 'block';
     }
 }
 
@@ -359,6 +359,7 @@ form.addEventListener("submit", async e => {
         .catch(error => {
             console.error('Ошибка при добавлении фильма:', error);
         });
+        console.log(newProduct);
     }
 });
 
@@ -368,7 +369,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const loginButton = document.getElementById('loginButton');
     const profilePicture = document.getElementById('profilePicture');
     const profile_image = document.getElementById('profile_image');    
-    const addProductButton = document.getElementById('addProductButton');
+    const addProductButtonContainer = document.getElementById('addProductButtonContainer');
 
     const userId = getCookie('user_id');
     if (userId) {
@@ -382,7 +383,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 profilePicture.style.display = 'block';
                 profile_image.src = user.avatar;
                 if (user.role === 'Админиcтратор' || user.role === 'Модератор') {
-                    addProductButton.style.display = 'block';
+                    addProductButtonContainer.style.display = 'block';
                 }
             } else {
                 console.error('Ошибка при получении данных пользователя:', await response.json());

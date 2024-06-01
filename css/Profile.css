@@ -1,8 +1,11 @@
 html, body {
     height: 100%;
+    width: 100%;
+    padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; /* Предотвращает горизонтальную прокрутку */
 }
 .main {
     flex: 1;
@@ -21,14 +24,17 @@ body {
     color: #fff;
     font-size: 24px;
     max-width: 1440px;
-    height: 83px;
+    height: 85px;
+    margin: 0;
+    padding: 0;
 }
 .logo_name {
     font-size: 32px;
     font-family: "Arvo", serif;
 }
 .search_input {
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
 }
 #profile_image {
     border-radius: 50%;
@@ -38,6 +44,9 @@ body {
     width: 416px;
     height: 416px;
 }
+.dropdown-toggle::after {
+    display: none !important; /* Убираем стрелочку */
+}
 
 .dropdown:hover .dropdown_profile {
     display: block;
@@ -45,13 +54,22 @@ body {
 .dropdown_profile {
     right: 0;
     left: auto; /* Отменяет стандартное позиционирование слева */
-}
-.dropdown_profile {
     background-color: #26222D;
 }
 /* Изменение цвета фона элемента при наведении */
 .dropdown_profile .dropdown-item:hover {
     background-color: #161422; /* Цвет фона при наведении */
+}
+.offcanvas {
+    background-color: #26222D;
+}
+@media (max-width: 576px) {
+    .logo_name {
+        font-size: 6vw;
+    }
+    #loginButton {
+        font-size: 5vw;
+    }
 }
 
 .main {
@@ -59,8 +77,10 @@ body {
     background-color: #161422;
 }
 
-#accaunt_image {
+#avatar_image {
     border-radius: 50%;
+    width: 100%;
+    height: 100%;
 }
 #login {
     font-size: 32px;
@@ -68,6 +88,17 @@ body {
 .border_line2 {
     height: 3px;
     background: linear-gradient(90deg, #2F2546, #8C69DF 51%, #322B44);
+}
+/* .about-text {
+    word-wrap: break-word;
+    width: 100%;
+} */
+.about-text {
+    white-space: nowrap; /* Запрещает перенос слов */
+    overflow: hidden; /* Обрезает текст, выходящий за пределы контейнера */
+    text-overflow: ellipsis; /* Добавляет многоточие в конце обрезанного текста */
+    display: inline-block;
+    vertical-align: middle;
 }
 
 
@@ -84,7 +115,7 @@ body {
 .border_line {
     height: 3px;
     background: linear-gradient(90deg, #2F2546, #8C69DF 51%, #322B44);
-    width: 511px;
+    width: 100%;
 }
 .original_font {
     font: inherit;
@@ -104,7 +135,7 @@ body {
     border-bottom: 1px solid white;
 }
 .footer_icons {
-    width: 195px;
+    max-width: 195px;
 }
 .helpButton {
     font-size: 21px;
@@ -115,6 +146,19 @@ body {
     font-size: 24px;
 }
 
-.underline {
-    border-bottom: 1px solid white;
+@media (max-width: 1200px) {
+    .main {
+        font-size: 1rem;
+    }
+    #login {
+        font-size: 1.5rem;
+    }
 }
+
+/* @media (max-width: 768px) {
+    
+}
+
+@media (max-width: 576px) {
+    
+} */

@@ -1,8 +1,11 @@
 html, body {
     height: 100%;
+    width: 100%;
+    padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; /* Предотвращает горизонтальную прокрутку */
 }
 .main {
     flex: 1;
@@ -21,17 +24,23 @@ body {
     color: #fff;
     font-size: 24px;
     max-width: 1440px;
-    height: 83px;
+    height: 85px;
+    margin: 0;
+    padding: 0;
 }
 .logo_name {
     font-size: 32px;
     font-family: "Arvo", serif;
 }
 .search_input {
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
 }
 #profile_image {
     border-radius: 50%;
+}
+.dropdown-toggle::after {
+    display: none !important; /* Убираем стрелочку */
 }
 
 .dropdown:hover .dropdown_profile {
@@ -40,13 +49,25 @@ body {
 .dropdown_profile {
     right: 0;
     left: auto; /* Отменяет стандартное позиционирование слева */
-}
-.dropdown_profile {
     background-color: #26222D;
 }
 /* Изменение цвета фона элемента при наведении */
 .dropdown_profile .dropdown-item:hover {
     background-color: #161422; /* Цвет фона при наведении */
+}
+.offcanvas {
+    background-color: #26222D;
+}
+@media (max-width: 576px) {
+    .logo_name {
+        font-size: 6vw;
+    }
+    #loginButton {
+        font-size: 5vw;
+    }
+    .main {
+        font-size: 18px;
+    }
 }
 
 .main {
@@ -60,9 +81,7 @@ body {
 #name_movie {
     font-size: 32px;
 }
-.general-font {
-    font-size: 20px;
-}
+
 
 .modal-design {
     background-color: #161422;
@@ -96,7 +115,7 @@ body {
     border-bottom: 1px solid white;
 }
 .footer_icons {
-    width: 195px;
+    max-width: 195px;
 }
 .helpButton {
     font-size: 21px;
@@ -107,6 +126,29 @@ body {
     font-size: 24px;
 }
 
-.underline {
-    border-bottom: 1px solid white;
+
+.comments-title {
+    font-size: 2rem;
+}
+.comment_container {
+    margin-bottom: 20px;
+}
+.comment .c-controls a {
+    margin-right: 10px;
+}
+.user-name {
+    color: #a586ed;
+}
+.comment-at {
+    font-size: 0.8em;
+}
+.delete {
+    color: rgb(209, 83, 83);
+}
+.edit {
+    color: #a586ed;
+}
+.comment-reply-line {
+    width: 1px;
+    background-color: #26222D;
 }

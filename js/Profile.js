@@ -1,6 +1,3 @@
-//const link = 'http://localhost:8000';
-const link = 'https://kinesteria-production.up.railway.app';
-
 // Поиск по каталогу
 document.getElementById('search').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') { // Проверка нажатия на Enter

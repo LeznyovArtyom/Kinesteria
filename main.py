@@ -109,6 +109,7 @@ class ProductUpdate(BaseModel):
 class Comment(BaseModel):
     text: str
     user_id: int
+    parent_comment_id: Optional[int] = None
 
 class CommentUpdate(BaseModel):
     text: str
@@ -213,8 +214,9 @@ def register_new_user(user_data: User):
     cursor.execute("INSERT INTO user (first_name, last_name, login, email, password, avatar, role_id) VALUES (%s, %s, %s, %s, %s, %s, %s)",
                    (user_data.first_name, user_data.last_name, user_data.login, user_data.email, user_data.password, user_data.avatar, 3))
     connection.commit()
+    user_id = cursor.lastrowid
     cursor.close()
-    return {"message": "Пользователь успешно зарегистрирован"}
+    return {"message": "Пользователь успешно зарегистрирован", "user_id": user_id}
 
 
 # Обновить информацию о пользователе
@@ -245,64 +247,6 @@ def update_user(id: int, user_data: UserUpdate):
     connection.commit()
     cursor.close()
     return {"message": "Пользователь успешно обновлен"}
-
-
-# # Получить список всех произведений / произведений по параметрам
-# @app.get("/products/")
-# def get_products_by_parameters(type_id: Optional[int] = None, genre_id: Optional[int] = None, country_id: Optional[int] = None, quality_id: Optional[int] = None, 
-#                                subtitles_id: Optional[int] = None, voice_acting_id: Optional[int] = None, rating_id: Optional[int] = None, release_year_id: Optional[int] = None):
-#     cursor = connection.cursor(dictionary=True)
-
-#     params = {"type_id": type_id, "genre_id": genre_id, "country_id": country_id, "quality_id": quality_id, "subtitles_id": subtitles_id, "voice_acting_id": voice_acting_id, "rating_id": rating_id, "release_year_id": release_year_id}
-#     params = {k: v for k, v in params.items() if v is not None}
-
-#     where_clauses = []
-#     values = []
-#     for key, value in params.items():
-#         if key == 'genre_id':
-#             where_clauses.append("product.id IN (SELECT product_id FROM product_genre WHERE genre_id = %s)")
-#         elif key == 'country_id':
-#             where_clauses.append("product.id IN (SELECT product_id FROM product_country WHERE country_id = %s)")
-#         elif key == 'subtitles_id':
-#             where_clauses.append("product.id IN (SELECT product_id FROM product_subtitles WHERE subtitles_id = %s)")
-#         elif key == 'quality_id':
-#             where_clauses.append("product.id IN (SELECT product_id FROM product_quality WHERE quality_id = %s)")
-#         elif key == 'voice_acting_id':
-#             where_clauses.append("product.id IN (SELECT product_id FROM product_voice_acting WHERE voice_acting_id = %s)")
-#         else:
-#             where_clauses.append(f"{key} = %s")
-#         values.append(value)
-
-#     where_statement = " AND ".join(where_clauses)
-#     sql_query = f"""
-# SELECT product.id, product.name, product.description, product.original_name, product.director, 
-#         product.actors, product.release_year, product.rating, product.image,
-#         type.name as type, GROUP_CONCAT(DISTINCT genre.name SEPARATOR ', ') AS genre, 
-#         GROUP_CONCAT(DISTINCT country.name SEPARATOR ', ') as country, 
-#         GROUP_CONCAT(DISTINCT subtitles.name SEPARATOR ', ') as subtitles,
-#         GROUP_CONCAT(DISTINCT quality.name SEPARATOR ', ') as quality, 
-#         GROUP_CONCAT(DISTINCT voice_acting.name SEPARATOR ', ') as voice_acting 
-# FROM product
-# LEFT JOIN type on product.type_id = type.id
-# LEFT JOIN product_genre on product.id = product_genre.product_id
-# LEFT JOIN genre on product_genre.genre_id = genre.id
-# LEFT JOIN product_country on product.id = product_country.product_id
-# LEFT JOIN country on product_country.country_id = country.id
-# LEFT JOIN product_subtitles on product.id = product_subtitles.product_id
-# LEFT JOIN subtitles on product_subtitles.subtitles_id = subtitles.id
-# LEFT JOIN product_quality on product.id = product_quality.product_id
-# LEFT JOIN quality on product_quality.quality_id = quality.id
-# LEFT JOIN product_voice_acting on product.id = product_voice_acting.product_id
-# LEFT JOIN voice_acting on product_voice_acting.voice_acting_id = voice_acting.id
-# {(f'WHERE {where_statement}' if where_statement else '')}
-# GROUP BY product.id
-# ORDER BY product.id
-#     """
-
-#     cursor.execute(sql_query, tuple(values))
-#     result = cursor.fetchall()
-#     cursor.close()
-#     return {"Products": result}
 
 
 # Получить список всех произведений
@@ -339,38 +283,42 @@ def get_products_by_parameters():
     cursor.close()
     return {"Products": result}
 
+
 # Получить произведение по ID
 @app.get("/products/{id}")
 def get_product_by_id(id: int):
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
-    sql_query = """SELECT product.id, product.name, product.description, product.original_name, product.director, 
-                        product.actors, product.release_year, product.rating, product.image,
-                        type.name as type, GROUP_CONCAT(DISTINCT genre.name SEPARATOR ', ') AS genre, 
-                        GROUP_CONCAT(DISTINCT country.name SEPARATOR ', ') as country, 
-                        GROUP_CONCAT(DISTINCT subtitles.name SEPARATOR ', ') as subtitles,
-                        GROUP_CONCAT(DISTINCT quality.name SEPARATOR ', ') as quality, 
-                        GROUP_CONCAT(DISTINCT voice_acting.name SEPARATOR ', ') as voice_acting,
-                        GROUP_CONCAT(DISTINCT genre.id SEPARATOR ', ') AS genre_ids,
-                        GROUP_CONCAT(DISTINCT country.id SEPARATOR ', ') as country_ids,
-                        GROUP_CONCAT(DISTINCT subtitles.id SEPARATOR ', ') as subtitles_ids,
-                        GROUP_CONCAT(DISTINCT quality.id SEPARATOR ', ') as quality_ids,
-                        GROUP_CONCAT(DISTINCT voice_acting.id SEPARATOR ', ') as voice_acting_ids
-                    FROM product
-                    LEFT JOIN type on product.type_id = type.id
-                    LEFT JOIN product_genre on product.id = product_genre.product_id
-                    LEFT JOIN genre on product_genre.genre_id = genre.id
-                    LEFT JOIN product_country on product.id = product_country.product_id
-                    LEFT JOIN country on product_country.country_id = country.id
-                    LEFT JOIN product_subtitles on product.id = product_subtitles.product_id
-                    LEFT JOIN subtitles on product_subtitles.subtitles_id = subtitles.id
-                    LEFT JOIN product_quality on product.id = product_quality.product_id
-                    LEFT JOIN quality on product_quality.quality_id = quality.id
-                    LEFT JOIN product_voice_acting on product.id = product_voice_acting.product_id
-                    LEFT JOIN voice_acting on product_voice_acting.voice_acting_id = voice_acting.id
-                    WHERE product.id = %s
-                    GROUP BY product.id
-                    """
+
+    sql_query = """
+    SELECT product.id, product.name, product.description, product.original_name, product.director, 
+        product.actors, product.release_year, product.rating, product.image,
+        type.name as type, GROUP_CONCAT(DISTINCT genre.name SEPARATOR ', ') AS genre, 
+        GROUP_CONCAT(DISTINCT country.name SEPARATOR ', ') as country, 
+        GROUP_CONCAT(DISTINCT subtitles.name SEPARATOR ', ') as subtitles,
+        GROUP_CONCAT(DISTINCT quality.name SEPARATOR ', ') as quality, 
+        GROUP_CONCAT(DISTINCT voice_acting.name SEPARATOR ', ') as voice_acting,
+        GROUP_CONCAT(DISTINCT genre.id SEPARATOR ', ') AS genre_ids,
+        GROUP_CONCAT(DISTINCT country.id SEPARATOR ', ') as country_ids,
+        GROUP_CONCAT(DISTINCT subtitles.id SEPARATOR ', ') as subtitles_ids,
+        GROUP_CONCAT(DISTINCT quality.id SEPARATOR ', ') as quality_ids,
+        GROUP_CONCAT(DISTINCT voice_acting.id SEPARATOR ', ') as voice_acting_ids
+    FROM product
+    LEFT JOIN type on product.type_id = type.id
+    LEFT JOIN product_genre on product.id = product_genre.product_id
+    LEFT JOIN genre on product_genre.genre_id = genre.id
+    LEFT JOIN product_country on product.id = product_country.product_id
+    LEFT JOIN country on product_country.country_id = country.id
+    LEFT JOIN product_subtitles on product.id = product_subtitles.product_id
+    LEFT JOIN subtitles on product_subtitles.subtitles_id = subtitles.id
+    LEFT JOIN product_quality on product.id = product_quality.product_id
+    LEFT JOIN quality on product_quality.quality_id = quality.id
+    LEFT JOIN product_voice_acting on product.id = product_voice_acting.product_id
+    LEFT JOIN voice_acting on product_voice_acting.voice_acting_id = voice_acting.id
+    WHERE product.id = %s
+    GROUP BY product.id
+    """
+    
     cursor.execute(sql_query, (id,))
     result = cursor.fetchone()
     cursor.close()
@@ -549,7 +497,8 @@ def get_voice_acting():
 def get_comments_by_product_id(id: int):
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
-    sql_query = """SELECT comments.id, comments.text, comments.date, product.name as product, user.login FROM comments
+    sql_query = """SELECT comments.id, comments.text, comments.date, comments.parent_comment_id, product.name as product, user.id as user_id, user.login, user.avatar 
+                    FROM comments
                     LEFT JOIN user on comments.user_id = user.id
                     LEFT JOIN product on comments.product_id = product.id
                     WHERE product.id = %s"""
@@ -575,7 +524,8 @@ def delete_comment(id: int):
 def add_new_comment(id: int, comment_data: Comment):
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
-    cursor.execute("INSERT INTO comments (text, date, product_id, user_id) VALUES (%s, %s, %s, %s)", (comment_data.text, datetime.now(), id, comment_data.user_id))
+    cursor.execute("INSERT INTO comments (text, date, product_id, user_id, parent_comment_id) VALUES (%s, %s, %s, %s, %s)", 
+                   (comment_data.text, datetime.now(), id, comment_data.user_id, comment_data.parent_comment_id))
     connection.commit()
     cursor.close()
     return {"message": "Комментарий успешно добавлен"}
@@ -645,6 +595,7 @@ def update_review(id: int, review_data: ReviewUpdate):
     cursor.close()
     return {"message": "Отзыв успешно обновлен"}
 
+
 if __name__ == "__main__":
-    # uvicorn.run(app, host="0.0.0.0", port=8000)
-    uvicorn.run(app, host="0.0.0.0", port=os.getenv("MYSQLPORT"))
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # uvicorn.run(app, host="0.0.0.0", port=os.getenv("MYSQLPORT"))

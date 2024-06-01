@@ -1,8 +1,11 @@
 html, body {
     height: 100%;
+    width: 100%;
+    padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; /* Предотвращает горизонтальную прокрутку */
 }
 .main {
     flex: 1;
@@ -21,17 +24,23 @@ body {
     color: #fff;
     font-size: 24px;
     max-width: 1440px;
-    height: 83px;
+    height: 85px;
+    margin: 0;
+    padding: 0;
 }
 .logo_name {
     font-size: 32px;
     font-family: "Arvo", serif;
 }
 .search_input {
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
 }
 #profile_image {
     border-radius: 50%;
+}
+.dropdown-toggle::after {
+    display: none !important; /* Убираем стрелочку */
 }
 
 .dropdown:hover .dropdown_profile {
@@ -40,13 +49,22 @@ body {
 .dropdown_profile {
     right: 0;
     left: auto; /* Отменяет стандартное позиционирование слева */
-}
-.dropdown_profile {
     background-color: #26222D;
 }
 /* Изменение цвета фона элемента при наведении */
 .dropdown_profile .dropdown-item:hover {
     background-color: #161422; /* Цвет фона при наведении */
+}
+.offcanvas {
+    background-color: #26222D;
+}
+@media (max-width: 576px) {
+    .logo_name {
+        font-size: 6vw;
+    }
+    #loginButton {
+        font-size: 5vw;
+    }
 }
 
 .main {
@@ -65,6 +83,7 @@ body {
 #text_description {
     border-radius: 5px;
     font: inherit;
+    width: 950px;
 }
 .separator {
     border-bottom: 2px solid #26222D;
@@ -120,7 +139,7 @@ body {
     border-bottom: 1px solid white;
 }
 .footer_icons {
-    width: 195px;
+    max-width: 195px;
 }
 .helpButton {
     font-size: 21px;
@@ -129,4 +148,20 @@ body {
 }
 .footer_title {
     font-size: 24px;
+}
+
+@media (max-width: 992px) {
+    #text_description {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .inputChange {
+        width: 100%;
+    }
+    #productImage {
+        width: 100%;
+        font-size: 20px;
+    }
 }

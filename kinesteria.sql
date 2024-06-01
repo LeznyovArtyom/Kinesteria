@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`user` (
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(32) NOT NULL,
   `about_me` TEXT(1000) NULL,
-  `avatar` BLOB NOT NULL,
+  `avatar` LONGBLOB NOT NULL,
   `role_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_role_idx` (`role_id` ASC) VISIBLE,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`product` (
   `actors` TEXT(200) NULL,
   `release_year` INT NULL,
   `rating` DECIMAL(3,1) NULL,
-  `image` BLOB NULL,
+  `image` LONGBLOB NULL,
   `type_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_type_idx` (`type_id` ASC) VISIBLE,
@@ -138,11 +138,13 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`comments` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `text` TEXT(1000) NULL,
   `date` DATETIME NULL,
+  `parent_comment_id` INT NULL,
   `product_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
   INDEX `fk_product_idx` (`product_id` ASC) VISIBLE,
+  INDEX `fk_parent_comment_idx` (`parent_comment_id` ASC) VISIBLE,
   CONSTRAINT `fk_user`
     FOREIGN KEY (`user_id`)
     REFERENCES `Kinesteria`.`user` (`id`)
@@ -150,6 +152,10 @@ CREATE TABLE IF NOT EXISTS `Kinesteria`.`comments` (
   CONSTRAINT `fk_product6`
     FOREIGN KEY (`product_id`)
     REFERENCES `Kinesteria`.`product` (`id`)
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_parent_comment`
+    FOREIGN KEY (`parent_comment_id`)
+    REFERENCES `Kinesteria`.`comments` (`id`)
     ON DELETE CASCADE
   );
 

@@ -1,6 +1,3 @@
-//const link = 'http://localhost:8000';
-const link = 'https://kinesteria-production.up.railway.app';
-
 // Получаем произведения из базы данных
 async function getProducts() {    
     // Отправляем AJAX запрос к API
@@ -76,6 +73,7 @@ function displayMovies(movies) {
 // Поиск по каталогу
 document.getElementById('search').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') { // Проверка нажатия на Enter
+        e.preventDefault(); // Предотвращаем поведение по умолчанию
         var searchQuery = this.value.trim(); // Получаем значение поля ввода, удаляя лишние пробелы
         if (searchQuery.length > 0) {
             window.location.href = "/html/Catalog_page.html?search=" + encodeURIComponent(searchQuery); // Перенаправление на страницу каталога с параметром поиска

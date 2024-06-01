@@ -13,20 +13,24 @@
         <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     </head>
     <body>
-        <div class="header d-flex justify-content-center">
-            <nav class="navbar navbar-expand-lg navbar-dark w-100 py-0">
-                <div class="container">
-                    <a class="navbar-brand" href="#">
-                        <img src="../images/icon.png" alt="Иконка" />
-                    </a>
-                    <div class="logo_name me-5">
-                        <a class="text-decoration-none text-white" href="../index.html">Kinesteria</a>
+        <nav class="navbar navbar-expand-lg navbar-dark w-100 my-0 mx-auto">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center me-auto" href="../index.html">
+                    <img src="../images/icon.png" alt="Иконка" class="logo_image"/>
+                    <span class="logo_name ms-3 me-4">Kinesteria</span>
+                </a>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                                <img src="../images/icon.png" alt="Иконка" />
+                                <span class="logo_name ms-3">Kinesteria</span>
+                            </a>
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
                     </div>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="../html/Main_page.html">Главная</a>
                             </li>
@@ -34,30 +38,31 @@
                                 <a class="nav-link text-white" href="../html/Catalog_page.html">Каталог</a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav ml-auto d-flex">
-                            <li class="nav-item d-flex align-items-center mx-4">
-                                <div>
-                                    <input type="text" class="form-control search_input" id="search" placeholder="Поиск" />
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white ms-3" href="../html/Authorization_page.html" id="loginButton">Войти</a>
-                            </li>
-                            <li class="nav-item" id="profilePicture" style="display: none">
-                                <div class="dropdown">
-                                    <a href="#" class="nav-link" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="" alt="Профиль" width="74px" height="74px" id="profile_image" /></a>
-                                    <ul class="dropdown-menu dropdown-menu-end original_font dropdown_profile" aria-labelledby="dropdownMenuLink">
-                                        <li class="dropdown_elem"><a class="dropdown-item text-white" href="../html/Profile.html">Профиль</a></li>
-                                        <li class="dropdown_elem"><a class="dropdown-item text-white" href="../html/Settings.html">Настройки</a></li>
-                                        <li><a class="dropdown-item text-white" href="#" id="go_out">Выйти</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
+                        <input class="form-control me-3 search_input mx-0 my-auto" type="search" placeholder="Поиск" aria-label="Поиск" id="search">
                     </div>
                 </div>
-            </nav>
-        </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../html/Authorization_page.html" id="loginButton">Войти</a>
+                    </li>
+                    <li class="nav-item" id="profilePicture" style="display: none">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="" alt="Профиль" width="74px" height="74px" id="profile_image" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end original_font dropdown_profile" aria-labelledby="dropdownMenuLink">
+                                <li class="dropdown_elem"><a class="dropdown-item text-white" href="../html/Profile.html">Профиль</a></li>
+                                <li class="dropdown_elem"><a class="dropdown-item text-white" href="../html/Settings.html">Настройки</a></li>
+                                <li><a class="dropdown-item text-white" href="#" id="go_out">Выйти</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <button class="navbar-toggler border-0 ms-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
 
         <div class="main container">
             <div class="container">
@@ -89,11 +94,11 @@
                 </div>
                 <div class="title pt-4 pb-3">
                     <div class="mb-2">Описание:</div>
-                    <textarea class="px-2" id="text_description" cols="70" rows="6" class="inputChange"></textarea>
+                    <textarea class="px-2" id="text_description" rows="6"></textarea>
                     <button type="button" class="btn bg-white d-block original_font py-0" id="changeDescription">Изменить</button>
                 </div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
                         <div class="title pt-4 pb-3">
                             <div class="mb-2">Жанр:</div>
                             <div class="d-flex">
@@ -145,7 +150,7 @@
                             <button type="button" class="btn bg-white d-block original_font py-0 mt-2" id="changeGenre">Изменить</button>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
                         <div class="title pt-4 pb-3">
                             <div class="mb-2">Страна:</div>
                             <div class="d-flex">
@@ -239,7 +244,7 @@
                             <button type="button" class="btn bg-white d-block original_font py-0 mt-2" id="changeCountry">Изменить</button>
                         </div>
                     </div> 
-                    <div class="col-3">
+                    <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
                         <div class="title pt-4 pb-3">
                             <div class="mb-2">Качество:</div>
                             <div class="d-flex">
@@ -261,7 +266,7 @@
                             <button type="button" class="btn bg-white d-block original_font py-0 mt-2" id="changeQuality">Изменить</button>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
                         <div class="title pt-4 pb-3">
                             <div class="mb-2">Субтитры:</div>
                             <div class="d-flex">
@@ -280,23 +285,25 @@
                             <button type="button" class="btn bg-white d-block original_font py-0 mt-2" id="changeSubtitles">Изменить</button>
                         </div>
                     </div>
-                </div>
-                <div class="title pt-4">
-                    <div class="mb-2">Озвучка:</div>
-                    <div class="d-flex">
-                        <div class="dropdown">
-                            <button class="btn btn-light dropdown-toggle original_font select_item" type="button" id="multiSelectVoiceActingButton" data-bs-toggle="dropdown" aria-expanded="false">Выберите озвучку</button>
-                            <ul class="dropdown-menu w-100 original_font px-2 multiSelectVoiceActing overflow-auto" aria-labelledby="multiSelectVoiceActing">
-                                <li>
-                                    <label><input type="checkbox" value="1" name="Русский" class="form-check-input">Русский</label>
-                                </li>
-                                <li>
-                                    <label><input type="checkbox" value="2" name="Английский" class="form-check-input">Английский</label>
-                                </li>
-                            </ul>
+                    <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                        <div class="title pt-4">
+                            <div class="mb-2">Озвучка:</div>
+                            <div class="d-flex">
+                                <div class="dropdown">
+                                    <button class="btn btn-light dropdown-toggle original_font select_item" type="button" id="multiSelectVoiceActingButton" data-bs-toggle="dropdown" aria-expanded="false">Выберите озвучку</button>
+                                    <ul class="dropdown-menu w-100 original_font px-2 multiSelectVoiceActing overflow-auto" aria-labelledby="multiSelectVoiceActing">
+                                        <li>
+                                            <label><input type="checkbox" value="1" name="Русский" class="form-check-input">Русский</label>
+                                        </li>
+                                        <li>
+                                            <label><input type="checkbox" value="2" name="Английский" class="form-check-input">Английский</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <button type="button" class="btn bg-white d-block original_font py-0 mt-2" id="changeVoiceActing">Изменить</button>
                         </div>
                     </div>
-                    <button type="button" class="btn bg-white d-block original_font py-0 mt-2" id="changeVoiceActing">Изменить</button>
                 </div>
                 <div class="title pb-3 pt-4">
                     <div class="mb-2">Изображение:</div>
@@ -310,13 +317,13 @@
             </div>
         </div>
 
-        <div class="footer container">
+        <div class="footer container my-0 mx-auto">
             <div class="container">
                 <div class="footer_border"></div>
                 <div class="row footer_content mt-4">
-                    <div class="col-7">
+                    <div class="col-12 col-lg-6">
                         <div class="footer_title">По вопросам сотрудничества</div>
-                        <div class="footer_icons d-flex justify-content-between mt-2">
+                        <div class="footer_icons d-flex justify-content-between mt-2 w-100 d-flex justify-content-between flex-wrap">
                             <a href="https://vk.com/arrrtyy"><img src="../images/icon1.svg" alt="Соц-сеть" width="33px" /></a>
                             <a href="https://t.me/arty_y_y"><img src="../images/icon2.svg" alt="Соц-сеть" width="33px" /></a>
                             <a href="https://wa.me/79231807045"><img src="../images/icon3.svg" alt="Соц-сеть" width="33px" /></a>
@@ -328,7 +335,7 @@
                             <div class="indexing_item">© 2024, Kinesteria, 18+</div>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-12 col-lg-3 col-sm-6">
                         <div class="footer_title mb-2">Информация</div>
                         <ul class="list-unstyled">
                             <li>
@@ -339,7 +346,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-lg-3 col-sm-6">
                         <div class="footer_title mb-2">Помощь</div>
                         <ul class="list-unstyled">
                             <li>
@@ -393,6 +400,7 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="../js/config.js"></script>
         <script src="../js/Change_product.js"></script>
     </body>
 </html>

@@ -24,20 +24,23 @@ body {
     color: #fff;
     font-size: 24px;
     max-width: 1440px;
-    width: 100%; /* Гарантирует, что navbar будет занимать всю ширину экрана */
-    height: 83px;
-    margin: 0 auto; /* Центрирует navbar */
+    height: 85px;
+    margin: 0;
+    padding: 0;
 }
 .logo_name {
     font-size: 32px;
     font-family: "Arvo", serif;
 }
 .search_input {
-    width: 100%; /* Устанавливаем ширину 100% для адаптивности */
+    width: 100%;
     max-width: 300px;
 }
 #profile_image {
     border-radius: 50%;
+}
+.dropdown-toggle::after {
+    display: none !important; /* Убираем стрелочку */
 }
 
 .dropdown:hover .dropdown_profile {
@@ -59,13 +62,42 @@ body {
 }
 .main-image {
     border-radius: 15px;
-    /* height: 295px; */
-    width: 100%; /* Устанавливаем ширину 100% для адаптивности */
-    height: auto;
+    height: 295px;
+    width: 100%;
 }
 .description {
     margin: 4em 0 2em; 
+    font-size: 24px; /* Базовый размер шрифта для больших экранов */
 }
+
+@media (max-width: 1200px) {
+    .description {
+        font-size: 22px; /* Размер шрифта для экранов средней ширины */
+        margin: 3em 0 1.5em;
+    }
+}
+
+@media (max-width: 992px) {
+    .description {
+        font-size: 20px; /* Размер шрифта для более узких экранов */
+        margin: 2.5em 0 1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .description {
+        font-size: 18px; /* Размер шрифта для планшетов */
+        margin: 2em 0 1em;
+    }
+}
+
+@media (max-width: 576px) {
+    .description {
+        font-size: 16px; /* Размер шрифта для мобильных устройств */
+        margin: 1.5em 0 1em;
+    }
+}
+
 #registerButton {
     margin-bottom: 2em;
     font-size: inherit;
@@ -85,7 +117,6 @@ body {
 .border_line {
     height: 3px;
     background: linear-gradient(90deg, #2F2546, #8C69DF 51%, #322B44);
-    width: 100%; /* Устанавливаем ширину 100% для адаптивности */
     max-width: 511px;
     margin: 0 auto; /* Центрируем элемент */
 }
@@ -102,17 +133,12 @@ body {
     color: #fff;
     font-size: 20px;
     font-weight: 400;
-    margin: 0 auto; /* Центрирует footer */
 }
 .footer_border {
     border-bottom: 1px solid white;
 }
 .footer_icons {
-    width: 100%;
     max-width: 195px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Позволяет иконкам переноситься на следующую строку */
 }
 .helpButton {
     font-size: 21px;
@@ -123,6 +149,15 @@ body {
     font-size: 24px;
 }
 
-.underline {
-    border-bottom: 1px solid white;
+@media (max-width: 576px) {
+    .logo_name {
+        font-size: 6vw;
+    }
+    #loginButton {
+        font-size: 5vw;
+    }
+}
+
+.offcanvas {
+    background-color: #26222D;
 }

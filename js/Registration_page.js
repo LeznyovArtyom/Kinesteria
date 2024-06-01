@@ -1,6 +1,3 @@
-//const link = 'http://localhost:8000';
-const link = 'https://kinesteria-production.up.railway.app';
-
 const form = document.getElementById('registration_form');
 const last_name = document.getElementById('last_name');
 const first_name = document.getElementById('first_name');
@@ -137,7 +134,8 @@ async function addUser(userInputs) {
       });
 
       if (response.ok) {
-         // alert('Вы успешно зарегистрировались!');
+         let data = await response.json();
+         setCookie('user_id', data.user_id, { 'max-age': 86400 }); // Сохранение id пользователя в куки
          form.reset();
          window.location.href = "../html/Main_page.html";
       } else {
@@ -176,4 +174,38 @@ function validateEmail(email_value) {
 // Проверка корректности пароля
 function validatePassword(password_value) {
     return /^(?=.*[a-zA-Z])(?=.*\d).{6,32}$/.test(password_value);
+}
+
+
+// Функция установки куки
+const setCookie = (name, value, options = {}) => {
+   options = {
+      path: '/',
+      ...options
+   };
+
+   if (options.expires instanceof Date) {
+      options.expires = options.expires.toUTCString();
+   }
+
+   let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+   for (let optionKey in options) {
+      updatedCookie += "; " + optionKey;
+      let optionValue = options[optionKey];
+      if (optionValue !== true) {
+         updatedCookie += "=" + optionValue;
+      }
+   }
+
+   document.cookie = updatedCookie;
+}
+
+
+// Функция получения куки
+const getCookie = (name) => {
+   let matches = document.cookie.match(new RegExp(
+      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+   ));
+   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
