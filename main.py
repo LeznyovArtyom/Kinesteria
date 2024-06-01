@@ -13,13 +13,19 @@ import uvicorn
 app = FastAPI()
 
 def get_db_connection():
-    return mysql.connector.connect(
-        host=os.getenv("MYSQLHOST"),
-        port=os.getenv("MYSQLPORT"),
-        user=os.getenv("MYSQLUSER"),
-        password=os.getenv("MYSQLPASSWORD"),
-        database=os.getenv("MYSQL_DATABASE"),
-    )
+    try:
+        connection = mysql.connector.connect(
+            host=os.getenv("MYSQLHOST"),
+            port=int(os.getenv("MYSQLPORT")),
+            user=os.getenv("MYSQLUSER"),
+            password=os.getenv("MYSQLPASSWORD"),
+            database=os.getenv("MYSQL_DATABASE"),
+        )
+        print("Connection successful")
+        return connection
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        raise
 
 # def get_db_connection():
 #     return mysql.connector.connect(
@@ -598,4 +604,4 @@ def update_review(id: int, review_data: ReviewUpdate):
 
 if __name__ == "__main__":
     # uvicorn.run(app, host="0.0.0.0", port=8000)
-    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT")))
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", 8000)))
