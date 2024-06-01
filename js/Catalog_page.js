@@ -1,27 +1,26 @@
 let productsData = []
 // Получаем произведения из базы данных
-async function getProducts() {    
+function getProducts() {    
     // Отправляем AJAX запрос к API
-    try {
-        let response = await fetch(`${link}/products/`);
-        let data = await response.json();
-        const products = data.Products;
-        displayProducts(products); // Функция отображения фильмов на странице
-    } catch (error) {
-        console.error('Ошибка при получении данных:', error);
-    }
+    fetch(`${link}/products/`)
+        .then(response => response.json())
+        .then(data => {
+            productsData = data.Products;
+            displayProducts(productsData)
+        })
+        .catch(error => console.error('Ошибка при получении данных:', error));
 }
 
 
-// // При загрузке страницы
-// document.addEventListener('DOMContentLoaded', async () => {
-//     // Получаем фильмы из базы данных
-//     await getProducts();
-//     // Вызываем функцию установки фильтров
-//     setFilters();
-//     // Отображаем фильмы
-//     displayProducts(productsData);
-// });
+// При загрузке страницы
+document.addEventListener('DOMContentLoaded', function () {
+    // Получаем фильмы из базы данных
+    getProducts();
+    // Вызываем функцию установки фильтров
+    setFilters();
+    // Отображаем фильмы
+    displayProducts(productsData);
+});
 
 
 // Слушаем изменения в фильтрах и вызываем функцию фильтрации
@@ -367,13 +366,6 @@ form.addEventListener("submit", async e => {
 
 // Отображение аккаунта
 document.addEventListener('DOMContentLoaded', async () => {
-    // Получаем фильмы из базы данных
-    getProducts();
-    // Вызываем функцию установки фильтров
-    setFilters();
-    // Отображаем фильмы
-    displayProducts(productsData);
-
     const loginButton = document.getElementById('loginButton');
     const profilePicture = document.getElementById('profilePicture');
     const profile_image = document.getElementById('profile_image');    

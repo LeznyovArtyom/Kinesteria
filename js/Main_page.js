@@ -1,14 +1,13 @@
 // Получаем произведения из базы данных
-async function getProducts() {    
+function getProducts() {    
     // Отправляем AJAX запрос к API
-    try {
-        let response = await fetch(`${link}/products/`);
-        let data = await response.json();
-        const products = data.Products;
-        displayProducts(products); // Функция отображения фильмов на странице
-    } catch (error) {
-        console.error('Ошибка при получении данных:', error);
-    }
+    fetch(`${link}/products/`)
+        .then(response => response.json())
+        .then(data => {
+            productsData = data.Products;
+            displayProducts(productsData)
+        })
+        .catch(error => console.error('Ошибка при получении данных:', error));
 }
 
 
