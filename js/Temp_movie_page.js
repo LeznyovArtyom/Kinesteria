@@ -133,6 +133,7 @@ document.getElementById('deleteMovie').addEventListener('click', function() {
     });
 });
 
+
 let parentId = null;
 
 // Отправить комментарий
@@ -416,7 +417,7 @@ function deleteComment(commentNode, commentId) {
 }
 
 
-// Преобразование даты datetime в от6носительное время 
+// Преобразование даты datetime в относительное время 
 function timeAgo(dateString) {
   const now = new Date();
   const pastDate = new Date(dateString);
